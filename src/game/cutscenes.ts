@@ -1,6 +1,6 @@
 // agua: altura da água (0 a 1). brilho: força da luz (0 a 1)
 export type Cena = { texto: string; agua: number; brilho: number };
-export type CutsceneInfo = { tipo: "cais" | "biblioteca" | "jardins" | "catedral" | "coracao"; entrada: string; cenas: Cena[] };
+export type CutsceneInfo = { tipo: "cais" | "biblioteca" | "jardins" | "recife" | "catedral" | "abismo" | "coracao"; entrada: string; cenas: Cena[] };
 
 export const cutscenes = {
   cais: {
@@ -37,6 +37,16 @@ export const cutscenes = {
       { texto: "Para passar, será preciso aprender a andar no escuro.", agua: 0.2, brilho: 0.1 },
     ],
   },
+  recife: {
+    tipo: "recife",
+    entrada: "Toque para mergulhar no recife",
+    cenas: [
+      { texto: "Depois dos jardins, o fundo desce e desce. Ali dormem os barcos que a lanterna não conseguiu trazer de volta.", agua: 0.6, brilho: 0.3 },
+      { texto: "A luz da cidade se estilhaçou no naufrágio. Cada caco ainda guarda um pouco de calor.", agua: 0.6, brilho: 0.7 },
+      { texto: "Seis fragmentos esperam entre os cascos. Mas você está sem fôlego de verdade agora.", agua: 0.6, brilho: 0.5 },
+      { texto: "Respire quando achar bolhas e não se perca. O ar não perdoa quem hesita.", agua: 0.6, brilho: 0.9 },
+    ],
+  },
   catedral: {
     tipo: "catedral",
     entrada: "Toque para entrar na catedral",
@@ -46,6 +56,16 @@ export const cutscenes = {
       { texto: "Cada mecanismo foi feito para uma altura da maré: um no chão, um no alto, um no meio.", agua: 0.85, brilho: 0.7 },
       { texto: "No altar há uma inscrição. Leia com calma e observe a maré.", agua: 0.5, brilho: 0.5 },
       { texto: "A pressa não abre nada aqui. A água só respeita quem espera a hora certa.", agua: 0.2, brilho: 0.8 },
+    ],
+  },
+  abismo: {
+    tipo: "abismo",
+    entrada: "Toque para enfrentar a corrente",
+    cenas: [
+      { texto: "A catedral termina num poço. Dele sobe a corrente que mantém a cidade presa no fundo.", agua: 0.8, brilho: 0.3 },
+      { texto: "Destroços de todos os séculos caem por ali, empurrados de um lado para o outro.", agua: 0.8, brilho: 0.4 },
+      { texto: "Não há como lutar contra o mar. Só como aguentar até ele mudar de ideia.", agua: 0.8, brilho: 0.6 },
+      { texto: "Fique em movimento e proteja o casco.", agua: 0.8, brilho: 1 },
     ],
   },
   coracao: {

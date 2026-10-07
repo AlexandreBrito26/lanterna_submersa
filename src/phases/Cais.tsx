@@ -3,7 +3,9 @@ import { Application, Graphics } from "pixi.js";
 import { palette } from "../game/theme";
 import { useGame } from "../store/useGame";
 import { audio } from "../game/audio";
-import { criarBolhas, reduzMovimento } from "../game/fx";
+import { criarBolhas, criarMergulhador, criarRaios, criarRastro, desenharHalo, reduzMovimento } from "../game/fx";
+import Cabecalho from "../components/Cabecalho";
+import Tela from "../components/Tela";
 
 const W = 360, H = 640, SPEED = 2.4, LUZ = 120, ALCANCE = 36;
 
@@ -14,12 +16,15 @@ const objetos: Objeto[] = [
   { id: "porta", x: 180, y: 90, cor: palette.mare },
 ];
 
+const conchasIniciais = [[40, 560], [310, 450], [60, 200]] as const;
+
 export default function Cais() {
   const host = useRef<HTMLDivElement>(null);
   const escuro = useRef<HTMLCanvasElement>(null);
-  const [msg, setMsg] = useState("Toque ou arraste para andar. Chegue perto de algo e use Interagir.");
-  const { inventory, giveItem, complete, leave } = useGame();
+  const [msg, setMsg] = useState("Toque ou arraste para andar. Chegue perto de algo e use Interagir. Longe de tudo, Interagir emite um eco que revela as conchas.");
+  const { inventory, giveItem, complete } = useGame();
   const acaoRef = useRef<() => void>();
+  const [conchasN, setConchasN] = useState(0);
   const inv = useRef(inventory);
   inv.current = inventory;
 
@@ -29,6 +34,10 @@ export default function Cais() {
     const alvo = { x: 180, y: 560 };
     const teclas = new Set<string>();
     let morto = false;
+    const inicioT = performance.now();
+    const conchas = conchasIniciais.map(([x, y]) => ({ x, y, ok: false }));
+    let ping = -9999;
+    const pingPos = { x: 0, y: 0 };
 
     const kd = (e: KeyboardEvent) => teclas.add(e.key.toLowerCase());
     const ku = (e: KeyboardEvent) => teclas.delete(e.key.toLowerCase());
@@ -43,14 +52,23 @@ export default function Cais() {
         setMsg("Dentro da caixa há uma chave coberta de sal.");
       }
       if (o.id === "porta") {
-        if (inv.current.includes("chave-do-cais")) { audio.sfx.porta(); audio.sfx.vitoria(); complete("cais"); }
+        if (inv.current.includes("chave-do-cais")) { audio.sfx.porta(); audio.sfx.vitoria();
+          const achadas = conchas.filter((c) => c.ok).length;
+          if (achadas === conchas.length) giveItem("conchas-todas");
+          const tempo = Math.round((performance.now() - inicioT) / 1000);
+          complete("cais", {
+            estrelas: 1 + (achadas === conchas.length ? 1 : 0) + (tempo <= 75 ? 1 : 0),
+            tempo,
+            detalhes: [`Conchas: ${achadas} de ${conchas.length}`],
+          });
+        }
         else { audio.sfx.erro(); setMsg("A porta está trancada. Procure uma chave."); }
       }
     };
 
     const agir = () => {
       const o = objetos.find((o) => Math.hypot(o.x - pos.x, o.y - pos.y) < ALCANCE);
-      if (o) interagir(o); else setMsg("Nada ao alcance. Chegue mais perto de algo.");
+      if (o) interagir(o); else { ping = performance.now(); pingPos.x = pos.x; pingPos.y = pos.y; audio.sfx.pista(); setMsg("Você ergue a lanterna e o eco volta: o brilho das conchas aparece por um instante."); }
     };
     acaoRef.current = agir;
     const onAct = (e: KeyboardEvent) => {
@@ -84,16 +102,23 @@ export default function Cais() {
         }
       });
       app.stage.addChild(cenario);
+      const raios = criarRaios(app, W, H);
       const ondas = new Graphics();
       app.stage.addChild(ondas);
       const bolhas = criarBolhas(app, W, H, 16, palette.espuma);
 
-      const jogador = new Graphics().circle(0, 0, 10).fill(palette.espuma);
+      const extras = new Graphics();
+      app.stage.addChild(extras);
+      const halo = new Graphics();
+      app.stage.addChild(halo);
+      const rastro = criarRastro(app, palette.espuma);
+      const jogador = criarMergulhador();
       app.stage.addChild(jogador);
 
       const ctx = escuro.current!.getContext("2d")!;
 
       app.ticker.add(() => {
+        if (useGame.getState().pausado) return;
         const t = performance.now();
         const mov = reduzMovimento() ? 0 : 1;
         bolhas(t);
@@ -118,10 +143,25 @@ export default function Cais() {
         pos.x = Math.max(10, Math.min(W - 10, pos.x));
         pos.y = Math.max(10, Math.min(H - 10, pos.y));
         jogador.position.set(pos.x, pos.y);
+        raios(t);
+        desenharHalo(halo, pos.x, pos.y, 36, t);
+        rastro(pos.x, pos.y);
+        extras.clear();
+        for (const c of conchas) {
+          if (c.ok) continue;
+          if (Math.hypot(c.x - pos.x, c.y - pos.y) < 18) {
+            c.ok = true; audio.sfx.pista();
+            const n = conchas.filter((k) => k.ok).length;
+            setConchasN(n);
+            setMsg(`Uma concha brilhante. ${n} de ${conchas.length}. Valem uma estrela.`);
+            continue;
+          }
+          extras.circle(c.x, c.y, 6).fill({ color: palette.lanterna, alpha: 0.75 + 0.25 * Math.sin(t * 0.006 + c.x) * mov });
+        }
 
         ctx.globalCompositeOperation = "source-over";
         ctx.clearRect(0, 0, W, H);
-        ctx.fillStyle = "rgba(11,29,42,0.94)";
+        ctx.fillStyle = "rgba(10,26,31,0.94)";
         ctx.fillRect(0, 0, W, H);
         ctx.globalCompositeOperation = "destination-out";
         const g = ctx.createRadialGradient(pos.x, pos.y, 8, pos.x, pos.y, LUZ + Math.sin(t * 0.006) * 5 * mov);
@@ -129,6 +169,27 @@ export default function Cais() {
         g.addColorStop(1, "rgba(0,0,0,0)");
         ctx.fillStyle = g;
         ctx.fillRect(0, 0, W, H);
+        for (const c of conchas) {
+          if (c.ok) continue;
+          const h = ctx.createRadialGradient(c.x, c.y, 1, c.x, c.y, 22);
+          h.addColorStop(0, "rgba(0,0,0,0.7)");
+          h.addColorStop(1, "rgba(0,0,0,0)");
+          ctx.fillStyle = h;
+          ctx.fillRect(c.x - 22, c.y - 22, 44, 44);
+        }
+        const kp = (t - ping) / 1800;
+        if (kp >= 0 && kp < 1) {
+          for (const c of conchas) {
+            if (c.ok || Math.hypot(c.x - pingPos.x, c.y - pingPos.y) > 80 + kp * 260) continue;
+            const h = ctx.createRadialGradient(c.x, c.y, 1, c.x, c.y, 60);
+            h.addColorStop(0, `rgba(0,0,0,${1 - kp})`);
+            h.addColorStop(1, "rgba(0,0,0,0)");
+            ctx.fillStyle = h;
+            ctx.fillRect(c.x - 60, c.y - 60, 120, 120);
+          }
+          ctx.beginPath(); ctx.arc(pingPos.x, pingPos.y, 20 + kp * 340, 0, 7);
+          ctx.strokeStyle = `rgba(0,0,0,${0.5 * (1 - kp)})`; ctx.lineWidth = 3; ctx.stroke();
+        }
         for (const o of objetos) {
           const h = ctx.createRadialGradient(o.x, o.y, 2, o.x, o.y, 34);
           h.addColorStop(0, "rgba(0,0,0,0.55)");
@@ -164,15 +225,14 @@ export default function Cais() {
   }, [giveItem, complete]);
 
   return (
-    <div className="flex h-full flex-col items-center gap-3 p-3">
-      <div className="flex w-full max-w-sm items-center justify-between">
-        <h2 className="font-narrativa text-2xl text-lanterna">Cais Afundado</h2>
-        <button onClick={leave} className="text-sm text-espuma/70 underline">Voltar</button>
-      </div>
-      <div className="relative overflow-hidden rounded-lg border border-mare" style={{ width: "min(100%, calc(60dvh * 9 / 16))", aspectRatio: "9 / 16" }}>
+    <div className="flex h-full flex-col items-center gap-2 p-2">
+      <Cabecalho id="cais">
+        <p className="text-sm text-espuma/70">Conchas opcionais: {conchasN}/3 · Termine em até 75s para a 3ª estrela</p>
+      </Cabecalho>
+      <Tela>
         <div ref={host} className="absolute inset-0" />
         <canvas ref={escuro} width={W} height={H} className="pointer-events-none absolute inset-0 h-full w-full" />
-      </div>
+      </Tela>
       <button onClick={() => acaoRef.current?.()} className="rounded-lg border border-lanterna px-6 py-2 text-lanterna">Interagir</button>
       <p className="max-w-sm text-center font-narrativa text-base text-espuma/90" role="status">{msg}</p>
     </div>

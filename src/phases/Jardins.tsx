@@ -3,8 +3,10 @@ import { Application, Graphics } from "pixi.js";
 import { palette } from "../game/theme";
 import { useGame } from "../store/useGame";
 import { audio } from "../game/audio";
-import { criarBolhas, reduzMovimento } from "../game/fx";
+import { vibrar, criarBolhas, criarMergulhador, criarRaios, criarRastro, desenharHalo, reduzMovimento } from "../game/fx";
 import { configAtual } from "../game/dificuldade";
+import Cabecalho from "../components/Cabecalho";
+import Tela from "../components/Tela";
 
 const W = 360, H = 640, SPEED = 2.2, R = 8;
 const INICIO = { x: 180, y: 600 };
@@ -36,8 +38,9 @@ export default function Jardins() {
   const acesa = useRef(true);
   const [aceso, setAceso] = useState(true);
   const [msg, setMsg] = useState("Apague a lanterna perto das enguias. Sem luz, elas quase não notam você.");
-  const { giveItem, complete, leave } = useGame();
+  const { giveItem, complete } = useGame();
 
+  const iscaRef = useRef<() => void>();
   const alternar = () => {
     acesa.current = !acesa.current;
     setAceso(acesa.current);
@@ -54,10 +57,25 @@ export default function Jardins() {
     let luz = LUZ_ACESA;
     let graca = 0;
     let fim = false;
+    let tremor = 0;
     let morto = false;
+    let vistas = 0;
+    let isca: { x: number; y: number; ate: number } | null = null;
+    let recarga = 0;
+    const inicioT = performance.now();
 
+    const lancar = () => {
+      const agora = performance.now();
+      if (agora < recarga) { audio.sfx.erro(); setMsg("A isca ainda está se formando."); return; }
+      isca = { x: pos.x, y: pos.y - 40, ate: agora + 4500 };
+      recarga = agora + 9000;
+      audio.sfx.bolha();
+      setMsg("Uma luz de plâncton fica para trás. As enguias seguem a luz, não você.");
+    };
+    iscaRef.current = lancar;
     const kd = (e: KeyboardEvent) => {
       const k = e.key.toLowerCase();
+      if (k === "f") lancar();
       if (k === "l") { acesa.current = !acesa.current; setAceso(acesa.current); audio.sfx.interagir(); }
       teclas.add(k);
     };
@@ -78,6 +96,7 @@ export default function Jardins() {
       corais.forEach(([x, y, w, h]) => cenario.roundRect(x, y, w, h, 12).fill({ color: palette.alga, alpha: 0.75 }));
       cenario.circle(SAIDA.x, SAIDA.y, 20).fill(palette.lanterna);
       app.stage.addChild(cenario);
+      const raios = criarRaios(app, W, H);
       const ramos = new Graphics();
       app.stage.addChild(ramos);
       const bolhas = criarBolhas(app, W, H, 18, palette.espuma);
@@ -89,7 +108,10 @@ export default function Jardins() {
         app.stage.addChild(g);
         return g;
       });
-      const jogador = new Graphics().circle(0, 0, R).fill(palette.espuma);
+      const halo = new Graphics();
+      app.stage.addChild(halo);
+      const rastro = criarRastro(app, palette.espuma);
+      const jogador = criarMergulhador();
       app.stage.addChild(jogador);
 
       const ctx = escuro.current!.getContext("2d")!;
@@ -102,7 +124,7 @@ export default function Jardins() {
       };
 
       app.ticker.add(() => {
-        if (fim) return;
+        if (fim || useGame.getState().pausado) return;
         const t = performance.now();
         const mov = reduzMovimento() ? 0 : 1;
         bolhas(t);
@@ -128,10 +150,17 @@ export default function Jardins() {
         pos.x = Math.max(R, Math.min(W - R, pos.x));
         pos.y = Math.max(R, Math.min(H - R, pos.y));
         jogador.position.set(pos.x, pos.y);
+        raios(t);
+        desenharHalo(halo, pos.x, pos.y, 36, t);
+        rastro(pos.x, pos.y);
+        app.stage.position.set(mov ? (Math.random() - 0.5) * tremor : 0, mov ? (Math.random() - 0.5) * tremor : 0);
+        tremor *= 0.88;
 
         const visao = acesa.current ? VISAO_ACESA : cfg.visaoApagada;
         aneis.clear();
         enguias.forEach((e, i) => {
+          const viva = isca && t < isca.ate ? isca : null;
+          if (viva && Math.abs(viva.x - e.x) > 8) e.d = viva.x > e.x ? 1 : -1;
           e.x += e.v * e.d;
           if (e.x < 25 || e.x > W - 25) e.d *= -1;
           corpos[i].position.set(e.x, e.y);
@@ -139,11 +168,14 @@ export default function Jardins() {
           corpos[i].scale.y = 1 + 0.18 * Math.sin(t * 0.01 + i) * mov;
           corpos[i].rotation = 0.12 * Math.sin(t * 0.004 + i) * mov;
           aneis.circle(e.x, e.y, visao).stroke({ color: palette.coral, width: 1, alpha: 0.3 });
-          if (graca <= 0 && Math.hypot(e.x - pos.x, e.y - pos.y) < visao) {
+          if (graca <= 0 && !(viva && Math.hypot(e.x - viva.x, e.y - viva.y) < 220) && Math.hypot(e.x - pos.x, e.y - pos.y) < visao) {
             audio.sfx.erro();
             setMsg("Uma enguia viu você. Volte ao início e tente com a lanterna apagada.");
             pos.x = alvo.x = INICIO.x; pos.y = alvo.y = INICIO.y;
             graca = 90;
+            vistas++;
+            tremor = 8;
+            vibrar([60, 40, 60]);
           }
         });
         if (graca > 0) graca--;
@@ -154,16 +186,22 @@ export default function Jardins() {
           audio.sfx.vitoria();
           giveItem("perola-de-coral");
           setMsg("O arco se abre. Uma pérola de coral brilha na entrada.");
-          setTimeout(() => complete("jardins"), 1600);
+          const tempo = Math.round((performance.now() - inicioT) / 1000);
+          setTimeout(() => complete("jardins", {
+            estrelas: vistas === 0 ? 3 : vistas <= 2 ? 2 : 1,
+            tempo,
+            detalhes: [vistas === 0 ? "Nunca foi visto" : `Visto ${vistas}x`],
+          }), 1200);
         }
 
         luz += ((acesa.current ? LUZ_ACESA : LUZ_APAGADA) - luz) * 0.12;
         ctx.globalCompositeOperation = "source-over";
         ctx.clearRect(0, 0, W, H);
-        ctx.fillStyle = "rgba(11,29,42,0.95)";
+        ctx.fillStyle = "rgba(10,26,31,0.95)";
         ctx.fillRect(0, 0, W, H);
         ctx.globalCompositeOperation = "destination-out";
         furo(pos.x, pos.y, luz);
+        if (isca && t < isca.ate) furo(isca.x, isca.y, 50 + Math.sin(t * 0.01) * 6 * mov, 0.9);
         enguias.forEach((e) => furo(e.x, e.y, 34, 0.9));
         furo(SAIDA.x, SAIDA.y, 56 + Math.sin(t * 0.004) * 6 * mov, 0.9);
       });
@@ -190,15 +228,12 @@ export default function Jardins() {
   }, [giveItem, complete]);
 
   return (
-    <div className="flex h-full flex-col items-center gap-3 p-3">
-      <div className="flex w-full max-w-sm items-center justify-between">
-        <h2 className="font-narrativa text-2xl text-lanterna">Jardins de Coral</h2>
-        <button onClick={leave} className="text-sm text-espuma/70 underline">Voltar</button>
-      </div>
-      <div className="relative overflow-hidden rounded-lg border border-mare" style={{ width: "min(100%, calc(56dvh * 9 / 16))", aspectRatio: "9 / 16" }}>
+    <div className="flex h-full flex-col items-center gap-2 p-2">
+      <Cabecalho id="jardins" />
+      <Tela>
         <div ref={host} className="absolute inset-0" />
         <canvas ref={escuro} width={W} height={H} className="pointer-events-none absolute inset-0 h-full w-full" />
-      </div>
+      </Tela>
       <button
         onClick={alternar}
         aria-pressed={!aceso}
@@ -206,6 +241,7 @@ export default function Jardins() {
       >
         {aceso ? "Apagar lanterna (L)" : "Acender lanterna (L)"}
       </button>
+      <button onClick={() => iscaRef.current?.()} className="rounded-lg border border-coral px-5 py-2 text-coral">Lançar isca de plâncton (F)</button>
       <p className="max-w-sm text-center font-narrativa text-base text-espuma/90" role="status">{msg}</p>
     </div>
   );

@@ -3,6 +3,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import Menu from "./components/Menu";
 import Cutscene from "./components/Cutscene";
 import BotaoSom from "./components/BotaoSom";
+import Resultado from "./components/Resultado";
+import ToastConquista from "./components/ToastConquista";
+import Pausa from "./components/Pausa";
+import { musica } from "./game/musica";
 import { audio } from "./game/audio";
 import { cutscenes, type CenaId } from "./game/cutscenes";
 import { useGame } from "./store/useGame";
@@ -12,7 +16,9 @@ const fases = {
   cais: lazy(() => import("./phases/Cais")),
   biblioteca: lazy(() => import("./phases/Biblioteca")),
   jardins: lazy(() => import("./phases/Jardins")),
+  recife: lazy(() => import("./phases/Recife")),
   catedral: lazy(() => import("./phases/Catedral")),
+  abismo: lazy(() => import("./phases/Abismo")),
   coracao: lazy(() => import("./phases/Coracao")),
 };
 
@@ -20,6 +26,8 @@ export default function App() {
   const current = useGame((s) => s.current);
   const inventory = useGame((s) => s.inventory);
   const giveItem = useGame((s) => s.giveItem);
+  const infinito = useGame((s) => s.infinito);
+  const rodada = useGame((s) => s.rodada);
   const [rever, setRever] = useState<CenaId | null>(null);
   const Fase = current ? fases[current] : null;
 
@@ -31,6 +39,11 @@ export default function App() {
     if (cenaId) giveItem(`cutscene:${cenaId}`);
     setRever(null);
   };
+
+  // Cada fase tem a sua trilha; o menu e a Maré Infinita também
+  useEffect(() => {
+    musica.tocar(current ? (infinito && current === "abismo" ? "infinito" : current) : "menu");
+  }, [current, infinito]);
 
   useEffect(() => {
     const ligar = () => audio.iniciar();
@@ -45,17 +58,20 @@ export default function App() {
   return (
     <>
       <BotaoSom />
+      <Resultado />
+      <ToastConquista />
+      <Pausa />
       {cenaId && <Cutscene key={cenaId} info={cutscenes[cenaId]} aoFinal={fimDaCena} />}
       <AnimatePresence mode="wait">
         <motion.div
-          key={current ?? "menu"}
+          key={`${current ?? "menu"}:${rodada}`}
           className="h-full"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <Suspense fallback={<p className="p-6 font-narrativa text-espuma/70">Carregando...</p>}>
+          <Suspense fallback={<p className="p-6 font-narrativa text-espuma/70" role="status">Carregando...</p>}>
             {Fase ? <Fase /> : <Menu aoRever={setRever} />}
           </Suspense>
         </motion.div>

@@ -1,4 +1,5 @@
 import { Howl, Howler } from "howler";
+import { musica } from "./musica";
 
 const KEY = "lanterna-submersa:mudo";
 
@@ -9,7 +10,7 @@ function lerMudo(): boolean {
 const som = (arquivo: string, volume = 0.6, loop = false) =>
   new Howl({ src: [`/audio/${arquivo}.wav`], volume, loop });
 
-const ambiente = som("ambiente", 0.35, true);
+const ambiente = som("ambiente", 0.18, true);
 const efeitos = {
   coletar: som("coletar"),
   interagir: som("interagir", 0.5),
@@ -31,9 +32,26 @@ if (typeof document !== "undefined") {
   });
 }
 
+// Tom sintetizado simples, com envelope exponencial
+function tom(freq: number, dur: number, tipo: OscillatorType, vol: number, atraso = 0, ate?: number) {
+  const ctx = Howler.ctx;
+  const destino: AudioNode | undefined = Howler.masterGain ?? ctx?.destination;
+  if (!ctx || !destino) return;
+  const o = ctx.createOscillator(), g = ctx.createGain();
+  const t0 = ctx.currentTime + atraso;
+  o.type = tipo;
+  o.frequency.setValueAtTime(freq, t0);
+  if (ate) o.frequency.exponentialRampToValueAtTime(ate, t0 + dur);
+  g.gain.setValueAtTime(0.0001, t0);
+  g.gain.exponentialRampToValueAtTime(vol, t0 + 0.012);
+  g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+  o.connect(g); g.connect(destino);
+  o.start(t0); o.stop(t0 + dur + 0.05);
+}
+
 export const audio = {
   // Navegadores só liberam áudio após um gesto do jogador
-  iniciar() { if (!ambiente.playing()) ambiente.play(); },
+  iniciar() { if (!ambiente.playing()) ambiente.play(); musica.iniciar(); },
   sfx: {
     coletar: () => efeitos.coletar.play(),
     interagir: () => efeitos.interagir.play(),
@@ -41,6 +59,12 @@ export const audio = {
     porta: () => efeitos.porta.play(),
     erro: () => efeitos.erro.play(),
     vitoria: () => efeitos.vitoria.play(),
+    // Arpejo brilhante de medalha
+    conquista: () => [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => tom(f, 0.9, "sine", 0.18, i * 0.09)),
+    // Pancada de casco: grave seco e ruído curto
+    pancada: () => { tom(140, 0.28, "sine", 0.5, 0, 45); tom(90, 0.2, "sawtooth", 0.12, 0, 40); },
+    // Bolha estourando
+    bolha: () => { tom(420, 0.12, "sine", 0.2, 0, 900); tom(640, 0.1, "sine", 0.12, 0.05, 1100); },
   },
   // Nota curta sintetizada, usada no duelo do chefe
   nota(freq: number) {

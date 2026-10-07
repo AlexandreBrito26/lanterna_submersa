@@ -4,12 +4,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        abismo: "#0B1D2A",
-        mare: "#14465A",
+        abismo: "#0A1A1F",
+        mare: "#1F3A40",
         coral: "#E07A5F",
-        lanterna: "#F2CC8F",
-        espuma: "#EAF4F4",
+        lanterna: "#FFBF00",
+        espuma: "#F2E6D6",
         alga: "#3D8B7A",
+        latao: "#A67C52",
+        cobre: "#BF9B30",
+        ouro: "#E0AC69",
       },
       fontFamily: {
         narrativa: ["Spectral", "Georgia", "serif"],

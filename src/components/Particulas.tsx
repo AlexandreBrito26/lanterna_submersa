@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 // Partículas que sobem ao fundo da tela (poeira, bolhas, faíscas de luz)
-export default function Particulas({ quantidade = 14, cor = "#EAF4F4" }: { quantidade?: number; cor?: string }) {
+export default function Particulas({ quantidade = 14, cor = "#F2E6D6" }: { quantidade?: number; cor?: string }) {
   const reduz = useReducedMotion();
   const itens = useMemo(
     () => Array.from({ length: quantidade }, (_, i) => ({
