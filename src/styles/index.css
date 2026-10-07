@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+html, body { height: 100%; }
+#root {
+  height: 100dvh;
+  box-sizing: border-box;
+  /* faixa superior livre para o botão de som e a barra de status do celular */
+  padding: calc(env(safe-area-inset-top, 0px) + 2.5rem) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+}
+body { @apply bg-abismo text-espuma font-ui; margin: 0; overflow: hidden; overscroll-behavior: none; -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%; }
+button { touch-action: manipulation; min-height: 44px; }
+:focus-visible { outline: 2px solid #F2CC8F; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }

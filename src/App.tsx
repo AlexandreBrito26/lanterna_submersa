@@ -1,0 +1,65 @@
+import { lazy, Suspense, useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import Menu from "./components/Menu";
+import Cutscene from "./components/Cutscene";
+import BotaoSom from "./components/BotaoSom";
+import { audio } from "./game/audio";
+import { cutscenes, type CenaId } from "./game/cutscenes";
+import { useGame } from "./store/useGame";
+
+// Cada fase vira um pacote separado, carregado só quando o jogador entra nela
+const fases = {
+  cais: lazy(() => import("./phases/Cais")),
+  biblioteca: lazy(() => import("./phases/Biblioteca")),
+  jardins: lazy(() => import("./phases/Jardins")),
+  catedral: lazy(() => import("./phases/Catedral")),
+  coracao: lazy(() => import("./phases/Coracao")),
+};
+
+export default function App() {
+  const current = useGame((s) => s.current);
+  const inventory = useGame((s) => s.inventory);
+  const giveItem = useGame((s) => s.giveItem);
+  const [rever, setRever] = useState<CenaId | null>(null);
+  const Fase = current ? fases[current] : null;
+
+  // A cutscene toca sozinha na primeira vez que a fase é aberta
+  const pendente = current && current in cutscenes && !inventory.includes(`cutscene:${current}`)
+    ? (current as CenaId) : null;
+  const cenaId = rever ?? pendente;
+  const fimDaCena = () => {
+    if (cenaId) giveItem(`cutscene:${cenaId}`);
+    setRever(null);
+  };
+
+  useEffect(() => {
+    const ligar = () => audio.iniciar();
+    window.addEventListener("pointerdown", ligar, { once: true });
+    window.addEventListener("keydown", ligar, { once: true });
+    return () => {
+      window.removeEventListener("pointerdown", ligar);
+      window.removeEventListener("keydown", ligar);
+    };
+  }, []);
+
+  return (
+    <>
+      <BotaoSom />
+      {cenaId && <Cutscene key={cenaId} info={cutscenes[cenaId]} aoFinal={fimDaCena} />}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={current ?? "menu"}
+          className="h-full"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <Suspense fallback={<p className="p-6 font-narrativa text-espuma/70">Carregando...</p>}>
+            {Fase ? <Fase /> : <Menu aoRever={setRever} />}
+          </Suspense>
+        </motion.div>
+      </AnimatePresence>
+    </>
+  );
+}
