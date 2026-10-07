@@ -1,9 +1,10 @@
 import type { Save } from "../store/schema";
+import { paginas } from "./diario";
 
 export type Conquista = { id: string; nome: string; desc: string; check: (s: Save) => boolean };
 
 const tres = (...ids: string[]) => (s: Save) => ids.every((i) => s.estrelas[i] === 3);
-const seis = ["cais", "biblioteca", "jardins", "recife", "catedral", "abismo"];
+const seis = ["cais", "biblioteca", "jardins", "armazem", "recife", "oficina", "catedral", "sinos", "observatorio", "abismo"];
 const todasFases = [...seis, "coracao"];
 
 export const conquistas: Conquista[] = [
@@ -19,6 +20,11 @@ export const conquistas: Conquista[] = [
   { id: "guardiao", nome: "Palavra do guardião", desc: "Conclua o Coração da Lanterna.", check: (s) => s.completed.includes("coracao") },
   { id: "finais", nome: "Todos os finais", desc: "Descubra os 4 finais.", check: (s) => ["apagar", "acender", "guardar", "renascer"].every((f) => s.inventory.includes(`final:${f}`)) },
   { id: "lenda", nome: "Lenda das profundezas", desc: "Conclua todas as fases na dificuldade Difícil.", check: (s) => todasFases.every((f) => s.inventory.includes(`dificil:${f}`)) },
+  { id: "oficineiro", nome: "Mãos de faroleiro", desc: "3 estrelas na Oficina do Faroleiro.", check: tres("oficina") },
+  { id: "ouvido", nome: "Ouvido de sineiro", desc: "3 estrelas na Sala dos Sinos.", check: tres("sinos") },
+  { id: "pesador", nome: "Balança honesta", desc: "3 estrelas no Armazém do Porto.", check: tres("armazem") },
+  { id: "navegante", nome: "Norte certo", desc: "3 estrelas no Observatório Naufragado.", check: tres("observatorio") },
+  { id: "diario", nome: "Diário completo", desc: "Abra todas as páginas do diário de Tomás.", check: (s) => paginas.every((p) => p.check(s)) },
   { id: "mare-60", nome: "Fôlego da maré", desc: "Aguente 60 segundos na Maré Infinita.", check: (s) => s.recordeInfinito >= 60 },
   { id: "mare-120", nome: "Imortal das correntes", desc: "Aguente 120 segundos na Maré Infinita.", check: (s) => s.recordeInfinito >= 120 },
 ];

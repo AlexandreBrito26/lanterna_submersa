@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const PhaseId = z.enum(["cais", "biblioteca", "jardins", "recife", "catedral", "abismo", "coracao"]);
+export const PhaseId = z.enum(["cais", "biblioteca", "jardins", "armazem", "recife", "oficina", "catedral", "sinos", "observatorio", "abismo", "coracao"]);
 export type PhaseId = z.infer<typeof PhaseId>;
 
 export const SaveSchema = z.object({

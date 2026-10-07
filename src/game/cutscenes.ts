@@ -37,6 +37,28 @@ export const cutscenes = {
       { texto: "Para passar, será preciso aprender a andar no escuro.", agua: 0.2, brilho: 0.1 },
     ],
   },
+  armazem: {
+    tipo: "recife",
+    entrada: "Toque para entrar no armazém",
+    cenas: [
+      { texto: "No fim do porto, um armazém de pedra guarda o lastro de todos os barcos que a lanterna trouxe de volta.", agua: 0.4, brilho: 0.3 },
+      { texto: "Cada barco deixava uma pedra com o próprio nome. Pela ordem de peso, o armazém sabia a ordem em que chegaram.", agua: 0.4, brilho: 0.5 },
+      { texto: "A água levou os livros e apagou as marcas. Mas as pedras continuam aqui, cada uma com o seu peso.", agua: 0.4, brilho: 0.5 },
+      { texto: "Uma balança de dois pratos ainda pende do teto. Está enferrujada, mas continua honesta.", agua: 0.4, brilho: 0.8 },
+      { texto: "Compare as pedras. O peso não mente, só engana quem pesa com pressa.", agua: 0.4, brilho: 1 },
+    ],
+  },
+  observatorio: {
+    tipo: "coracao",
+    entrada: "Toque para subir ao observatório",
+    cenas: [
+      { texto: "Acima da Sala dos Sinos, uma escada em espiral sobe até uma cúpula de vidro. Mesmo debaixo d'água, ela ainda mostra as estrelas, trêmulas como numa lembrança.", agua: 0.7, brilho: 0.3 },
+      { texto: "Os faroleiros vinham aqui para achar o norte quando as nuvens cobriam o céu.", agua: 0.7, brilho: 0.5 },
+      { texto: "Três anéis de bronze giram em torno do mesmo eixo. Um arrasta o outro, e o outro arrasta o terceiro, como a lua arrasta a maré.", agua: 0.7, brilho: 0.7 },
+      { texto: "Só quando a Estrela estiver no topo dos três anéis o caminho até a superfície vai aparecer.", agua: 0.7, brilho: 0.9 },
+      { texto: "Gire com calma. Cada movimento tem uma consequência.", agua: 0.7, brilho: 1 },
+    ],
+  },
   recife: {
     tipo: "recife",
     entrada: "Toque para mergulhar no recife",
@@ -45,6 +67,28 @@ export const cutscenes = {
       { texto: "A luz da cidade se estilhaçou no naufrágio. Cada caco ainda guarda um pouco de calor.", agua: 0.6, brilho: 0.7 },
       { texto: "Seis fragmentos esperam entre os cascos. Mas você está sem fôlego de verdade agora.", agua: 0.6, brilho: 0.5 },
       { texto: "Respire quando achar bolhas e não se perca. O ar não perdoa quem hesita.", agua: 0.6, brilho: 0.9 },
+    ],
+  },
+  oficina: {
+    tipo: "biblioteca",
+    entrada: "Toque para entrar na oficina",
+    cenas: [
+      { texto: "Entre o recife e a catedral, uma casinha de tábuas resistiu à cheia. A porta nunca foi trancada.", agua: 0.35, brilho: 0.3 },
+      { texto: "Era a oficina do faroleiro. Tomás Vaz passou quarenta anos ali, polindo vidro e trocando pavios.", agua: 0.35, brilho: 0.5 },
+      { texto: "Na bancada, a lente da lanterna está desmontada. Alguém tentou consertá-la e não terminou.", agua: 0.35, brilho: 0.6 },
+      { texto: "Bilhetes, uma carta e uma receita esperam ao lado das peças. Nem todos dizem a verdade.", agua: 0.35, brilho: 0.8 },
+      { texto: "Monte a lente, forje o aro e aponte o feixe. Uma peça errada e a luz não passa.", agua: 0.35, brilho: 1 },
+    ],
+  },
+  sinos: {
+    tipo: "catedral",
+    entrada: "Toque para escutar os sinos",
+    cenas: [
+      { texto: "Atrás do altar, uma escada de pedra desce até uma sala redonda. O som chega antes da luz.", agua: 0.6, brilho: 0.2 },
+      { texto: "Cinco sinos pendem do teto, presos por correntes grossas de sal e ferrugem.", agua: 0.6, brilho: 0.4 },
+      { texto: "Quatro deles já tocaram a vida inteira. Tocavam quando um barco voltava, e a cidade inteira sabia pelo som.", agua: 0.6, brilho: 0.6 },
+      { texto: "O quinto sino nunca foi tocado. A corda dele está limpa, como se esperasse por alguém.", agua: 0.6, brilho: 0.8 },
+      { texto: "Primeiro aprenda a voz de cada um. Depois afine o quinto, para que ele possa responder.", agua: 0.6, brilho: 1 },
     ],
   },
   catedral: {

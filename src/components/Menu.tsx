@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Award, Film, Infinity as InfinityIcon, Lock, Music, Play, Settings2, Trash2, Trophy } from "lucide-react";
+import { ArrowLeft, Award, BookOpen, Film, Infinity as InfinityIcon, Lock, Music, Play, Settings2, Trash2, Trophy } from "lucide-react";
 import { phases, tiposVitoria } from "../phases/data";
 import { useGame } from "../store/useGame";
 import { cutscenes, type CenaId } from "../game/cutscenes";
@@ -9,6 +9,7 @@ import CenaMenu from "./CenaMenu";
 import Estrelas from "./Estrelas";
 import { iconeConquista, iconeTipo } from "./tipos";
 import { conquistas } from "../game/conquistas";
+import { paginas } from "../game/diario";
 import { musica } from "../game/musica";
 
 const finais: Record<string, string> = {
@@ -24,16 +25,18 @@ const descNiveis: Record<Nivel, string> = {
 };
 const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
 
-type Tela = "titulo" | "fases" | "ajustes" | "galeria";
+type Tela = "titulo" | "fases" | "ajustes" | "galeria" | "diario";
 
 export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
   const { completed, inventory, estrelas, melhorTempo, start, startInfinito, reset, conquistas: ganhas, recordeInfinito } = useGame();
+  const estado = useGame();
   const { nivel, definir } = useDificuldade();
   const [tela, setTela] = useState<Tela>("titulo");
   const [confirmar, setConfirmar] = useState(false);
   const [musicaOn, setMusicaOn] = useState(musica.estaAtiva());
 
-  const liberada = (i: number) => phases[i].pronta && (i === 0 || completed.includes(phases[i - 1].id));
+  // Fases novas entre as antigas não trancam quem já passou delas
+  const liberada = (i: number) => phases[i].pronta && (i === 0 || completed.includes(phases[i - 1].id) || phases.slice(i).some((p) => completed.includes(p.id)));
   const proxima = phases.find((_, i) => liberada(i) && !completed.includes(phases[i].id));
   const totalEstrelas = Object.values(estrelas).reduce((a, b) => a + b, 0);
   const finaisVistos = Object.keys(finais).filter((f) => inventory.includes(`final:${f}`));
@@ -103,6 +106,39 @@ export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
                     <Film size={14} aria-hidden /> Rever história
                   </button>
                 )}
+              </motion.li>
+            );
+          })}
+        </ol>
+      </main>
+    );
+  }
+
+  if (tela === "diario") {
+    const abertas = paginas.filter((p) => p.check(estado)).length;
+    return (
+      <main className="mx-auto flex h-full max-w-xl flex-col gap-5 overflow-y-auto px-6 py-6">
+        {fundo}
+        <header className="flex items-center justify-between">
+          <h1 className="font-narrativa text-3xl text-lanterna">Diário do Faroleiro</h1>
+          <Voltar />
+        </header>
+        <p className="flex items-center gap-2 text-sm text-espuma/70">
+          <BookOpen size={16} className="text-lanterna" aria-hidden />
+          {abertas} de {paginas.length} páginas. Cada fase concluída abre uma nova.
+        </p>
+        <ol className="flex flex-col gap-3">
+          {paginas.map((p, k) => {
+            const ok = p.check(estado);
+            return (
+              <motion.li
+                key={p.id}
+                initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: k * 0.04 }}
+                className={`rounded-xl border p-4 backdrop-blur-sm ${ok ? "border-latao/70 bg-espuma/5" : "border-mare bg-mare/20 opacity-70"}`}
+              >
+                <span className="text-xs uppercase tracking-[0.2em] text-latao">Página {k + 1}</span>
+                <h2 className="mt-1 font-narrativa text-xl text-lanterna">{ok ? p.titulo : "???"}</h2>
+                <p className={`mt-2 font-narrativa leading-relaxed ${ok ? "text-espuma/90" : "text-sm text-espuma/50"}`}>{ok ? p.texto : p.dica}</p>
               </motion.li>
             );
           })}
@@ -340,9 +376,10 @@ export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
             <InfinityIcon size={18} aria-hidden /> Maré Infinita{recordeInfinito ? ` · recorde ${recordeInfinito}s` : ""}
           </motion.button>
         )}
-        <div className="flex gap-3">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
             { t: "Galeria", I: Award, f: () => setTela("galeria") },
+            { t: "Diário", I: BookOpen, f: () => setTela("diario") },
             { t: "Abertura", I: Film, f: () => aoRever("cais") },
             { t: "Ajustes", I: Settings2, f: () => setTela("ajustes") },
           ].map(({ t, I, f }) => (
@@ -350,7 +387,7 @@ export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
               key={t}
               variants={{ oculto: { opacity: 0, y: 18 }, visivel: { opacity: 1, y: 0 } }}
               whileTap={{ scale: 0.97 }} onClick={f}
-              className="flex flex-1 items-center justify-center gap-1.5 rounded-2xl border border-espuma/20 bg-abismo/40 px-2 py-3 text-sm text-espuma/85 backdrop-blur-md transition-colors hover:border-espuma/50"
+              className="flex items-center justify-center gap-1.5 rounded-2xl border border-espuma/20 bg-abismo/40 px-2 py-3 text-sm text-espuma/85 backdrop-blur-md transition-colors hover:border-espuma/50"
             >
               <I size={16} aria-hidden /> {t}
             </motion.button>

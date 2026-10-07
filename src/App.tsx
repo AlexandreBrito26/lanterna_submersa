@@ -16,8 +16,12 @@ const fases = {
   cais: lazy(() => import("./phases/Cais")),
   biblioteca: lazy(() => import("./phases/Biblioteca")),
   jardins: lazy(() => import("./phases/Jardins")),
+  armazem: lazy(() => import("./phases/Armazem")),
   recife: lazy(() => import("./phases/Recife")),
+  oficina: lazy(() => import("./phases/Oficina")),
   catedral: lazy(() => import("./phases/Catedral")),
+  sinos: lazy(() => import("./phases/Sinos")),
+  observatorio: lazy(() => import("./phases/Observatorio")),
   abismo: lazy(() => import("./phases/Abismo")),
   coracao: lazy(() => import("./phases/Coracao")),
 };
