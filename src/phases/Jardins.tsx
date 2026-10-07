@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Application, Graphics } from "pixi.js";
+import { resolucaoIdeal } from "../game/pixiBase";
 import { palette } from "../game/theme";
 import { useGame } from "../store/useGame";
 import { audio } from "../game/audio";
@@ -84,7 +85,7 @@ export default function Jardins() {
     window.addEventListener("keyup", ku);
 
     (async () => {
-      await app.init({ width: W, height: H, background: palette.abismo, antialias: true, resolution: Math.min(window.devicePixelRatio || 1, 2), autoDensity: true });
+      await app.init({ width: W, height: H, background: palette.abismo, antialias: true, resolution: resolucaoIdeal(host.current), autoDensity: true });
       if (morto) { app.destroy(true); return; }
       host.current!.appendChild(app.canvas);
       app.canvas.style.width = "100%";
@@ -228,11 +229,12 @@ export default function Jardins() {
   }, [giveItem, complete]);
 
   return (
-    <div className="flex h-full flex-col items-center gap-2 p-2">
+    <div className="fase-layout">
       <Cabecalho id="jardins" />
       <Tela>
         <div ref={host} className="absolute inset-0" />
         <canvas ref={escuro} width={W} height={H} className="pointer-events-none absolute inset-0 h-full w-full" />
+        <p className="legenda-jogo" role="status">{msg}</p>
       </Tela>
       <button
         onClick={alternar}
@@ -242,7 +244,6 @@ export default function Jardins() {
         {aceso ? "Apagar lanterna (L)" : "Acender lanterna (L)"}
       </button>
       <button onClick={() => iscaRef.current?.()} className="rounded-lg border border-coral px-5 py-2 text-coral">Lançar isca de plâncton (F)</button>
-      <p className="max-w-sm text-center font-narrativa text-base text-espuma/90" role="status">{msg}</p>
     </div>
   );
 }

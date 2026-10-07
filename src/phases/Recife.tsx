@@ -154,7 +154,7 @@ export default function Recife() {
 
   const critico = hud.ar < 0.25;
   return (
-    <div className="flex h-full flex-col items-center gap-2 p-2">
+    <div className="fase-layout">
       <Cabecalho id="recife">
         <div className="flex items-center gap-3 text-sm">
           <span className="flex items-center gap-1 text-lanterna"><Gem size={16} aria-hidden /> {hud.frag}/6</span>
@@ -169,12 +169,12 @@ export default function Recife() {
       <Tela>
         <div ref={host} className="absolute inset-0" />
         <canvas ref={escuro} width={W} height={H} className="pointer-events-none absolute inset-0 h-full w-full" />
+        <p className="legenda-jogo" role="status">{msg}</p>
       </Tela>
       <button
         onPointerDown={() => { seg.current = true; }} onPointerUp={() => { seg.current = false; }} onPointerLeave={() => { seg.current = false; }}
         className="select-none rounded-lg border border-lanterna px-5 py-2 text-lanterna" style={{ touchAction: "none" }}
       >Prender o fôlego (segure ou Espaço)</button>
-      <p className="max-w-sm text-center font-narrativa text-base text-espuma/90" role="status">{msg}</p>
     </div>
   );
 }

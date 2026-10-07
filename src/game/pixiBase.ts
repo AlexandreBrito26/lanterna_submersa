@@ -3,11 +3,18 @@ import { palette } from "./theme";
 
 export const W = 360, H = 640;
 
+// Resolução proporcional ao tamanho real na tela, para o jogo não ficar borrado quando a moldura cresce
+export function resolucaoIdeal(host?: HTMLElement | null): number {
+  const dpr = window.devicePixelRatio || 1;
+  const largura = host?.clientWidth || W;
+  return Math.max(1, Math.min(dpr * (largura / W), 3));
+}
+
 export async function criarApp(host: HTMLElement): Promise<Application> {
   const app = new Application();
   await app.init({
     width: W, height: H, background: palette.abismo, antialias: true,
-    resolution: Math.min(window.devicePixelRatio || 1, 2), autoDensity: true,
+    resolution: resolucaoIdeal(host), autoDensity: true,
   });
   app.canvas.style.width = "100%";
   app.canvas.style.height = "100%";

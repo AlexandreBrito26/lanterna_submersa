@@ -157,7 +157,7 @@ export default function Abismo() {
   }, [giveItem, complete]);
 
   return (
-    <div className="flex h-full flex-col items-center gap-2 p-2">
+    <div className="fase-layout">
       <Cabecalho id="abismo">
         <div className="flex items-center justify-between text-sm">
           <span className="flex items-center gap-1 text-lanterna"><Timer size={16} aria-hidden /> {hud.resta}s{infinito && recorde > 0 && <span className="ml-2 text-espuma/60">recorde {recorde}s</span>}</span>
@@ -171,12 +171,12 @@ export default function Abismo() {
       <Tela>
         <div ref={host} className="absolute inset-0" />
         <canvas ref={escuro} width={W} height={H} className="pointer-events-none absolute inset-0 h-full w-full" />
+        <p className="legenda-jogo" role="status">{msg}</p>
       </Tela>
       <button
         onPointerDown={() => { ancora.current = true; }} onPointerUp={() => { ancora.current = false; }} onPointerLeave={() => { ancora.current = false; }}
         className="select-none rounded-lg border border-lanterna px-5 py-2 text-lanterna" style={{ touchAction: "none" }}
       >Lançar âncora (segure ou Espaço)</button>
-      <p className="max-w-sm text-center font-narrativa text-base text-espuma/90" role="status">{msg}</p>
     </div>
   );
 }

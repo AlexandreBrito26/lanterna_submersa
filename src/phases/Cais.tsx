@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Application, Graphics } from "pixi.js";
+import { resolucaoIdeal } from "../game/pixiBase";
 import { palette } from "../game/theme";
 import { useGame } from "../store/useGame";
 import { audio } from "../game/audio";
@@ -77,7 +78,7 @@ export default function Cais() {
     window.addEventListener("keydown", onAct);
 
     (async () => {
-      await app.init({ width: W, height: H, background: palette.abismo, antialias: true, resolution: Math.min(window.devicePixelRatio || 1, 2), autoDensity: true });
+      await app.init({ width: W, height: H, background: palette.abismo, antialias: true, resolution: resolucaoIdeal(host.current), autoDensity: true });
       if (morto) { app.destroy(true); return; }
       host.current!.appendChild(app.canvas);
       app.canvas.style.width = "100%";
@@ -225,16 +226,16 @@ export default function Cais() {
   }, [giveItem, complete]);
 
   return (
-    <div className="flex h-full flex-col items-center gap-2 p-2">
+    <div className="fase-layout">
       <Cabecalho id="cais">
         <p className="text-sm text-espuma/70">Conchas opcionais: {conchasN}/3 · Termine em até 75s para a 3ª estrela</p>
       </Cabecalho>
       <Tela>
         <div ref={host} className="absolute inset-0" />
         <canvas ref={escuro} width={W} height={H} className="pointer-events-none absolute inset-0 h-full w-full" />
+        <p className="legenda-jogo" role="status">{msg}</p>
       </Tela>
       <button onClick={() => acaoRef.current?.()} className="rounded-lg border border-lanterna px-6 py-2 text-lanterna">Interagir</button>
-      <p className="max-w-sm text-center font-narrativa text-base text-espuma/90" role="status">{msg}</p>
     </div>
   );
 }
