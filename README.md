@@ -327,3 +327,9 @@ Suba para o GitHub e importe em vercel.com. O Vite é detectado automaticamente.
 - Os fundos pausam quando a aba fica oculta.
 
 **Ainda não medido:** a performance real no navegador (por exemplo, no DevTools, aba Performance). As mudanças acima são medidas no bundle e no código, não no quadro renderizado.
+
+## Atualização do jogo no navegador (v51)
+- **Causa:** o jogo é um PWA (instalável, com cache offline). O service worker era gerado, mas nunca registrado no `main.tsx`. Com isso, uma versão nova ficava esperando todas as abas fecharem, e o navegador continuava mostrando o conteúdo antigo: mapa, medalhas, finais e atos.
+- **Correção:** `registerSW({ immediate: true })` em `main.tsx`, com `skipWaiting`, `clientsClaim` e `cleanupOutdatedCaches` no Workbox. A versão nova passa a ser ativada e a substituir o cache assim que estiver pronta.
+- **Uma vez só:** em um dispositivo que já tinha o jogo instalado, é preciso recarregar à força (ou limpar os dados do site) para trocar o cache antigo pelo novo. A partir daí, as atualizações chegam sozinhas.
+- Os dados de progresso (salvo no localStorage) não são afetados.

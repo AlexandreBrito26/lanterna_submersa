@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      workbox: { globPatterns: ["**/*.{js,css,html,wav,png,svg}"] },
+      workbox: { globPatterns: ["**/*.{js,css,html,wav,png,svg}"], skipWaiting: true, clientsClaim: true, cleanupOutdatedCaches: true },
       manifest: {
         name: "Lanterna Submersa",
         short_name: "Lanterna",
