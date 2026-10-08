@@ -24,7 +24,17 @@ function camada(w: number, h: number, base: number, alt: number, cor: string, to
   return c;
 }
 
-export default function CenaMenu() {
+// Paleta do fundo do menu por ato: céu (topo, meio, fundo) e cor da luz
+const PALETAS: Record<number, { topo: string; meio: string; fundo: string; luz: string }> = {
+  1: { topo: "#1b6a80", meio: "#0f3347", fundo: "#06121b", luz: "255,191,0" },
+  2: { topo: "#1d7f7a", meio: "#0a3a44", fundo: "#03111a", luz: "127,224,208" },
+  3: { topo: "#4a2440", meio: "#1c1024", fundo: "#0a0612", luz: "255,140,60" },
+  4: { topo: "#2f4a3f", meio: "#14201c", fundo: "#070d0b", luz: "170,210,180" },
+  5: { topo: "#3d6a8a", meio: "#1e3a52", fundo: "#0b1a28", luz: "255,250,235" },
+};
+
+export default function CenaMenu({ ato = 1 }: { ato?: number }) {
+  const pal = PALETAS[ato] ?? PALETAS[1];
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -64,7 +74,7 @@ export default function CenaMenu() {
       const t = parado ? 0 : ms;
       // água profunda
       const bg = ctx.createLinearGradient(0, 0, 0, h);
-      bg.addColorStop(0, "#1b6a80"); bg.addColorStop(0.4, "#0f3347"); bg.addColorStop(1, "#06121b");
+      bg.addColorStop(0, pal.topo); bg.addColorStop(0.4, pal.meio); bg.addColorStop(1, pal.fundo);
       ctx.globalCompositeOperation = "source-over";
       ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h);
 
@@ -73,7 +83,7 @@ export default function CenaMenu() {
       for (let i = 0; i < 6; i++) {
         const x0 = w * (i / 5) + Math.sin(t * 0.0003 + i * 1.7) * 60;
         const lg = ctx.createLinearGradient(x0, 0, x0 + 90, h * 0.8);
-        lg.addColorStop(0, "rgba(255,191,0,0.13)"); lg.addColorStop(1, "rgba(255,191,0,0)");
+        lg.addColorStop(0, `rgba(${pal.luz},0.13)`); lg.addColorStop(1, `rgba(${pal.luz},0)`);
         ctx.fillStyle = lg;
         ctx.beginPath(); ctx.moveTo(x0 - 20, 0); ctx.lineTo(x0 + 40, 0); ctx.lineTo(x0 + 220 + Math.sin(t * 0.0004 + i) * 40, h * 0.8); ctx.lineTo(x0 + 60, h * 0.8); ctx.fill();
       }
@@ -82,7 +92,7 @@ export default function CenaMenu() {
       luz.x += (luz.tx - luz.x) * 0.06; luz.y += (luz.ty - luz.y) * 0.06;
       const rl = 230 + Math.sin(t * 0.002) * 12;
       const lg2 = ctx.createRadialGradient(luz.x, luz.y, 0, luz.x, luz.y, rl);
-      lg2.addColorStop(0, "rgba(255,191,0,0.28)"); lg2.addColorStop(1, "rgba(255,191,0,0)");
+      lg2.addColorStop(0, `rgba(${pal.luz},0.28)`); lg2.addColorStop(1, `rgba(${pal.luz},0)`);
       ctx.fillStyle = lg2; ctx.fillRect(luz.x - rl, luz.y - rl, rl * 2, rl * 2);
       ctx.globalCompositeOperation = "source-over";
 
@@ -166,7 +176,7 @@ export default function CenaMenu() {
       window.removeEventListener("pointerdown", mover);
       document.removeEventListener("visibilitychange", vis);
     };
-  }, []);
+  }, [ato]);
 
   return <canvas ref={ref} aria-hidden className="pointer-events-none fixed inset-0 -z-10 h-full w-full" />;
 }

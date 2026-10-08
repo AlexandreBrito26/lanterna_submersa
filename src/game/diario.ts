@@ -212,6 +212,10 @@ export const paginas: Pagina[] = [
     texto: "As ilhas do mangue só se mantinham de pé ligadas por pontes. Cada ilha pedia o seu número de pontes, e nenhuma ponte podia cruzar outra. Tomás chamava isso de equilíbrio da costa.",
   },
   {
+    id: "d-trilha", titulo: "Trilha de memória", dica: "Conclua a Trilha Lembrada.", check: fez("trilha"),
+    texto: "Quando a luz se apagou de vez, Tomás só tinha a memória do caminho. Ele olhava o mapa por um instante e refazia cada curva de cabeça. Quem esquecia uma curva, voltava ao começo.",
+  },
+  {
     id: "d-abismo", titulo: "A corrente que sobe", dica: "Conclua as Correntes do Abismo.", check: fez("abismo"),
     texto: "A corrente do poço não é inimiga. É o próprio mar tentando levar a luz de volta à superfície. O problema é que ele leva a cidade junto.",
   },

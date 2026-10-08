@@ -333,6 +333,12 @@ export const audio = {
       falha: () => tom(150, 0.25, "square", 0.07, 0, 90),
       completo: () => [262, 330, 392, 523].forEach((f, i) => tom(f, 1.5, "triangle", 0.12, i * 0.12)),
     },
+    // Trilha lembrada: passo com estalo de memória, erro seco e caminho refeito com acorde
+    trilha: {
+      passo: () => tom(440, 0.08, "triangle", 0.06, 0, 520),
+      erro: () => { tom(170, 0.18, "square", 0.08, 0, 100); ruido(0.06, 700, 200, 0.06); },
+      chegou: () => [392, 523.25, 659.25, 880].forEach((f, i) => tom(f, 1.4, "sine", 0.12, i * 0.12)),
+    },
     // Brasa que migra: passo da brasa pelo caminho, atiçar com fagulha que sobe e fogo que se apaga
     brasa: {
       passar: () => tom(220, 0.08, "triangle", 0.05, 0, 180),

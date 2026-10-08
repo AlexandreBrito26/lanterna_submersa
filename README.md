@@ -333,3 +333,13 @@ Suba para o GitHub e importe em vercel.com. O Vite é detectado automaticamente.
 - **Correção:** `registerSW({ immediate: true })` em `main.tsx`, com `skipWaiting`, `clientsClaim` e `cleanupOutdatedCaches` no Workbox. A versão nova passa a ser ativada e a substituir o cache assim que estiver pronta.
 - **Uma vez só:** em um dispositivo que já tinha o jogo instalado, é preciso recarregar à força (ou limpar os dados do site) para trocar o cache antigo pelo novo. A partir daí, as atualizações chegam sozinhas.
 - Os dados de progresso (salvo no localStorage) não são afetados.
+
+## Ato IV (v52): ramo Apagar, fase 1
+- **Trilha Lembrada** (`phases/Trilha.tsx`), ato IV, ramo Apagar: um caminho aparece por alguns segundos e some. Refaça a sequência de direções de memória. Bater numa parede ou sair da trilha conta como erro e recomeça do início. Dois caminhos (5x4 e 5x5). Estrelas pelos erros: nenhum = 3, até 3 = 2. Som: passo com estalo de memória, erro seco, caminho refeito com acorde; trilha de pulsos de silêncio.
+- Cutscene de entrada (arte do ramo Apagar), página *Trilha de memória* no diário e medalha *Memória de mapa*.
+- **Ato IV:** 1 de 20 fases (4 ramos de 5). Próximo: segunda fase do ramo Apagar.
+
+## Menu: fundo por ato e organização do mapa (v53)
+- **Fundo que não aparecia:** o canvas do menu (`CenaMenu`) cobria por completo o fundo da tela, então as cores de cada ato nunca eram vistas. Agora o próprio canvas usa uma paleta por ato (céu e cor da luz) e muda quando o ato muda.
+- **Ato III que "sumia":** os atos III a V só aparecem no mapa quando há fases visíveis para o seu ramo. Quem ainda não escolheu o final no Coração vê, no fim da lista, o aviso "escolha o final no Coração para abrir este ato". Atos sem fases mostram "em construção".
+- **Organização do mapa:** cada ato tem seu cabeçalho, e dentro do Ato III as fases ficam agrupadas por ramo ("Ramo do Apagar", "Ramo do Acender" etc.).

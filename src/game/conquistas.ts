@@ -65,6 +65,7 @@ export const conquistas: Conquista[] = [
   { id: "sementes-em-linha", nome: "Horta em ordem", desc: "3 estrelas nas Sementes em Linha.", check: tres("sementes") },
   { id: "trilha-alternada", nome: "Passo certo", desc: "3 estrelas na Trilha Alternada.", check: tres("alternado") },
   { id: "pontes-de-mangue", nome: "Mestre das pontes", desc: "3 estrelas nas Pontes de Mangue.", check: tres("pontes") },
+  { id: "trilha-lembrada", nome: "Memória de mapa", desc: "3 estrelas na Trilha Lembrada.", check: tres("trilha") },
   { id: "diario", nome: "Diário completo", desc: "Abra todas as páginas do diário de Tomás.", check: (s) => paginas.every((p) => p.check(s)) },
   { id: "mare-60", nome: "Fôlego da maré", desc: "Aguente 60 segundos na Maré Infinita.", check: (s) => s.recordeInfinito >= 60 },
   { id: "mare-120", nome: "Imortal das correntes", desc: "Aguente 120 segundos na Maré Infinita.", check: (s) => s.recordeInfinito >= 120 },

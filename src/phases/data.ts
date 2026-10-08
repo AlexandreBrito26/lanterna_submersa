@@ -1,6 +1,6 @@
 import type { PhaseId } from "../store/schema";
 
-export type TipoVitoria = "exploracao" | "deducao" | "furtividade" | "coleta" | "sincronia" | "sobrevivencia" | "duelo" | "criacao" | "escuta" | "equilibrio" | "navegacao" | "medida" | "sinalizacao" | "reflexo" | "estiva" | "deslize" | "sombras" | "valvulas" | "laco" | "labirinto" | "vento" | "eco" | "cardume" | "crescer" | "neblina" | "alavancas" | "memoria" | "logica" | "correnteza" | "cadeia" | "palavras" | "final" | "tateio" | "contagem" | "fio" | "pedra" | "breu" | "chama" | "vela" | "forja" | "molhada" | "brasa" | "arca" | "muralha" | "ordem" | "fechadura" | "selos" | "escalada" | "encaixe" | "sementes" | "alternado" | "pontes";
+export type TipoVitoria = "exploracao" | "deducao" | "furtividade" | "coleta" | "sincronia" | "sobrevivencia" | "duelo" | "criacao" | "escuta" | "equilibrio" | "navegacao" | "medida" | "sinalizacao" | "reflexo" | "estiva" | "deslize" | "sombras" | "valvulas" | "laco" | "labirinto" | "vento" | "eco" | "cardume" | "crescer" | "neblina" | "alavancas" | "memoria" | "logica" | "correnteza" | "cadeia" | "palavras" | "final" | "tateio" | "contagem" | "fio" | "pedra" | "breu" | "chama" | "vela" | "forja" | "molhada" | "brasa" | "arca" | "muralha" | "ordem" | "fechadura" | "selos" | "escalada" | "encaixe" | "sementes" | "alternado" | "pontes" | "lembranca";
 
 export const tiposVitoria: Record<TipoVitoria, { nome: string; objetivo: string }> = {
   exploracao:    { nome: "Exploração",    objetivo: "Encontre a chave e abra a porta" },
@@ -55,6 +55,7 @@ export const tiposVitoria: Record<TipoVitoria, { nome: string; objetivo: string 
   sementes:      { nome: "Sementes",       objetivo: "Plante uma semente por linha e por coluna, fugindo do solo fraco" },
   alternado:     { nome: "Alternado",      objetivo: "Troque de cor a cada passo até a saída" },
   pontes:        { nome: "Pontes",         objetivo: "Ligue as ilhas com o número exato de pontes, sem cruzá-las" },
+  lembranca:     { nome: "Lembrança",      objetivo: "Refaça o caminho que viu por um instante, só de memória" },
 };
 
 // Os cinco atos da história. Ato I é o jogo original (até o Coração); os demais são construídos em sequência.
@@ -67,7 +68,7 @@ export const atos = [
 ];
 
 // Fases que pertencem a um ato diferente do Ato I
-const ATO_DA_FASE: Partial<Record<PhaseId, number>> = { eco: 2, cardume: 2, coral: 2, neblina: 2, alavancas: 2, memoria: 2, perolas: 2, setas: 2, dominos: 2, palavras: 2, final2: 2, silencio: 3, contagem: 3, fio: 3, pedra: 3, breu: 3, chama: 3, vela: 3, forja: 3, molhada: 3, brasa: 3, arca: 3, muralha: 3, ganchos: 3, fechadura: 3, selos: 3, escalada: 3, encaixe: 3, sementes: 3, alternado: 3, pontes: 3 };
+const ATO_DA_FASE: Partial<Record<PhaseId, number>> = { eco: 2, cardume: 2, coral: 2, neblina: 2, alavancas: 2, memoria: 2, perolas: 2, setas: 2, dominos: 2, palavras: 2, final2: 2, silencio: 3, contagem: 3, fio: 3, pedra: 3, breu: 3, chama: 3, vela: 3, forja: 3, molhada: 3, brasa: 3, arca: 3, muralha: 3, ganchos: 3, fechadura: 3, selos: 3, escalada: 3, encaixe: 3, sementes: 3, alternado: 3, pontes: 3, trilha: 4 };
 export function atoDe(id: PhaseId): number { return ATO_DA_FASE[id] ?? 1; }
 
 // ramo: fase que só aparece para quem escolheu esse final no Coração (Ato III em diante)
@@ -127,4 +128,5 @@ export const phases: PhaseInfo[] = [
   { id: "sementes", titulo: "Sementes em Linha", resumo: "Plante uma semente por linha e por coluna, evitando o solo fraco.", tipo: "sementes", pronta: true, ramo: "renascer" },
   { id: "alternado", titulo: "Trilha Alternada", resumo: "Troque de cor a cada passo e chegue à saída do mangue.", tipo: "alternado", pronta: true, ramo: "renascer" },
   { id: "pontes", titulo: "Pontes de Mangue", resumo: "Ligue as ilhas com o número exato de pontes, sem cruzá-las.", tipo: "pontes", pronta: true, ramo: "renascer" },
+  { id: "trilha", titulo: "Trilha Lembrada", resumo: "Um caminho aparece por um instante. Refaça-o de memória, sem errar a curva.", tipo: "lembranca", pronta: true, ramo: "apagar" },
 ];

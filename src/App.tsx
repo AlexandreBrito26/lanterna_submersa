@@ -66,6 +66,7 @@ const fases = {
   sementes: lazy(() => import("./phases/Sementes")),
   alternado: lazy(() => import("./phases/Alternado")),
   pontes: lazy(() => import("./phases/Pontes")),
+  trilha: lazy(() => import("./phases/Trilha")),
 };
 
 export default function App() {

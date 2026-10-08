@@ -512,6 +512,16 @@ export const cutscenes = {
       { texto: "Ligue as ilhas com o número exato. Quando todas estiverem ligadas, o mangue se sustenta.", agua: 0.62, brilho: 0.9 },
     ],
   },
+  trilha: {
+    tipo: "apagar",
+    entrada: "Toque para decorar o caminho",
+    cenas: [
+      { texto: "Na cidade que renasce, as ruas ainda estão apagadas. Só a memória dos moradores mostra por onde passar.", agua: 0.8, brilho: 0.05 },
+      { texto: "Um caminho aparece por um instante, e logo some na escuridão. É preciso guardá-lo de cabeça.", agua: 0.8, brilho: 0.05 },
+      { texto: "Tomás repetia cada curva em voz baixa, até que o caminho virasse uma canção.", agua: 0.82, brilho: 0.04 },
+      { texto: "Refaça a trilha sem errar. Quando a última curva fechar, a luz vai aparecer no fim do caminho.", agua: 0.82, brilho: 0.04 },
+    ],
+  },
   abismo: {
     tipo: "abismo",
     entrada: "Toque para enfrentar a corrente",

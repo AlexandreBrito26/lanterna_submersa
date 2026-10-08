@@ -27,6 +27,8 @@ const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).p
 
 type Tela = "titulo" | "fases" | "ajustes" | "galeria" | "diario";
 
+const nomeRamo: Record<string, string> = { apagar: "do Apagar", acender: "do Acender", guardar: "do Guardar", renascer: "do Renascer" };
+
 export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
   const { completed, inventory, estrelas, melhorTempo, start, startInfinito, reset, conquistas: ganhas, recordeInfinito } = useGame();
   const estado = useGame();
@@ -58,7 +60,7 @@ export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
       <ArrowLeft size={16} aria-hidden /> Voltar
     </button>
   );
-  const fundo = <CenaMenu />;
+  const fundo = <CenaMenu ato={atoMenu} />;
 
   if (tela === "fases") {
     return (
@@ -82,6 +84,11 @@ export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
             const tempo = melhorTempo[p.id];
             return (
               <Fragment key={p.id}>
+              {!inicioDeAto && p.ramo && phases[i - 1]?.ramo !== p.ramo && (
+                <li className="pt-3">
+                  <h3 className="text-xs uppercase tracking-[0.25em] text-espuma/50">Ramo {nomeRamo[p.ramo]}</h3>
+                </li>
+              )}
               {inicioDeAto && (
                 <li className="pt-2">
                   <h2 className={`font-narrativa text-xl ${atoDe(p.id) === 2 ? "text-alga" : atoDe(p.id) === 3 ? "text-coral" : "text-lanterna"}`}>{atos[atoDe(p.id) - 1].titulo}</h2>
@@ -131,10 +138,14 @@ export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
             );
           })}
         </ol>
-        <div className="flex flex-col gap-1 pt-2">
-          {atos.slice(3).map((a) => (
-            <p key={a.n} className="flex items-center gap-2 text-sm text-espuma/50"><Lock size={12} aria-hidden /> {a.titulo}: em construção</p>
-          ))}
+        <div className="flex flex-col gap-2 pt-2">
+          {atos.map((a) => {
+            const temFases = todasFases.some((p) => atoDe(p.id) === a.n);
+            const visivel = phases.some((p) => atoDe(p.id) === a.n);
+            if (visivel) return null;
+            const motivo = !temFases ? "em construção" : ramoAtual ? "em breve para o seu ramo" : "escolha o final no Coração para abrir este ato";
+            return <p key={a.n} className="flex items-center gap-2 text-sm text-espuma/50"><Lock size={12} aria-hidden /> {a.titulo}: {motivo}</p>;
+          })}
         </div>
       </main>
     );

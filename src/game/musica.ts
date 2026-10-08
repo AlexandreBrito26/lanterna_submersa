@@ -1,6 +1,6 @@
 import { Howler } from "howler";
 
-export type TemaMusical = "menu" | "cais" | "biblioteca" | "jardins" | "armazem" | "porao" | "recife" | "oficina" | "espelhos" | "catedral" | "sinos" | "observatorio" | "eclusa" | "torre" | "abismo" | "coracao" | "mangue" | "teatro" | "bombas" | "rede" | "mare" | "vento" | "eco" | "cardume" | "coral" | "neblina" | "alavancas" | "memoria" | "perolas" | "setas" | "dominos" | "palavras" | "final2" | "silencio" | "contagem" | "fio" | "pedra" | "breu" | "chama" | "vela" | "forja" | "molhada" | "brasa" | "arca" | "muralha" | "ganchos" | "fechadura" | "selos" | "escalada" | "encaixe" | "sementes" | "alternado" | "pontes" | "infinito";
+export type TemaMusical = "menu" | "cais" | "biblioteca" | "jardins" | "armazem" | "porao" | "recife" | "oficina" | "espelhos" | "catedral" | "sinos" | "observatorio" | "eclusa" | "torre" | "abismo" | "coracao" | "mangue" | "teatro" | "bombas" | "rede" | "mare" | "vento" | "eco" | "cardume" | "coral" | "neblina" | "alavancas" | "memoria" | "perolas" | "setas" | "dominos" | "palavras" | "final2" | "silencio" | "contagem" | "fio" | "pedra" | "breu" | "chama" | "vela" | "forja" | "molhada" | "brasa" | "arca" | "muralha" | "ganchos" | "fechadura" | "selos" | "escalada" | "encaixe" | "sementes" | "alternado" | "pontes" | "trilha" | "infinito";
 
 type Tema = {
   raiz: number;            // frequência base em Hz
@@ -67,6 +67,7 @@ const temas: Record<TemaMusical, Tema> = {
   sementes:   { raiz: 116.5, escala: [0, 3, 5, 7, 10, 12], acordes: [[0, 7, 12], [-2, 5, 10], [-4, 3, 8], [-5, 2, 7]], passo: [4, 8], onda: "triangle", filtro: 700, pulso: "lencol" },
   alternado:  { raiz: 123.5, escala: [0, 2, 4, 7, 9, 12], acordes: [[0, 7, 12], [-2, 5, 10], [-4, 3, 8], [-5, 2, 7]], passo: [3, 6], onda: "triangle", filtro: 750, pulso: "lencol" },
   pontes:     { raiz: 146.8, escala: [0, 2, 5, 7, 9], acordes: [[0, 7, 12], [-3, 4, 9], [-5, 2, 7], [-7, 0, 5]], passo: [3, 6], onda: "sine", filtro: 650, pulso: "lencol" },
+  trilha:     { raiz: 92.5, escala: [0, 2, 5, 7, 9], acordes: [[0, 7], [-5, 2], [-7, 0], [-5, 2]], passo: [5, 9], onda: "sine", filtro: 300, pulso: "silencio", grave: true },
   infinito:   { raiz: 110,   escala: [0, 3, 5, 7, 8, 12],      acordes: [[0, 7, 12], [-2, 5, 10], [-4, 3, 8], [-5, 2, 7]], passo: [0.6, 1.5], onda: "sawtooth", filtro: 450, pulso: "corrente", grave: true },
 };
 

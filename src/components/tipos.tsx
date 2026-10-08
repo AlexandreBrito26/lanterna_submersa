@@ -54,6 +54,7 @@ export const iconeTipo: Record<TipoVitoria, typeof Compass> = {
   sementes: Sprout,
   alternado: Anchor,
   pontes: Anchor,
+  lembranca: Compass,
 };
 
 import { Anchor, Award, BookMarked, BookOpenCheck, Ear, Clock, Crown, Flame, Infinity as InfinityIcon, Shell, ShieldCheck, Star, Sunrise, Timer, Waves as Ondas, Wind as Vento, type LucideIcon } from "lucide-react";
@@ -119,4 +120,5 @@ export const iconeConquista: Record<string, LucideIcon> = {
   "sementes-em-linha": Sprout,
   "trilha-alternada": Anchor,
   "pontes-de-mangue": Anchor,
+  "trilha-lembrada": Compass,
 };
