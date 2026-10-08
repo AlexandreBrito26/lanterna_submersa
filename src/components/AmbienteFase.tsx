@@ -1,11 +1,29 @@
 import { useEffect, useRef } from "react";
-import { reduzMovimento } from "../game/fx";
+import { reduzMovimento } from "../game/acessibilidade";
 
-export type TipoAmbiente = "biblioteca" | "catedral" | "coracao";
+export type TipoAmbiente = "biblioteca" | "catedral" | "coracao" | "mangue" | "teatro" | "bombas" | "rede" | "mare" | "vento" | "eco" | "cardume" | "coral" | "neblina" | "alavancas" | "memoria" | "perolas" | "setas" | "dominos" | "palavras" | "silencio" | "chama";
 
 const temas: Record<TipoAmbiente, { fundo: [string, string, string]; motas: string[]; paginas: boolean }> = {
   biblioteca: { fundo: ["#16505f", "#0f3347", "#06121b"], motas: ["255,191,0", "242,230,214"], paginas: true },
   catedral:   { fundo: ["#123552", "#0b2236", "#050f18"], motas: ["224,122,95", "255,191,0", "61,139,122", "242,230,214"], paginas: false },
+  mangue:     { fundo: ["#1d4a3c", "#10302c", "#06140f"], motas: ["255,191,0", "61,139,122", "90,61,43"], paginas: false },
+  teatro:     { fundo: ["#2a1d4a", "#140f2e", "#07050f"], motas: ["255,191,0", "242,230,214", "224,122,95"], paginas: false },
+  bombas:     { fundo: ["#1e3d4a", "#11252f", "#060f14"], motas: ["255,191,0", "61,139,122", "242,230,214"], paginas: false },
+  rede:       { fundo: ["#174a58", "#0c2d38", "#041319"], motas: ["224,122,95", "242,230,214", "255,191,0"], paginas: false },
+  mare:       { fundo: ["#16445a", "#0b2b3c", "#04121c"], motas: ["255,191,0", "242,230,214", "61,139,122"], paginas: false },
+  vento:      { fundo: ["#1d3f5e", "#10253c", "#050c18"], motas: ["242,230,214", "255,191,0", "224,122,95"], paginas: false },
+  eco:        { fundo: ["#0b2c44", "#071b2c", "#020811"], motas: ["255,191,0", "61,139,122", "242,230,214"], paginas: false },
+  cardume:    { fundo: ["#0c3a45", "#082830", "#03121a"], motas: ["127,224,208", "242,230,214", "224,122,95"], paginas: false },
+  coral:      { fundo: ["#0f4a48", "#0a3331", "#041614"], motas: ["127,224,208", "61,139,122", "255,191,0"], paginas: false },
+  neblina:    { fundo: ["#143a48", "#0c2630", "#041116"], motas: ["242,230,214", "127,224,208", "61,139,122"], paginas: false },
+  alavancas:  { fundo: ["#2a3340", "#1a212b", "#080b10"], motas: ["255,191,0", "120,130,140", "242,230,214"], paginas: false },
+  memoria:    { fundo: ["#3a3424", "#282316", "#0d0b07"], motas: ["242,230,214", "255,191,0", "127,224,208"], paginas: false },
+  perolas:    { fundo: ["#2a2a3a", "#1c1c2a", "#08080f"], motas: ["242,230,214", "255,191,0", "127,224,208"], paginas: false },
+  setas:      { fundo: ["#0e4046", "#0a3036", "#031417"], motas: ["127,224,208", "255,191,0", "61,139,122"], paginas: false },
+  dominos:    { fundo: ["#3a2c20", "#2a1f16", "#0c0906"], motas: ["255,191,0", "224,122,95", "242,230,214"], paginas: false },
+  palavras:   { fundo: ["#0e3e4c", "#0a2c37", "#03131a"], motas: ["242,230,214", "127,224,208", "255,191,0"], paginas: false },
+  silencio:   { fundo: ["#050a10", "#03060a", "#010203"], motas: ["242,230,214", "61,139,122"], paginas: false },
+  chama:      { fundo: ["#3a1e0e", "#24120a", "#0a0503"], motas: ["255,191,0", "224,122,95", "242,230,214"], paginas: false },
   coracao:    { fundo: ["#1b4a5c", "#0d2a3b", "#05101a"], motas: ["255,191,0", "255,191,0", "224,122,95"], paginas: false },
 };
 const rnd = (a: number, b: number) => a + Math.random() * (b - a);
@@ -19,7 +37,7 @@ export default function AmbienteFase({ tipo }: { tipo: TipoAmbiente }) {
     const ctx = canvas.getContext("2d")!;
     const tema = temas[tipo];
     const parado = reduzMovimento();
-    let w = 0, h = 0, raf = 0;
+    let w = 0, h = 0, raf = 0, ultimoQuadro = 0;
     type P = { x: number; y: number; r: number; v: number; f: number; cor: string; rot: number };
     let motas: P[] = [], bolhas: P[] = [], paginas: P[] = [];
 
@@ -39,6 +57,9 @@ export default function AmbienteFase({ tipo }: { tipo: TipoAmbiente }) {
     };
 
     const quadro = (ms: number) => {
+      // Fundo ambiente roda a 30 fps: metade do trabalho, sem diferença visível para o jogador
+      if (ms - ultimoQuadro < 33) { if (!parado) raf = requestAnimationFrame(quadro); return; }
+      ultimoQuadro = ms;
       const t = parado ? 0 : ms;
       const mov = parado ? 0 : 1;
       const bg = ctx.createLinearGradient(0, 0, 0, h);

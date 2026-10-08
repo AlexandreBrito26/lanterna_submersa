@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { reduzMovimento } from "../game/fx";
+import { reduzMovimento } from "../game/acessibilidade";
 
 type Cam = { c: HTMLCanvasElement; fator: number; drift: number };
 const rnd = (a: number, b: number) => a + Math.random() * (b - a);
@@ -56,7 +56,11 @@ export default function CenaMenu() {
       luz.x = luz.tx = w * 0.5; luz.y = luz.ty = h * 0.3;
     };
 
+    let ultimoQuadro = 0;
     const quadro = (ms: number) => {
+      // Fundo do menu a 30 fps: mesma economia do fundo das fases
+      if (ms - ultimoQuadro < 33) { if (!parado) raf = requestAnimationFrame(quadro); return; }
+      ultimoQuadro = ms;
       const t = parado ? 0 : ms;
       // água profunda
       const bg = ctx.createLinearGradient(0, 0, 0, h);

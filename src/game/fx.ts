@@ -1,8 +1,8 @@
 import { Application, Graphics } from "pixi.js";
 import { palette } from "./theme";
 
-export const reduzMovimento = () =>
-  typeof matchMedia !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+import { reduzMovimento } from "./acessibilidade";
+export { reduzMovimento };
 
 // Bolhas que sobem devagar. Devolve a função que deve ser chamada a cada quadro.
 export function criarBolhas(app: Application, W: number, H: number, qtd: number, cor: number) {

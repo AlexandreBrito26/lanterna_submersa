@@ -107,3 +107,59 @@ main:has(.font-narrativa blockquote) blockquote { border-radius: 4px 14px 6px 12
   .tela-area { grid-column: 2; grid-row: 1 / -1; height: 100%; width: calc((100dvh - 1.5rem) * 9 / 16); flex: none; }
   .legenda-jogo { font-size: 1.0625rem; padding: 0.625rem 0.875rem; left: 1rem; right: 1rem; bottom: 1rem; }
 }
+
+.grade-mangue { background: radial-gradient(circle at 50% 80%, rgba(90,61,43,.45), rgba(16,48,44,.4) 70%); }
+.grade-teatro { background: radial-gradient(circle at 50% 35%, rgba(242,230,214,.12), rgba(42,29,74,.55) 80%); }
+
+.grade-bombas { background: radial-gradient(circle at 50% 60%, rgba(255,191,0,.12), rgba(17,37,47,.6) 80%); }
+.grade-rede { background: repeating-linear-gradient(45deg, rgba(224,122,95,.08) 0 2px, transparent 2px 14px), linear-gradient(180deg, rgba(23,74,88,.2), rgba(4,19,25,.5)); }
+
+.grade-mare { background: linear-gradient(180deg, rgba(22,68,90,.3), rgba(4,18,28,.5)), repeating-linear-gradient(90deg, rgba(255,191,0,.04) 0 2px, transparent 2px 10px); }
+.grade-vento { background: radial-gradient(circle at 70% 20%, rgba(242,230,214,.14), rgba(16,37,60,.5) 80%); }
+
+.grade-eco { background: radial-gradient(circle at 50% 50%, rgba(255,191,0,.08), rgba(7,27,44,.6) 80%); }
+
+/* Ato II · Segundo Mar: fundo de mar aberto, azul-profundo com brilho de alga */
+.ato-2 { background: radial-gradient(ellipse at 50% 0%, rgba(127,224,208,.14), transparent 60%), linear-gradient(180deg, #0a2a36, #03111a); }
+.ato-2 .moldura { border-color: rgba(127,224,208,.45); }
+.ato-2 .font-narrativa { text-shadow: 0 0 12px rgba(127,224,208,.3); }
+
+.grade-cardume { background: radial-gradient(circle at 50% 60%, rgba(127,224,208,.1), rgba(8,40,48,.6) 80%); }
+.grade-coral { background: radial-gradient(circle at 30% 70%, rgba(127,224,208,.12), rgba(10,51,49,.55) 75%); }
+
+.grade-neblina { background: radial-gradient(circle at 50% 50%, rgba(242,230,214,.1), rgba(8,26,34,.7) 80%); }
+
+.grade-alavancas { background: linear-gradient(180deg, rgba(120,130,140,.12), rgba(8,11,16,.6)); }
+.grade-memoria { background: radial-gradient(circle at 50% 50%, rgba(255,191,0,.08), rgba(40,35,22,.55) 80%); }
+
+.grade-perolas { background: radial-gradient(circle at 50% 50%, rgba(242,230,214,.08), rgba(28,28,42,.6) 80%); }
+.grade-setas { background: radial-gradient(circle at 50% 60%, rgba(127,224,208,.1), rgba(10,48,54,.6) 80%); }
+
+.grade-dominos { background: linear-gradient(180deg, rgba(110,79,51,.25), rgba(12,9,6,.6)); }
+.grade-palavras { background: radial-gradient(circle at 50% 40%, rgba(127,224,208,.1), rgba(10,44,55,.6) 80%); }
+
+
+.grade-silencio { background: radial-gradient(circle at 50% 50%, rgba(2,6,10,0), rgba(0,0,0,.7) 80%); }
+
+.grade-chama { background: radial-gradient(circle at 50% 80%, rgba(255,120,40,.18), rgba(36,18,10,.6) 75%); }
+
+.grade-arca { background: linear-gradient(180deg, rgba(110,79,51,.22), rgba(12,9,6,.6)); }
+
+.grade-muralha { background: radial-gradient(circle at 50% 50%, rgba(127,224,208,.08), rgba(10,35,45,.6) 80%); }
+
+/* Ato III · Os Ramos: crepúsculo de brasas, roxo-noite com âmbar de fogo e coral */
+.ato-3 { background: radial-gradient(ellipse at 50% 100%, rgba(255,140,60,.18), transparent 55%), radial-gradient(ellipse at 20% 0%, rgba(224,122,95,.08), transparent 50%), linear-gradient(180deg, #1c1024, #0a0612); }
+.ato-3 .moldura { border-color: rgba(255,140,60,.5); box-shadow: 0 0 22px rgba(255,140,60,.08); }
+.ato-3 .font-narrativa { text-shadow: 0 0 14px rgba(255,140,60,.35); }
+
+/* Menus por ato: cada ato tem fundo, orbe e molduras próprios na tela principal */
+.ato-1 { background: radial-gradient(ellipse at 50% 0%, rgba(255,191,0,.14), transparent 60%), linear-gradient(180deg, #0f2c38, #061318); }
+.ato-4 { background: radial-gradient(ellipse at 50% 0%, rgba(170,210,180,.12), transparent 60%), linear-gradient(180deg, #14201c, #070d0b); }
+.ato-4 .moldura { border-color: rgba(170,210,180,.45); }
+.ato-5 { background: radial-gradient(ellipse at 50% 0%, rgba(255,250,235,.22), transparent 55%), linear-gradient(180deg, #1e3a52, #0b1a28); }
+.ato-5 .moldura { border-color: rgba(255,250,235,.55); }
+.orbe-menu { transition: background 0.6s ease, box-shadow 0.6s ease; }
+.ato-2 .orbe-menu { background: radial-gradient(circle at 40% 35%, #E8FFFA, #7FE0D0) !important; box-shadow: 0 0 70px 26px rgba(127,224,208,.4) !important; }
+.ato-3 .orbe-menu { background: radial-gradient(circle at 40% 35%, #FFE3CF, #E07A5F) !important; box-shadow: 0 0 70px 26px rgba(224,122,95,.45) !important; }
+.ato-4 .orbe-menu { background: radial-gradient(circle at 40% 35%, #E9F5EC, #8FB8A0) !important; box-shadow: 0 0 70px 26px rgba(143,184,160,.4) !important; }
+.ato-5 .orbe-menu { background: radial-gradient(circle at 40% 35%, #FFFFFF, #F6E7B0) !important; box-shadow: 0 0 90px 34px rgba(255,250,235,.55) !important; }

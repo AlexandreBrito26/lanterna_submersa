@@ -1,6 +1,6 @@
 import type { PhaseId } from "../store/schema";
 
-export type TipoVitoria = "exploracao" | "deducao" | "furtividade" | "coleta" | "sincronia" | "sobrevivencia" | "duelo" | "criacao" | "escuta" | "equilibrio" | "navegacao";
+export type TipoVitoria = "exploracao" | "deducao" | "furtividade" | "coleta" | "sincronia" | "sobrevivencia" | "duelo" | "criacao" | "escuta" | "equilibrio" | "navegacao" | "medida" | "sinalizacao" | "reflexo" | "estiva" | "deslize" | "sombras" | "valvulas" | "laco" | "labirinto" | "vento" | "eco" | "cardume" | "crescer" | "neblina" | "alavancas" | "memoria" | "logica" | "correnteza" | "cadeia" | "palavras" | "final" | "tateio" | "contagem" | "fio" | "pedra" | "breu" | "chama" | "vela" | "forja" | "molhada" | "brasa" | "arca" | "muralha" | "ordem" | "fechadura" | "selos" | "escalada" | "encaixe" | "sementes" | "alternado" | "pontes";
 
 export const tiposVitoria: Record<TipoVitoria, { nome: string; objetivo: string }> = {
   exploracao:    { nome: "Exploração",    objetivo: "Encontre a chave e abra a porta" },
@@ -14,20 +14,117 @@ export const tiposVitoria: Record<TipoVitoria, { nome: string; objetivo: string 
   escuta:        { nome: "Escuta",        objetivo: "Ordene os sinos e afine o quinto" },
   equilibrio:    { nome: "Equilíbrio",    objetivo: "Ordene as pedras só pelo peso" },
   navegacao:     { nome: "Navegação",     objetivo: "Leve a Estrela ao topo dos três anéis" },
+  medida:        { nome: "Medida",        objetivo: "Despeje entre as câmaras até chegar à medida exata" },
+  sinalizacao:   { nome: "Sinalização",   objetivo: "Repita os sinais de luz e chame alguém" },
+  reflexo:       { nome: "Reflexo",       objetivo: "Gire os espelhos até a luz alcançar a lente" },
+  estiva:        { nome: "Estiva",        objetivo: "Empurre as caixas até as marcas do porão" },
+  deslize:       { nome: "Deslize",       objetivo: "Chegue à boia sem parar sobre o lodo mole" },
+  sombras:       { nome: "Sombras",       objetivo: "Acenda todas as marcas da cena com o menor número de lâmpadas" },
+  valvulas:      { nome: "Válvulas",      objetivo: "Abra todas: cada toque inverte a válvula e as vizinhas" },
+  laco:          { nome: "Laço",          objetivo: "Feche a rede em volta de todos os peixes" },
+  labirinto:     { nome: "Maré",          objetivo: "Cada passo vira a maré: pise só onde o mar deixa" },
+  vento:         { nome: "Vento",         objetivo: "Cada passo seu é seguido de um empurrão do vento" },
+  eco:           { nome: "Eco",           objetivo: "Chame o mar e siga o eco até achar o farol apagado" },
+  cardume:       { nome: "Cardume",       objetivo: "Mova o cardume inteiro até as marcas, com todos juntos" },
+  crescer:       { nome: "Crescimento",   objetivo: "Plante o coral só junto ao que já existe, até cobrir as marcas" },
+  neblina:       { nome: "Neblina",       objetivo: "Ache a saída enxergando só o que já visitou" },
+  alavancas:     { nome: "Alavancas",     objetivo: "Descubra qual alavanca abre cada portão e abra o caminho" },
+  memoria:       { nome: "Memória",       objetivo: "Vire as conchas e ache todos os pares de símbolos iguais" },
+  logica:        { nome: "Lógica",        objetivo: "Preencha o colar conforme as contagens de cada linha e coluna" },
+  correnteza:    { nome: "Correnteza",    objetivo: "Gire as setas até a correnteza levar o barco ao farol" },
+  cadeia:        { nome: "Cadeia",        objetivo: "Derrube uma pedra para que a queda chegue a todas" },
+  palavras:      { nome: "Sopa",          objetivo: "Ache todas as palavras escondidas nas letras" },
+  final:         { nome: "Fim do Ato",    objetivo: "Acenda os quatro faróis, começando pelo do seu final" },
+  tateio:        { nome: "Tateio",        objetivo: "Ande no escuro: as paredes só aparecem quando você bate nelas" },
+  contagem:      { nome: "Contagem",      objetivo: "Use os números de cada casa para deduzir o caminho" },
+  fio:           { nome: "Fio",           objetivo: "Chegue à saída sem cruzar o próprio fio" },
+  pedra:         { nome: "Pedra",         objetivo: "Atire pedras no escuro para revelar as paredes" },
+  breu:          { nome: "Breu",          objetivo: "Chegue à saída com poucas pedras e muito tato" },
+  chama:         { nome: "Chama",         objetivo: "Acenda tochas e sopre o fogo até toda a lenha queimar" },
+  vela:          { nome: "Vela",          objetivo: "Acenda uma vela por turno e faça todas brilharem juntas" },
+  forja:         { nome: "Forja",         objetivo: "Aqueça cada pedra até a temperatura exata, sem passar do ponto" },
+  molhada:       { nome: "Lenha Molhada",  objetivo: "Acenda toda a lenha com tochas contadas" },
+  brasa:         { nome: "Brasa",          objetivo: "Atice a brasa nos altares antes que o fogo se apague" },
+  arca:          { nome: "Arca",           objetivo: "Guarde todas as cargas no menor número de arcas" },
+  muralha:       { nome: "Muralha",        objetivo: "Proteja cada farol das ondas com o menor número de escudos" },
+  ordem:         { nome: "Ordem",          objetivo: "Troque só ganchos vizinhos até a corrente estar em ordem" },
+  fechadura:     { nome: "Fechadura",      objetivo: "Deduza a posição de cada pino pelas tentativas" },
+  selos:         { nome: "Selos",          objetivo: "Preencha o cofre sem que nenhum selo encoste num igual" },
+  escalada:      { nome: "Escalada",       objetivo: "Suba até o topo da raiz, um degrau por vez" },
+  encaixe:       { nome: "Encaixe",        objetivo: "Cubra a costa com as peças de coral, sem sobras nem sobreposição" },
+  sementes:      { nome: "Sementes",       objetivo: "Plante uma semente por linha e por coluna, fugindo do solo fraco" },
+  alternado:     { nome: "Alternado",      objetivo: "Troque de cor a cada passo até a saída" },
+  pontes:        { nome: "Pontes",         objetivo: "Ligue as ilhas com o número exato de pontes, sem cruzá-las" },
 };
 
-export type PhaseInfo = { id: PhaseId; titulo: string; resumo: string; tipo: TipoVitoria; pronta: boolean };
+// Os cinco atos da história. Ato I é o jogo original (até o Coração); os demais são construídos em sequência.
+export const atos = [
+  { n: 1, titulo: "Ato I · A Lanterna", resumo: "Da Cidade Baixa ao Coração da Lanterna." },
+  { n: 2, titulo: "Ato II · Segundo Mar", resumo: "O mar aberto, os faróis apagados e a cidade submersa." },
+  { n: 3, titulo: "Ato III · Os Ramos", resumo: "Cada final abre um caminho próprio." },
+  { n: 4, titulo: "Ato IV · Os Ramos", resumo: "Os caminhos se aprofundam." },
+  { n: 5, titulo: "Ato V · O Farol Final", resumo: "Os ramos se encontram no último farol." },
+];
+
+// Fases que pertencem a um ato diferente do Ato I
+const ATO_DA_FASE: Partial<Record<PhaseId, number>> = { eco: 2, cardume: 2, coral: 2, neblina: 2, alavancas: 2, memoria: 2, perolas: 2, setas: 2, dominos: 2, palavras: 2, final2: 2, silencio: 3, contagem: 3, fio: 3, pedra: 3, breu: 3, chama: 3, vela: 3, forja: 3, molhada: 3, brasa: 3, arca: 3, muralha: 3, ganchos: 3, fechadura: 3, selos: 3, escalada: 3, encaixe: 3, sementes: 3, alternado: 3, pontes: 3 };
+export function atoDe(id: PhaseId): number { return ATO_DA_FASE[id] ?? 1; }
+
+// ramo: fase que só aparece para quem escolheu esse final no Coração (Ato III em diante)
+export type Ramo = "apagar" | "acender" | "guardar" | "renascer";
+export type PhaseInfo = { id: PhaseId; titulo: string; resumo: string; tipo: TipoVitoria; pronta: boolean; ramo?: Ramo };
 
 export const phases: PhaseInfo[] = [
   { id: "cais", titulo: "Cais Afundado", resumo: "Aprenda a andar na maré e a acender a lanterna.", tipo: "exploracao", pronta: true },
   { id: "biblioteca", titulo: "Biblioteca Alagada", resumo: "Reúna pistas e monte a história da cidade.", tipo: "deducao", pronta: true },
   { id: "jardins", titulo: "Jardins de Coral", resumo: "Atravesse sem ser visto, com luz limitada.", tipo: "furtividade", pronta: true },
   { id: "armazem", titulo: "Armazém do Porto", resumo: "Compare pedras numa balança e descubra a ordem de chegada dos barcos.", tipo: "equilibrio", pronta: true },
+  { id: "porao", titulo: "Porão da Estrela-d'Alva", resumo: "Empurre as caixas até as marcas e abra espaço para quem embarcou.", tipo: "estiva", pronta: true },
   { id: "recife", titulo: "Recife dos Naufrágios", resumo: "Recolha os fragmentos de luz antes que o ar acabe.", tipo: "coleta", pronta: true },
   { id: "oficina", titulo: "Oficina do Faroleiro", resumo: "Leia a bancada, monte as peças, forje o aro e aponte a luz.", tipo: "criacao", pronta: true },
+  { id: "espelhos", titulo: "Galeria dos Espelhos", resumo: "Vire os espelhos de prata e leve o feixe até a lente.", tipo: "reflexo", pronta: true },
   { id: "catedral", titulo: "Catedral das Marés", resumo: "Use o ciclo da maré para abrir caminhos.", tipo: "sincronia", pronta: true },
   { id: "sinos", titulo: "Sala dos Sinos", resumo: "Ordene os sinos pelo som e afine o quinto de ouvido.", tipo: "escuta", pronta: true },
   { id: "observatorio", titulo: "Observatório Naufragado", resumo: "Gire os anéis de bronze até a Estrela voltar ao topo.", tipo: "navegacao", pronta: true },
+  { id: "eclusa", titulo: "Eclusas da Cidade Baixa", resumo: "Despeje a água entre três câmaras até medir a quantidade exata.", tipo: "medida", pronta: true },
+  { id: "torre", titulo: "Torre dos Sinais", resumo: "Escute os sinais de luz, repita em pontos e traços e chame alguém.", tipo: "sinalizacao", pronta: true },
+  { id: "mangue", titulo: "Manguezal Escorregadio", resumo: "Deslize pela lama até bater em algo. O lodo mole cede atrás de você.", tipo: "deslize", pronta: true },
+  { id: "teatro", titulo: "Teatro de Sombras", resumo: "Acenda lâmpadas até que todas as marcas da cena fiquem iluminadas.", tipo: "sombras", pronta: true },
+  { id: "bombas", titulo: "Casa das Bombas", resumo: "Aperte uma válvula e ela inverte as vizinhas. Abra todas para o ar voltar.", tipo: "valvulas", pronta: true },
+  { id: "rede", titulo: "Rede do Porto", resumo: "Trace um laço fechado em volta de todos os peixes, sem cruzar as pedras.", tipo: "laco", pronta: true },
+  { id: "mare", titulo: "Labirinto da Maré", resumo: "Cada passo vira a maré. Pise só nas passagens que o mar deixa abertas.", tipo: "labirinto", pronta: true },
+  { id: "vento", titulo: "Vento Contrário", resumo: "Cada passo seu é seguido de um empurrão do vento. Leve o barco ao farol.", tipo: "vento", pronta: true },
   { id: "abismo", titulo: "Correntes do Abismo", resumo: "Desvie dos destroços e aguente até a maré virar.", tipo: "sobrevivencia", pronta: true },
   { id: "coracao", titulo: "Coração da Lanterna", resumo: "Enfrente o guardião e escolha o final.", tipo: "duelo", pronta: true },
+  { id: "eco", titulo: "Escuta do Segundo Mar", resumo: "Chame o mar e siga o eco até achar os faróis que ninguém acendeu.", tipo: "eco", pronta: true },
+  { id: "cardume", titulo: "Cardume Perdido", resumo: "Mova o cardume inteiro de uma vez, sem deixar ninguém preso nas rochas.", tipo: "cardume", pronta: true },
+  { id: "coral", titulo: "Coral Que Cresce", resumo: "Plante o coral só junto ao que já existe, até cobrir as marcas da cidade submersa.", tipo: "crescer", pronta: true },
+  { id: "neblina", titulo: "Neblina Azul", resumo: "Ache a saída num mar coberto de névoa, enxergando só o que já visitou.", tipo: "neblina", pronta: true },
+  { id: "alavancas", titulo: "Portas de Ferro", resumo: "Descubra qual alavanca abre cada portão até o caminho ficar livre.", tipo: "alavancas", pronta: true },
+  { id: "memoria", titulo: "Conchas Gêmeas", resumo: "Lembre onde estão as conchas e ache os pares de símbolos iguais.", tipo: "memoria", pronta: true },
+  { id: "perolas", titulo: "Colar de Pérolas", resumo: "Descubra a forma do colar só pelas contagens de cada linha e coluna.", tipo: "logica", pronta: true },
+  { id: "setas", titulo: "Correnteza de Setas", resumo: "Gire as setas da correnteza até o barco chegar ao farol.", tipo: "correnteza", pronta: true },
+  { id: "dominos", titulo: "Pedras Que Caem", resumo: "Derrube uma pedra certa para que a queda chegue a todas as outras.", tipo: "cadeia", pronta: true },
+  { id: "palavras", titulo: "Sopa das Marés", resumo: "Ache as palavras da cidade escondidas nas letras do mar.", tipo: "palavras", pronta: true },
+  { id: "final2", titulo: "O Último Farol", resumo: "Acenda os quatro faróis do Segundo Mar e feche o Ato II.", tipo: "final", pronta: true },
+  { id: "silencio", titulo: "Mar Sem Luz", resumo: "Ande no escuro, sem enxergar as paredes, até a saída do Apagar.", tipo: "tateio", pronta: true, ramo: "apagar" },
+  { id: "contagem", titulo: "Contagem no Escuro", resumo: "Use os números de cada casa para deduzir onde estão as paredes e chegar à saída.", tipo: "contagem", pronta: true, ramo: "apagar" },
+  { id: "fio", titulo: "Fio do Breu", resumo: "Deixe um fio atrás de você e chegue à saída sem cruzar o próprio caminho.", tipo: "fio", pronta: true, ramo: "apagar" },
+  { id: "pedra", titulo: "Pedra Lançada", resumo: "Atire pedras no escuro para descobrir as paredes à distância.", tipo: "pedra", pronta: true, ramo: "apagar" },
+  { id: "breu", titulo: "Breu Final", resumo: "Com poucas pedras e muito tato, feche o Apagar chegando à saída.", tipo: "breu", pronta: true, ramo: "apagar" },
+  { id: "chama", titulo: "Chama Que Corre", resumo: "Acenda o fogo certo na costa: ele só corre pela lenha que alcança.", tipo: "chama", pronta: true, ramo: "acender" },
+  { id: "vela", titulo: "Vela Que Derrete", resumo: "Acenda uma vela por turno e faça todas as portas se abrirem ao mesmo tempo.", tipo: "vela", pronta: true, ramo: "acender" },
+  { id: "forja", titulo: "Forja de Pedras", resumo: "Aqueça cada pedra até a temperatura exata, sem passar do ponto.", tipo: "forja", pronta: true, ramo: "acender" },
+  { id: "molhada", titulo: "Lenha Molhada", resumo: "Algumas lenhas precisam de duas tochas. Acenda toda a costa com as tochas que você tem.", tipo: "molhada", pronta: true, ramo: "acender" },
+  { id: "brasa", titulo: "Brasa Que Migra", resumo: "A brasa anda sozinha pelo caminho. Atice-a nos altares antes que o fogo se apague.", tipo: "brasa", pronta: true, ramo: "acender" },
+  { id: "arca", titulo: "Arca Cheia", resumo: "Guarde as cargas do porto no menor número de arcas, sem passar da capacidade.", tipo: "arca", pronta: true, ramo: "guardar" },
+  { id: "muralha", titulo: "Muralha de Escudos", resumo: "As ondas correm em linha reta. Proteja cada farol com o menor número de escudos.", tipo: "muralha", pronta: true, ramo: "guardar" },
+  { id: "ganchos", titulo: "Ganchos da Corrente", resumo: "Ordene a corrente trocando só ganchos vizinhos, com o menor número de trocas.", tipo: "ordem", pronta: true, ramo: "guardar" },
+  { id: "fechadura", titulo: "Fechadura de Pinos", resumo: "Deduza a posição de cada pino do cofre pelas tentativas, sem ver a resposta.", tipo: "fechadura", pronta: true, ramo: "guardar" },
+  { id: "selos", titulo: "Selos do Cofre", resumo: "Preencha o cofre com selos sem que nenhum encoste num igual.", tipo: "selos", pronta: true, ramo: "guardar" },
+  { id: "escalada", titulo: "Escalada de Raízes", resumo: "Suba a raiz da costa um degrau por vez, sem dar saltos que a quebrem.", tipo: "escalada", pronta: true, ramo: "renascer" },
+  { id: "encaixe", titulo: "Encaixe de Corais", resumo: "Cubra a costa com as peças de coral, sem sobras nem sobreposição.", tipo: "encaixe", pronta: true, ramo: "renascer" },
+  { id: "sementes", titulo: "Sementes em Linha", resumo: "Plante uma semente por linha e por coluna, evitando o solo fraco.", tipo: "sementes", pronta: true, ramo: "renascer" },
+  { id: "alternado", titulo: "Trilha Alternada", resumo: "Troque de cor a cada passo e chegue à saída do mangue.", tipo: "alternado", pronta: true, ramo: "renascer" },
+  { id: "pontes", titulo: "Pontes de Mangue", resumo: "Ligue as ilhas com o número exato de pontes, sem cruzá-las.", tipo: "pontes", pronta: true, ramo: "renascer" },
 ];

@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Award, BookOpen, Film, Infinity as InfinityIcon, Lock, Music, Play, Settings2, Trash2, Trophy } from "lucide-react";
-import { phases, tiposVitoria } from "../phases/data";
+import { atoDe, atos, phases as todasFases, tiposVitoria, type Ramo } from "../phases/data";
 import { useGame } from "../store/useGame";
 import { cutscenes, type CenaId } from "../game/cutscenes";
 import { niveis, useDificuldade, type Nivel } from "../game/dificuldade";
@@ -35,9 +35,21 @@ export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
   const [confirmar, setConfirmar] = useState(false);
   const [musicaOn, setMusicaOn] = useState(musica.estaAtiva());
 
+  // Ramo do Ato III: só as fases do final escolhido no Coração aparecem
+  const ramoAtual = (["apagar", "acender", "guardar", "renascer"] as Ramo[]).reverse().find((r) => inventory.includes(`final:${r}`));
+  const phases = todasFases.filter((p) => !p.ramo || p.ramo === ramoAtual);
   // Fases novas entre as antigas não trancam quem já passou delas
   const liberada = (i: number) => phases[i].pronta && (i === 0 || completed.includes(phases[i - 1].id) || phases.slice(i).some((p) => completed.includes(p.id)));
   const proxima = phases.find((_, i) => liberada(i) && !completed.includes(phases[i].id));
+  // Cada ato tem o seu menu principal. O menu só muda quando o ato atual é concluído por completo.
+  const atoConcluido = (n: number) => {
+    const fases = phases.filter((p) => atoDe(p.id) === n);
+    return fases.length > 0 && fases.every((p) => completed.includes(p.id));
+  };
+  let atoMenu = 1;
+  while (atoMenu <= 5 && atoConcluido(atoMenu)) atoMenu++;
+  atoMenu = Math.min(atoMenu, 5);
+  const subtitulos: Record<number, string> = { 1: "Maré Alta", 2: "O Segundo Mar", 3: "Os Ramos", 4: "Raízes da Cidade", 5: "O Farol Final" };
   const totalEstrelas = Object.values(estrelas).reduce((a, b) => a + b, 0);
   const finaisVistos = Object.keys(finais).filter((f) => inventory.includes(`final:${f}`));
 
@@ -58,18 +70,26 @@ export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
         </header>
         <p className="flex items-center gap-2 text-sm text-espuma/70">
           <Trophy size={16} className="text-lanterna" aria-hidden />
-          {totalEstrelas} de {phases.length * 3} estrelas
+          {totalEstrelas} de {todasFases.length * 3} estrelas
         </p>
 
         <ol className="relative flex flex-col gap-3 pl-8 before:absolute before:bottom-4 before:left-3 before:top-4 before:w-px before:bg-mare">
           {phases.map((p, i) => {
+            const inicioDeAto = i === 0 || atoDe(phases[i - 1].id) !== atoDe(p.id);
             const feita = completed.includes(p.id);
             const aberta = liberada(i);
             const Icone = iconeTipo[p.tipo];
             const tempo = melhorTempo[p.id];
             return (
+              <Fragment key={p.id}>
+              {inicioDeAto && (
+                <li className="pt-2">
+                  <h2 className={`font-narrativa text-xl ${atoDe(p.id) === 2 ? "text-alga" : atoDe(p.id) === 3 ? "text-coral" : "text-lanterna"}`}>{atos[atoDe(p.id) - 1].titulo}</h2>
+                  <p className="text-sm text-espuma/60">{atos[atoDe(p.id) - 1].resumo}</p>
+                </li>
+              )}
               <motion.li
-                key={p.id}
+                key={`item-${p.id}`}
                 className="relative"
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -107,9 +127,15 @@ export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
                   </button>
                 )}
               </motion.li>
+              </Fragment>
             );
           })}
         </ol>
+        <div className="flex flex-col gap-1 pt-2">
+          {atos.slice(3).map((a) => (
+            <p key={a.n} className="flex items-center gap-2 text-sm text-espuma/50"><Lock size={12} aria-hidden /> {a.titulo}: em construção</p>
+          ))}
+        </div>
       </main>
     );
   }
@@ -158,7 +184,7 @@ export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
 
         <section aria-label="Resumo" className="grid grid-cols-3 gap-2 text-center">
           {[
-            { v: `${totalEstrelas}/${phases.length * 3}`, t: "Estrelas" },
+            { v: `${totalEstrelas}/${todasFases.length * 3}`, t: "Estrelas" },
             { v: `${ganhas.length}/${conquistas.length}`, t: "Medalhas" },
             { v: recordeInfinito ? `${recordeInfinito}s` : "–", t: "Maré Infinita" },
           ].map((x) => (
@@ -290,7 +316,7 @@ export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
 
   const palavras = ["Lanterna", "Submersa"];
   return (
-    <main className="relative mx-auto flex h-full max-w-xl flex-col justify-center gap-10 overflow-y-auto px-6 py-8">
+    <main className={`relative mx-auto flex h-full max-w-xl flex-col justify-center gap-10 overflow-y-auto px-6 py-8 ato-${atoMenu}`}>
       {fundo}
       <header className="text-center">
         <div className="relative mx-auto mb-6 flex h-24 w-24 items-center justify-center" aria-hidden>
@@ -304,7 +330,7 @@ export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
             />
           ))}
           <motion.div
-            className="h-14 w-14 rounded-full bg-gradient-to-b from-espuma to-lanterna shadow-[0_0_70px_26px_rgba(255,191,0,0.45)]"
+            className="orbe-menu h-14 w-14 rounded-full bg-gradient-to-b from-espuma to-lanterna shadow-[0_0_70px_26px_rgba(255,191,0,0.45)]"
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: [1, 1.1, 1], opacity: [0.9, 1, 0.9] }}
             transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut" }}
@@ -327,6 +353,7 @@ export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
             </span>
           ))}
         </h1>
+        <p className="mt-3 text-sm uppercase tracking-[0.3em] text-espuma/60">{subtitulos[atoMenu]}</p>
         <motion.p
           className="mt-5 font-narrativa text-lg italic text-espuma/85"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6, duration: 1.2 }}
@@ -335,7 +362,7 @@ export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
         </motion.p>
         {(totalEstrelas > 0 || finaisVistos.length > 0) && (
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} className="mt-3 flex items-center justify-center gap-3 text-sm text-espuma/70">
-            <span className="flex items-center gap-1"><Trophy size={14} aria-hidden /> {totalEstrelas}/{phases.length * 3}</span>
+            <span className="flex items-center gap-1"><Trophy size={14} aria-hidden /> {totalEstrelas}/{todasFases.length * 3}</span>
             <span>Finais {finaisVistos.length}/4</span>
           </motion.p>
         )}
