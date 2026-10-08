@@ -163,3 +163,10 @@ main:has(.font-narrativa blockquote) blockquote { border-radius: 4px 14px 6px 12
 .ato-3 .orbe-menu { background: radial-gradient(circle at 40% 35%, #FFE3CF, #E07A5F) !important; box-shadow: 0 0 70px 26px rgba(224,122,95,.45) !important; }
 .ato-4 .orbe-menu { background: radial-gradient(circle at 40% 35%, #E9F5EC, #8FB8A0) !important; box-shadow: 0 0 70px 26px rgba(143,184,160,.4) !important; }
 .ato-5 .orbe-menu { background: radial-gradient(circle at 40% 35%, #FFFFFF, #F6E7B0) !important; box-shadow: 0 0 90px 34px rgba(255,250,235,.55) !important; }
+
+/* Tela principal do menu: o fundo animado (canvas) aparece por inteiro; o ato só colore molduras e orbe */
+.menu-raiz { background: none !important; }
+
+/* Título e frase do menu: sombra escura por trás das letras para ficarem legíveis sobre o fundo animado */
+.menu-titulo { text-shadow: 0 0 14px rgba(2,8,16,0.95), 0 2px 6px rgba(2,8,16,0.9); }
+.menu-frase { text-shadow: 0 0 10px rgba(2,8,16,0.95), 0 1px 4px rgba(2,8,16,0.9); }

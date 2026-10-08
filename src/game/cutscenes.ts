@@ -522,6 +522,146 @@ export const cutscenes = {
       { texto: "Refaça a trilha sem errar. Quando a última curva fechar, a luz vai aparecer no fim do caminho.", agua: 0.82, brilho: 0.04 },
     ],
   },
+  sombra: {
+    tipo: "apagar",
+    entrada: "Toque para seguir a sua sombra",
+    cenas: [
+      { texto: "Na cidade apagada, cada lâmpada precisa de uma sombra para acender. Mas a sombra anda do lado oposto.", agua: 0.8, brilho: 0.05 },
+      { texto: "Quando você vai para a direita, ela vai para a esquerda. Tomás aprendeu a andar pensando no espelho.", agua: 0.8, brilho: 0.05 },
+      { texto: "Um passo errado e a sombra se afasta da luz. Por isso ele contava cada movimento.", agua: 0.82, brilho: 0.04 },
+      { texto: "Leve a sombra até a lâmpada e chegue à saída. A luz volta a acender do outro lado.", agua: 0.82, brilho: 0.06 },
+    ],
+  },
+  luar: {
+    tipo: "apagar",
+    entrada: "Toque para acender o porto",
+    cenas: [
+      { texto: "As lâmpadas do porto estão apagadas em fileiras. Cada uma pode estar acesa ou não, e ninguém sabe por quê.", agua: 0.8, brilho: 0.05 },
+      { texto: "Tomás descobriu que inverter uma linha inteira, ou uma coluna, mudava várias lâmpadas de uma vez.", agua: 0.8, brilho: 0.05 },
+      { texto: "Virar a mesma fileira duas vezes desfazia o que estava feito. Por isso ele anotava cada toque.", agua: 0.82, brilho: 0.04 },
+      { texto: "Inverta as fileiras com calma. Quando a última lâmpada acender, o porto volta a ver a si mesmo.", agua: 0.82, brilho: 0.06 },
+    ],
+  },
+  ar: {
+    tipo: "apagar",
+    entrada: "Toque para mergulhar",
+    cenas: [
+      { texto: "A corrente do porto levou o ar da superfície. Quem desce ao fundo precisa contar cada braçada.", agua: 0.8, brilho: 0.05 },
+      { texto: "As bolhas que sobem do fundo são a única reserva. Pegá-las é voltar a respirar.", agua: 0.82, brilho: 0.05 },
+      { texto: "Tomás planejava cada movimento antes de dar, porque o pulmão não perdoa um erro.", agua: 0.82, brilho: 0.04 },
+      { texto: "Mergulhe com calma. Chegue à saída e emerja na luz, com o ar de volta.", agua: 0.84, brilho: 0.06 },
+    ],
+  },
+  chaves: {
+    tipo: "apagar",
+    entrada: "Toque para procurar as chaves",
+    cenas: [
+      { texto: "No breu do porto, as portas estão trancadas. Cada uma tem a sua chave escondida em algum canto.", agua: 0.8, brilho: 0.05 },
+      { texto: "Uma chave vermelha abre todas as portas vermelhas. A azul faz o mesmo com as azuis.", agua: 0.8, brilho: 0.05 },
+      { texto: "Tomás não forçava portas: procurava a chave primeiro, e só então seguia em frente.", agua: 0.82, brilho: 0.04 },
+      { texto: "Pegue as chaves certas e chegue à saída. Quando a última porta cair, a luz volta ao porto.", agua: 0.84, brilho: 0.06 },
+    ],
+  },
+  viciosa: {
+    tipo: "acender",
+    entrada: "Toque para acender a costa",
+    cenas: [
+      { texto: "A costa do acender tem brasas que só pegam quando há calor vizinho. Uma faísca sozinha se apaga.", agua: 0.6, brilho: 0.3 },
+      { texto: "Tomás aprendeu a escolher onde começar o fogo, para que ele corresse sozinho pela costa.", agua: 0.6, brilho: 0.5 },
+      { texto: "Cada casa tinha a sua exigência: umas pediam uma vizinha, outras pediam duas ou mais.", agua: 0.62, brilho: 0.7 },
+      { texto: "Acenda com poucos toques. Quando a costa inteira queimar, o fogo fica firme.", agua: 0.62, brilho: 0.9 },
+    ],
+  },
+  vapor: {
+    tipo: "acender",
+    entrada: "Toque para atravessar o vapor",
+    cenas: [
+      { texto: "Do chão da costa sobe vapor quente, em colunas que mudam de lugar a cada instante.", agua: 0.6, brilho: 0.3 },
+      { texto: "Uma coluna quente queima quem pisa nela. Tomás contava os turnos antes de cada passo.", agua: 0.6, brilho: 0.5 },
+      { texto: "Às vezes a melhor escolha é esperar. Parar também conta como um turno.", agua: 0.62, brilho: 0.7 },
+      { texto: "Atravesse com calma. Quando a outra margem chegar, o vapor não terá mais onde te alcançar.", agua: 0.62, brilho: 0.9 },
+    ],
+  },
+  aquecida: {
+    tipo: "acender",
+    entrada: "Toque para proteger o campo",
+    cenas: [
+      { texto: "O fogo saiu de uma brasa e corre pelo campo, alcançando tudo o que estiver livre.", agua: 0.6, brilho: 0.3 },
+      { texto: "Uma pedra bem posta barra o calor. Tomás protegia cada alvo com o mínimo de pedras.", agua: 0.6, brilho: 0.5 },
+      { texto: "Cada pedra custava trabalho para carregar. Por isso ele pensava antes de cada uma.", agua: 0.62, brilho: 0.7 },
+      { texto: "Ponha as pedras com cuidado. Quando nenhum alvo queimar, o campo está salvo.", agua: 0.62, brilho: 0.9 },
+    ],
+  },
+  anel: {
+    tipo: "acender",
+    entrada: "Toque para girar o anel",
+    cenas: [
+      { texto: "As lamparinas da praça formam um anel. Algumas estão acesas, outras não.", agua: 0.6, brilho: 0.3 },
+      { texto: "Girar o anel move todas as lamparinas de uma vez. Não há como acender uma sem mexer nas outras.", agua: 0.6, brilho: 0.5 },
+      { texto: "Tomás contava os giros em voz baixa, até que as chamas caíssem nas marcas antigas.", agua: 0.62, brilho: 0.7 },
+      { texto: "Gire com paciência. Quando o anel encaixar nas marcas, a praça inteira se ilumina.", agua: 0.62, brilho: 0.9 },
+    ],
+  },
+  fosforo: {
+    tipo: "acender",
+    entrada: "Toque para riscar o primeiro fósforo",
+    cenas: [
+      { texto: "A praça está cheia de lenha seca, mas os fósforos são poucos. Cada um precisa valer por uma linha.", agua: 0.6, brilho: 0.3 },
+      { texto: "Um fósforo riscado numa linha acende toda a fila. Numa coluna, acende a coluna inteira.", agua: 0.6, brilho: 0.5 },
+      { texto: "Tomás aprendeu a riscar só o necessário. Desperdiçar um fósforo era deixar uma lenha apagada para sempre.", agua: 0.62, brilho: 0.7 },
+      { texto: "Risque com cuidado. Quando a última lenha pegar, a praça volta a ter luz.", agua: 0.62, brilho: 0.9 },
+    ],
+  },
+  tanques: {
+    tipo: "guardar",
+    entrada: "Toque para começar",
+    cenas: [
+      { texto: "Na chuva, o porto junta água em jarros sem marcas. Quem quer uma medida exata precisa passar de um para outro.", agua: 0.6, brilho: 0.3 },
+      { texto: "Tomás passava a água de um jarro ao outro, sem olhar para o relógio.", agua: 0.6, brilho: 0.5 },
+      { texto: "Cada passo mexia nos dois jarros. Nada se perde, só se transfere.", agua: 0.62, brilho: 0.7 },
+      { texto: "Encha, esvazie e passe a água com calma. Quando um jarro marcar a medida, a chuva está guardada.", agua: 0.62, brilho: 0.9 },
+    ],
+  },
+  simetria: {
+    tipo: "guardar",
+    entrada: "Toque para começar",
+    cenas: [
+      { texto: "O cofre do porto tem uma grade que precisa ser igual dos dois lados, como um espelho.", agua: 0.6, brilho: 0.3 },
+      { texto: "Algumas casas já estão travadas, e o resto depende de quem pinta.", agua: 0.6, brilho: 0.5 },
+      { texto: "Tomás contava os pares de casas, um a um, antes de pintar qualquer uma.", agua: 0.62, brilho: 0.7 },
+      { texto: "Pinte com cuidado. Quando o cofre estiver simétrico, ele se abre sozinho.", agua: 0.62, brilho: 0.9 },
+    ],
+  },
+  prateleiras: {
+    tipo: "guardar",
+    entrada: "Toque para começar",
+    cenas: [
+      { texto: "O armazém tem estantes que precisam pesar o mesmo, senão o barco vira no mar.", agua: 0.6, brilho: 0.3 },
+      { texto: "As cargas têm pesos diferentes, e cada prateleira precisa do mesmo total.", agua: 0.6, brilho: 0.5 },
+      { texto: "Tomás começava pelas cargas pesadas: elas definiam o tamanho de cada prateleira.", agua: 0.62, brilho: 0.7 },
+      { texto: "Divida as cargas com paciência. Quando todas as estantes pesarem igual, o armazém fica justo.", agua: 0.62, brilho: 0.9 },
+    ],
+  },
+  trilhos: {
+    tipo: "guardar",
+    entrada: "Toque para começar",
+    cenas: [
+      { texto: "A mina tem trilhos que se bifurcam a cada chave. Uma troca errada manda a vagoneta para longe.", agua: 0.6, brilho: 0.3 },
+      { texto: "Tomás via o caminho inteiro antes de mexer em qualquer chave.", agua: 0.6, brilho: 0.5 },
+      { texto: "Ele chamava a estação certa de porto seguro, e cada chave de uma escolha de destino.", agua: 0.62, brilho: 0.7 },
+      { texto: "Ajuste as chaves com cuidado. Quando a vagoneta parar na estação certa, a carga está salva.", agua: 0.62, brilho: 0.9 },
+    ],
+  },
+  torrecaixas: {
+    tipo: "guardar",
+    entrada: "Toque para começar",
+    cenas: [
+      { texto: "No cais, a torre de caixas precisa chegar na altura exata, nem mais, nem menos.", agua: 0.6, brilho: 0.3 },
+      { texto: "As caixas vêm em três tamanhos, e cada uma conta como um passo.", agua: 0.6, brilho: 0.5 },
+      { texto: "Tomás procurava a menor quantidade de caixas, porque cada uma custava tempo para carregar.", agua: 0.62, brilho: 0.7 },
+      { texto: "Empilhe com calma. Quando a torre chegar à altura certa, ela fica firme contra a maré.", agua: 0.62, brilho: 0.9 },
+    ],
+  },
   abismo: {
     tipo: "abismo",
     entrada: "Toque para enfrentar a corrente",

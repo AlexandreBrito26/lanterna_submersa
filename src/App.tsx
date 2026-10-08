@@ -27,6 +27,7 @@ const fases = {
   observatorio: lazy(() => import("./phases/Observatorio")),
   eclusa: lazy(() => import("./phases/Eclusa")),
   torre: lazy(() => import("./phases/Torre")),
+  torrecaixas: lazy(() => import("./phases/TorreCaixas")),
   mangue: lazy(() => import("./phases/Mangue")),
   teatro: lazy(() => import("./phases/Teatro")),
   bombas: lazy(() => import("./phases/Bombas")),
@@ -67,6 +68,19 @@ const fases = {
   alternado: lazy(() => import("./phases/Alternado")),
   pontes: lazy(() => import("./phases/Pontes")),
   trilha: lazy(() => import("./phases/Trilha")),
+  sombra: lazy(() => import("./phases/Sombra")),
+  luar: lazy(() => import("./phases/Luar")),
+  ar: lazy(() => import("./phases/ArContado")),
+  chaves: lazy(() => import("./phases/Chaves")),
+  viciosa: lazy(() => import("./phases/Viciosa")),
+  vapor: lazy(() => import("./phases/Vapor")),
+  aquecida: lazy(() => import("./phases/Aquecida")),
+  anel: lazy(() => import("./phases/Anel")),
+  fosforo: lazy(() => import("./phases/Fosforo")),
+  tanques: lazy(() => import("./phases/Tanques")),
+  simetria: lazy(() => import("./phases/Simetria")),
+  prateleiras: lazy(() => import("./phases/Prateleiras")),
+  trilhos: lazy(() => import("./phases/Trilhos")),
 };
 
 export default function App() {

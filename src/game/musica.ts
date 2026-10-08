@@ -1,6 +1,6 @@
 import { Howler } from "howler";
 
-export type TemaMusical = "menu" | "cais" | "biblioteca" | "jardins" | "armazem" | "porao" | "recife" | "oficina" | "espelhos" | "catedral" | "sinos" | "observatorio" | "eclusa" | "torre" | "abismo" | "coracao" | "mangue" | "teatro" | "bombas" | "rede" | "mare" | "vento" | "eco" | "cardume" | "coral" | "neblina" | "alavancas" | "memoria" | "perolas" | "setas" | "dominos" | "palavras" | "final2" | "silencio" | "contagem" | "fio" | "pedra" | "breu" | "chama" | "vela" | "forja" | "molhada" | "brasa" | "arca" | "muralha" | "ganchos" | "fechadura" | "selos" | "escalada" | "encaixe" | "sementes" | "alternado" | "pontes" | "trilha" | "infinito";
+export type TemaMusical = "menu" | "cais" | "biblioteca" | "jardins" | "armazem" | "porao" | "recife" | "oficina" | "espelhos" | "catedral" | "sinos" | "observatorio" | "eclusa" | "torre" | "abismo" | "coracao" | "mangue" | "teatro" | "bombas" | "rede" | "mare" | "vento" | "eco" | "cardume" | "coral" | "neblina" | "alavancas" | "memoria" | "perolas" | "setas" | "dominos" | "palavras" | "final2" | "silencio" | "contagem" | "fio" | "pedra" | "breu" | "chama" | "vela" | "forja" | "molhada" | "brasa" | "arca" | "muralha" | "ganchos" | "fechadura" | "selos" | "escalada" | "encaixe" | "sementes" | "alternado" | "pontes" | "trilha" | "sombra" | "luar" | "ar" | "chaves" | "viciosa" | "vapor" | "aquecida" | "anel" | "fosforo" | "tanques" | "simetria" | "prateleiras" | "trilhos" | "torrecaixas" | "infinito";
 
 type Tema = {
   raiz: number;            // frequência base em Hz
@@ -68,6 +68,20 @@ const temas: Record<TemaMusical, Tema> = {
   alternado:  { raiz: 123.5, escala: [0, 2, 4, 7, 9, 12], acordes: [[0, 7, 12], [-2, 5, 10], [-4, 3, 8], [-5, 2, 7]], passo: [3, 6], onda: "triangle", filtro: 750, pulso: "lencol" },
   pontes:     { raiz: 146.8, escala: [0, 2, 5, 7, 9], acordes: [[0, 7, 12], [-3, 4, 9], [-5, 2, 7], [-7, 0, 5]], passo: [3, 6], onda: "sine", filtro: 650, pulso: "lencol" },
   trilha:     { raiz: 92.5, escala: [0, 2, 5, 7, 9], acordes: [[0, 7], [-5, 2], [-7, 0], [-5, 2]], passo: [5, 9], onda: "sine", filtro: 300, pulso: "silencio", grave: true },
+  sombra:     { raiz: 110, escala: [0, 4, 7, 9, 12], acordes: [[0, 7], [-5, 2], [-3, 4], [-7, 0]], passo: [5, 9], onda: "sine", filtro: 280, pulso: "silencio", grave: true },
+  luar:       { raiz: 116.5, escala: [0, 3, 5, 7, 10], acordes: [[0, 7], [-2, 5], [-5, 2], [-7, 0]], passo: [5, 9], onda: "sine", filtro: 320, pulso: "silencio", grave: true },
+  ar:         { raiz: 98, escala: [0, 2, 5, 7, 9], acordes: [[0, 7], [-5, 2], [-7, 0], [-5, 2]], passo: [5, 9], onda: "sine", filtro: 260, pulso: "silencio", grave: true },
+  chaves:     { raiz: 103.8, escala: [0, 2, 3, 7, 8, 12], acordes: [[0, 7], [-5, 2], [-3, 4], [-7, 0]], passo: [5, 9], onda: "sine", filtro: 300, pulso: "silencio", grave: true },
+  viciosa:    { raiz: 130.8, escala: [0, 2, 4, 7, 9, 12], acordes: [[0, 7, 12], [-2, 5, 10], [-4, 3, 8], [-5, 2, 7]], passo: [3, 6], onda: "triangle", filtro: 800, pulso: "lencol" },
+  vapor:      { raiz: 116.5, escala: [0, 2, 3, 7, 8, 12], acordes: [[0, 7, 12], [-2, 5, 10], [-5, 2, 7], [-7, 0, 5]], passo: [4, 7], onda: "sine", filtro: 650, pulso: "marulho" },
+  aquecida:   { raiz: 110, escala: [0, 3, 5, 7, 10], acordes: [[0, 7, 12], [-2, 5, 10], [-5, 2, 7], [-7, 0, 5]], passo: [4, 8], onda: "triangle", filtro: 500, pulso: "casco", grave: true },
+  anel:       { raiz: 146.8, escala: [0, 2, 4, 7, 9, 12], acordes: [[0, 7, 14], [-3, 4, 9], [-5, 2, 9], [-7, 0, 7]], passo: [2.5, 5], onda: "triangle", filtro: 900, pulso: "pesca" },
+  fosforo:    { raiz: 123.5, escala: [0, 2, 5, 7, 9, 12], acordes: [[0, 7, 12], [-3, 4, 9], [-5, 2, 7], [-7, 0, 5]], passo: [3, 6], onda: "sine", filtro: 780, pulso: "lencol" },
+  tanques:    { raiz: 130.8, escala: [0, 2, 4, 7, 9, 12], acordes: [[0, 7, 12], [-2, 5, 10], [-4, 3, 8], [-5, 2, 7]], passo: [4, 7], onda: "sine", filtro: 700, pulso: "marulho" },
+  simetria:   { raiz: 146.8, escala: [0, 2, 4, 7, 9, 11], acordes: [[0, 7, 12], [-3, 4, 9], [-5, 2, 7], [-7, 0, 5]], passo: [4, 8], onda: "triangle", filtro: 850, pulso: "lencol" },
+  prateleiras:{ raiz: 110, escala: [0, 3, 5, 7, 10], acordes: [[0, 7, 12], [-2, 5, 10], [-5, 2, 7], [-7, 0, 5]], passo: [4, 8], onda: "triangle", filtro: 520, pulso: "casco", grave: true },
+  trilhos:    { raiz: 123.5, escala: [0, 2, 5, 7, 9, 12], acordes: [[0, 7, 12], [-3, 4, 9], [-5, 2, 7], [-7, 0, 5]], passo: [3, 6], onda: "sine", filtro: 780, pulso: "pesca" },
+  torrecaixas: { raiz: 98, escala: [0, 2, 5, 7, 9], acordes: [[0, 7], [-5, 2], [-7, 0], [-5, 2]], passo: [5, 9], onda: "triangle", filtro: 420, pulso: "casco", grave: true },
   infinito:   { raiz: 110,   escala: [0, 3, 5, 7, 8, 12],      acordes: [[0, 7, 12], [-2, 5, 10], [-4, 3, 8], [-5, 2, 7]], passo: [0.6, 1.5], onda: "sawtooth", filtro: 450, pulso: "corrente", grave: true },
 };
 

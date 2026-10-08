@@ -1,6 +1,6 @@
 import type { PhaseId } from "../store/schema";
 
-export type TipoVitoria = "exploracao" | "deducao" | "furtividade" | "coleta" | "sincronia" | "sobrevivencia" | "duelo" | "criacao" | "escuta" | "equilibrio" | "navegacao" | "medida" | "sinalizacao" | "reflexo" | "estiva" | "deslize" | "sombras" | "valvulas" | "laco" | "labirinto" | "vento" | "eco" | "cardume" | "crescer" | "neblina" | "alavancas" | "memoria" | "logica" | "correnteza" | "cadeia" | "palavras" | "final" | "tateio" | "contagem" | "fio" | "pedra" | "breu" | "chama" | "vela" | "forja" | "molhada" | "brasa" | "arca" | "muralha" | "ordem" | "fechadura" | "selos" | "escalada" | "encaixe" | "sementes" | "alternado" | "pontes" | "lembranca";
+export type TipoVitoria = "exploracao" | "deducao" | "furtividade" | "coleta" | "sincronia" | "sobrevivencia" | "duelo" | "criacao" | "escuta" | "equilibrio" | "navegacao" | "medida" | "sinalizacao" | "reflexo" | "estiva" | "deslize" | "sombras" | "valvulas" | "laco" | "labirinto" | "vento" | "eco" | "cardume" | "crescer" | "neblina" | "alavancas" | "memoria" | "logica" | "correnteza" | "cadeia" | "palavras" | "final" | "tateio" | "contagem" | "fio" | "pedra" | "breu" | "chama" | "vela" | "forja" | "molhada" | "brasa" | "arca" | "muralha" | "ordem" | "fechadura" | "selos" | "escalada" | "encaixe" | "sementes" | "alternado" | "pontes" | "lembranca" | "espelhada" | "linhas" | "ar" | "chaves" | "viciosa" | "vapor" | "aquecida" | "anel" | "fosforo" | "tanques" | "simetria" | "prateleiras" | "trilhos" | "torrecaixas";
 
 export const tiposVitoria: Record<TipoVitoria, { nome: string; objetivo: string }> = {
   exploracao:    { nome: "Exploração",    objetivo: "Encontre a chave e abra a porta" },
@@ -56,6 +56,20 @@ export const tiposVitoria: Record<TipoVitoria, { nome: string; objetivo: string 
   alternado:     { nome: "Alternado",      objetivo: "Troque de cor a cada passo até a saída" },
   pontes:        { nome: "Pontes",         objetivo: "Ligue as ilhas com o número exato de pontes, sem cruzá-las" },
   lembranca:     { nome: "Lembrança",      objetivo: "Refaça o caminho que viu por um instante, só de memória" },
+  espelhada:     { nome: "Espelhada",      objetivo: "Leve sua sombra espelhada até a lâmpada e chegue à saída" },
+  linhas:        { nome: "Luar",           objetivo: "Inverta linhas e colunas até todas as lâmpadas acenderem" },
+  ar:            { nome: "Ar",             objetivo: "Chegue à saída sem ficar sem ar, pegando bolhas no caminho" },
+  chaves:        { nome: "Chaves",         objetivo: "Pegue as chaves certas para abrir as portas até a saída" },
+  viciosa:       { nome: "Brasa Viciosa",  objetivo: "Acenda a costa com o menor número de toques; o fogo se espalha sozinho" },
+  vapor:         { nome: "Coluna de Vapor", objetivo: "Atravesse o vapor sem pisar numa coluna quente" },
+  aquecida:      { nome: "Pedra Aquecida", objetivo: "Proteja todos os alvos do fogo com o menor número de pedras" },
+  anel:          { nome: "Anel de Lamparinas", objetivo: "Gire o anel até as chamas caírem nas marcas" },
+  fosforo:       { nome: "Fósforo Curto", objetivo: "Acenda toda a lenha com o menor número de fósforos" },
+  tanques:       { nome: "Tanques da Chuva", objetivo: "Consiga exatamente o volume pedido com os jarros" },
+  simetria:      { nome: "Simetria do Cofre", objetivo: "Deixe a grade simétrica com o mínimo de pinturas" },
+  prateleiras:   { nome: "Prateleiras Iguais", objetivo: "Divida as cargas para que cada prateleira pese o mesmo" },
+  trilhos:       { nome: "Trilhos da Mina", objetivo: "Ajuste as chaves para levar a vagoneta à estação" },
+  torrecaixas:   { nome: "Torre de Caixas", objetivo: "Chegue à altura exata com o menor número de caixas" },
 };
 
 // Os cinco atos da história. Ato I é o jogo original (até o Coração); os demais são construídos em sequência.
@@ -68,7 +82,7 @@ export const atos = [
 ];
 
 // Fases que pertencem a um ato diferente do Ato I
-const ATO_DA_FASE: Partial<Record<PhaseId, number>> = { eco: 2, cardume: 2, coral: 2, neblina: 2, alavancas: 2, memoria: 2, perolas: 2, setas: 2, dominos: 2, palavras: 2, final2: 2, silencio: 3, contagem: 3, fio: 3, pedra: 3, breu: 3, chama: 3, vela: 3, forja: 3, molhada: 3, brasa: 3, arca: 3, muralha: 3, ganchos: 3, fechadura: 3, selos: 3, escalada: 3, encaixe: 3, sementes: 3, alternado: 3, pontes: 3, trilha: 4 };
+const ATO_DA_FASE: Partial<Record<PhaseId, number>> = { eco: 2, cardume: 2, coral: 2, neblina: 2, alavancas: 2, memoria: 2, perolas: 2, setas: 2, dominos: 2, palavras: 2, final2: 2, silencio: 3, contagem: 3, fio: 3, pedra: 3, breu: 3, chama: 3, vela: 3, forja: 3, molhada: 3, brasa: 3, arca: 3, muralha: 3, ganchos: 3, fechadura: 3, selos: 3, escalada: 3, encaixe: 3, sementes: 3, alternado: 3, pontes: 3, trilha: 4, sombra: 4, luar: 4, ar: 4, chaves: 4, viciosa: 4, vapor: 4, aquecida: 4, anel: 4, fosforo: 4, tanques: 4, simetria: 4, prateleiras: 4, trilhos: 4, torrecaixas: 4 };
 export function atoDe(id: PhaseId): number { return ATO_DA_FASE[id] ?? 1; }
 
 // ramo: fase que só aparece para quem escolheu esse final no Coração (Ato III em diante)
@@ -129,4 +143,18 @@ export const phases: PhaseInfo[] = [
   { id: "alternado", titulo: "Trilha Alternada", resumo: "Troque de cor a cada passo e chegue à saída do mangue.", tipo: "alternado", pronta: true, ramo: "renascer" },
   { id: "pontes", titulo: "Pontes de Mangue", resumo: "Ligue as ilhas com o número exato de pontes, sem cruzá-las.", tipo: "pontes", pronta: true, ramo: "renascer" },
   { id: "trilha", titulo: "Trilha Lembrada", resumo: "Um caminho aparece por um instante. Refaça-o de memória, sem errar a curva.", tipo: "lembranca", pronta: true, ramo: "apagar" },
+  { id: "sombra", titulo: "Sombra Espelhada", resumo: "Sua sombra anda espelhada. Leve-a até a lâmpada e chegue à saída.", tipo: "espelhada", pronta: true, ramo: "apagar" },
+  { id: "luar", titulo: "Luar de Linhas", resumo: "Inverta linhas e colunas de lâmpadas com o menor número de toques.", tipo: "linhas", pronta: true, ramo: "apagar" },
+  { id: "ar", titulo: "Ar Contado", resumo: "Cada passo gasta ar. Pegue bolhas no caminho e chegue à saída sem afogar.", tipo: "ar", pronta: true, ramo: "apagar" },
+  { id: "chaves", titulo: "Chaves do Breu", resumo: "Pegue as chaves certas e abra as portas até a saída do breu.", tipo: "chaves", pronta: true, ramo: "apagar" },
+  { id: "viciosa", titulo: "Brasa Viciosa", resumo: "O fogo só acende onde há vizinhas queimando. Escolha por onde começar.", tipo: "viciosa", pronta: true, ramo: "acender" },
+  { id: "vapor", titulo: "Coluna de Vapor", resumo: "O vapor quente muda de coluna a cada turno. Atravesse no momento certo.", tipo: "vapor", pronta: true, ramo: "acender" },
+  { id: "aquecida", titulo: "Pedra Aquecida", resumo: "Ponha pedras para proteger os alvos do fogo.", tipo: "aquecida", pronta: true, ramo: "acender" },
+  { id: "anel", titulo: "Anel de Lamparinas", resumo: "Gire o anel de lamparinas até as chamas caírem nas marcas.", tipo: "anel", pronta: true, ramo: "acender" },
+  { id: "fosforo", titulo: "Fósforo Curto", resumo: "Cada fósforo acende uma linha ou coluna. Cubra toda a lenha.", tipo: "fosforo", pronta: true, ramo: "acender" },
+  { id: "tanques", titulo: "Tanques da Chuva", resumo: "Encha, esvazie e passe água entre os jarros até marcar o volume certo.", tipo: "tanques", pronta: true, ramo: "guardar" },
+  { id: "simetria", titulo: "Simetria do Cofre", resumo: "Deixe a grade do cofre igual dos dois lados do eixo.", tipo: "simetria", pronta: true, ramo: "guardar" },
+  { id: "prateleiras", titulo: "Prateleiras Iguais", resumo: "Divida as cargas para que cada prateleira pese o mesmo.", tipo: "prateleiras", pronta: true, ramo: "guardar" },
+  { id: "trilhos", titulo: "Trilhos da Mina", resumo: "Ajuste as chaves para a vagoneta chegar à estação certa.", tipo: "trilhos", pronta: true, ramo: "guardar" },
+  { id: "torrecaixas", titulo: "Torre de Caixas", resumo: "Empilhe caixas até a altura exata, com o menor número delas.", tipo: "torrecaixas", pronta: true, ramo: "guardar" },
 ];

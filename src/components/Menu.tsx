@@ -327,7 +327,7 @@ export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
 
   const palavras = ["Lanterna", "Submersa"];
   return (
-    <main className={`relative mx-auto flex h-full max-w-xl flex-col justify-center gap-10 overflow-y-auto px-6 py-8 ato-${atoMenu}`}>
+    <main className={`relative mx-auto flex h-full max-w-xl flex-col justify-center gap-10 overflow-y-auto px-6 py-8 ato-${atoMenu} menu-raiz`}>
       {fundo}
       <header className="text-center">
         <div className="relative mx-auto mb-6 flex h-24 w-24 items-center justify-center" aria-hidden>
@@ -347,7 +347,7 @@ export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
             transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut" }}
           />
         </div>
-        <h1 className="font-narrativa text-5xl font-semibold leading-tight sm:text-6xl" aria-label="Lanterna Submersa">
+        <h1 className="menu-titulo font-narrativa text-5xl font-semibold leading-tight sm:text-6xl" aria-label="Lanterna Submersa">
           {palavras.map((pal, wi) => (
             <span key={pal} className="block" aria-hidden>
               {pal.split("").map((ch, k) => (
@@ -366,7 +366,7 @@ export default function Menu({ aoRever }: { aoRever: (id: CenaId) => void }) {
         </h1>
         <p className="mt-3 text-sm uppercase tracking-[0.3em] text-espuma/60">{subtitulos[atoMenu]}</p>
         <motion.p
-          className="mt-5 font-narrativa text-lg italic text-espuma/85"
+          className="menu-frase mt-5 font-narrativa text-lg italic text-espuma"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6, duration: 1.2 }}
         >
           A cidade afundou, mas uma luz ainda responde ao seu passo.

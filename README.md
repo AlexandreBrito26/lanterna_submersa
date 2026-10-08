@@ -343,3 +343,58 @@ Suba para o GitHub e importe em vercel.com. O Vite é detectado automaticamente.
 - **Fundo que não aparecia:** o canvas do menu (`CenaMenu`) cobria por completo o fundo da tela, então as cores de cada ato nunca eram vistas. Agora o próprio canvas usa uma paleta por ato (céu e cor da luz) e muda quando o ato muda.
 - **Ato III que "sumia":** os atos III a V só aparecem no mapa quando há fases visíveis para o seu ramo. Quem ainda não escolheu o final no Coração vê, no fim da lista, o aviso "escolha o final no Coração para abrir este ato". Atos sem fases mostram "em construção".
 - **Organização do mapa:** cada ato tem seu cabeçalho, e dentro do Ato III as fases ficam agrupadas por ramo ("Ramo do Apagar", "Ramo do Acender" etc.).
+
+## Ato IV (v54): ramo Apagar, fase 2
+- **Sombra Espelhada** (`phases/Sombra.tsx`): sua sombra fica na posição espelhada em relação ao eixo vertical. Vence chegando à saída com a sombra sobre a lâmpada. Dois espelhos (mínimos de 4 e 7 passos, em `OTIMOS`, por busca em largura). Estrelas pelos passos: até o mínimo total = 3, até +3 = 2. Som: passo que ecoa do outro lado, lâmpada que acende com a sombra; trilha de pulsos de silêncio.
+- Cutscene de entrada (arte do ramo Apagar), página *A sombra do outro lado* no diário, medalha *Luz espelhada*.
+- **Ato IV:** 2 de 20 fases. Próximo: fase 3 do ramo Apagar.
+
+## Ato IV (v55): ramo Apagar, fase 3
+- **Luar de Linhas** (`phases/Luar.tsx`): lâmpadas acesas ou apagadas. Um toque numa linha (↔) ou coluna (↕) inverte todas as lâmpadas dela. Acenda todas com o menor número de toques. Três fileiras. O mínimo de toques de cada uma é calculado pelo próprio código, testando todas as combinações de linhas e colunas (3, 4 e 4, em `OTIMOS`). Estrelas pelos toques: até o mínimo total = 3, até +2 = 2. Som: clique de vidro ao virar uma fileira, acorde no porto aceso; trilha de pulsos de silêncio.
+- Cutscene de entrada (arte do ramo Apagar), página *Luz em linhas* no diário, medalha *Mestre do luar*.
+- **Ato IV:** 3 de 20 fases. Próximo: fase 4 do ramo Apagar.
+
+## Ato IV (v56): ramo Apagar, fase 4
+- **Ar Contado** (`phases/ArContado.tsx`): cada passo gasta 1 de ar (máximo 6, começa em 4). Bolhas recarregam +2. Sem ar, o mergulho acaba. Dois mergulhos, ambos com mínimo de 7 passos (em `OTIMOS`, por busca em largura sobre posição e ar). Estrelas pelos passos: até o mínimo total = 3, até +3 = 2. Som: braçada com bolha, falha de ar sufocada, chegada à superfície; trilha de pulsos de silêncio.
+- Cutscene de entrada (arte do ramo Apagar), página *Fôlego contado* no diário, medalha *Fôlego de ferro*.
+- Barra de ar visível na tela para o jogador acompanhar o gasto.
+- **Ato IV:** 4 de 20 fases. Próximo: fase 5 do ramo Apagar.
+
+## Armazém do Porto mais fácil (v57)
+- **Menos pedras:** de 4 e 5 para 3 e 4 pedras por rodada.
+- **Histórico das pesagens:** cada pesagem fica listada abaixo da balança (quem estava em cada prato e qual lado desceu), para o jogador não depender de memória.
+- **Feedback na ordem errada:** a mensagem diz quantas pedras já estão no lugar certo, em vez de só dizer que a ordem está errada.
+- **Estrelas mais generosas:** 3 estrelas com custo até 20 (antes 15), e 2 estrelas até 28 (antes 22). O custo é o número de pesagens mais 3 por cada ordem errada.
+- Os pesos continuam escondidos, e a regra da balança não mudou.
+
+## Menu: animação de fundo restaurada (v58)
+- **Causa:** a tela principal do menu recebia a classe de fundo do ato (`ato-N`), que pintava um gradiente opaco sobre a área central. Esse gradiente cobria o canvas animado (medusas, feixes de luz, cidade), e só as bordas continuavam visíveis.
+- **Correção:** a tela principal ganhou a classe `menu-raiz`, que remove o fundo. Agora o canvas aparece por inteiro, na coluna central e nas bordas.
+- As classes `ato-N` continuam valendo para as telas das fases. No menu, o ato só colore molduras e o orbe.
+
+## Legibilidade do título e da frase do menu (v59)
+- O título "Lanterna Submersa", a linha do ato e a frase de abertura passam a ter uma sombra escura por trás das letras. Assim, continuam legíveis sobre o fundo animado.
+- A frase de abertura ficou mais clara (cor espuma, sem transparência).
+
+## Ato IV (v60): ramo Apagar completo
+- **Chaves do Breu** (`phases/Chaves.tsx`), ramo Apagar, fase 5: chaves vermelha (r) e azul (b), que se pegam ao pisar e não se gastam. Portas (R e B) só abrem com a chave da mesma cor. Duas rodadas, com mínimos calculados pelo código por busca em largura sobre (posição, chaves). Estrelas pelos passos: até o mínimo total = 3, até +3 = 2. Som: chave que tine, passo, porta trancada que bate, porta aberta com acorde; trilha de pulsos de silêncio.
+- Cutscene de entrada (arte do ramo Apagar), página *Chaves do breu* no diário, medalha *Chaveiro do breu*.
+- **Ramo Apagar do Ato IV: 5 de 5 fases completo.** Ato IV: 5 de 20 fases. Próximo: ramo Acender do Ato IV.
+
+## Ato IV (v61): ramo Acender completo (5 fases)
+- **Brasa Viciosa:** cada casa exige um número de vizinhas queimando. Você acende algumas à mão, e o fogo corre sozinho. Duas costas; mínimo de toques calculado pelo código por enumeração.
+- **Coluna de Vapor:** a coluna c está quente no turno t quando (t + c) % 3 == 0. Você anda ou espera, sem pisar numa coluna quente. Duas travessias; mínimo de turnos por busca em largura sobre (posição, turno módulo 3).
+- **Pedra Aquecida:** o fogo sai de F e se espalha por casas livres. Ponha pedras para que nenhum alvo T queime. Dois campos; mínimo de pedras por enumeração.
+- **Anel de Lamparinas:** seis lamparinas em anel; cada giro move todas uma casa. Gire até as chamas caírem nas marcas. Mínimo de giros calculado pelo código.
+- **Fósforo Curto:** cada fósforo acende uma linha ou coluna inteira de lenha. Cubra toda a lenha com o mínimo de fósforos; enumeração das linhas e colunas.
+- Cada fase tem estrelas pelo custo acima do mínimo, cutscene de entrada (arte do Acender), página no diário, medalha, som próprio e trilha.
+- **Ato IV:** 10 de 20 fases (Apagar e Acender completos). Próximo: ramo Guardar.
+
+## Ato IV (v62): ramo Guardar completo (5 fases)
+- **Tanques da Chuva** (`phases/Tanques.tsx`): jarros de capacidades fixas. Encha, esvazie ou passe água entre eles até um jarro marcar o volume pedido. Duas rodadas (5 e 3 litros → 4; 7, 4 e 3 → 5). Mínimo de ações por busca em largura.
+- **Simetria do Cofre** (`phases/Simetria.tsx`): a grade precisa ser simétrica no eixo vertical. Algumas casas já vêm travadas. Mínimo de pinturas por enumeração.
+- **Prateleiras Iguais** (`phases/Prateleiras.tsx`): divida as cargas em prateleiras de mesmo peso. Duas rodadas (2 e 3 prateleiras).
+- **Trilhos da Mina** (`phases/Trilhos.tsx`): a vagoneta segue as chaves. Ajuste as chaves até ela parar na estação pedida. Mínimo de trocas por enumeração das configurações.
+- **Torre de Caixas** (`phases/TorreCaixas.tsx`): empilhe caixas de altura 1, 2 e 3 até a altura exata. Mínimo de caixas por programação dinâmica (alturas 7 e 10).
+- **Correção:** a fase Torre do Ato I (`phases/Torre.tsx`) foi restaurada. Na primeira versão desta rodada, a nova torre de caixas tinha sobrescrito esse arquivo; ela agora tem o id `torrecaixas`.
+- **Ato IV:** 15 de 20 fases (Apagar, Acender e Guardar completos). Próximo: ramo Renascer do Ato IV.

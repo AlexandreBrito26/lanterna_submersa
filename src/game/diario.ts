@@ -216,6 +216,62 @@ export const paginas: Pagina[] = [
     texto: "Quando a luz se apagou de vez, Tomás só tinha a memória do caminho. Ele olhava o mapa por um instante e refazia cada curva de cabeça. Quem esquecia uma curva, voltava ao começo.",
   },
   {
+    id: "d-sombra", titulo: "A sombra do outro lado", dica: "Conclua a Sombra Espelhada.", check: fez("sombra"),
+    texto: "Tomás notou que a sombra andava sempre do outro lado do espelho. Quem queria acender a lâmpada precisava pensar ao contrário: para ir à direita, a sombra ia à esquerda.",
+  },
+  {
+    id: "d-luar", titulo: "Luz em linhas", dica: "Conclua o Luar de Linhas.", check: fez("luar"),
+    texto: "No porto, as lâmpadas se acendiam em fileiras. Tomás descobriu que virar uma fileira inteira ajudava mais do que acender uma lâmpada de cada vez. Mas virar duas vezes a mesma fileira desfazia tudo.",
+  },
+  {
+    id: "d-ar", titulo: "Fôlego contado", dica: "Conclua o Ar Contado.", check: fez("ar"),
+    texto: "Tomás mergulhava com pouco ar, e aprendeu a contar cada braçada. As bolhas do fundo eram a única esperança de voltar, e ele sempre planejava o caminho até a próxima.",
+  },
+  {
+    id: "d-chaves", titulo: "Chaves do breu", dica: "Conclua as Chaves do Breu.", check: fez("chaves"),
+    texto: "No porto, cada porta trancada tinha a sua chave escondida em algum canto. Tomás aprendeu a procurar a chave antes de forçar a porta, porque uma chave serve para todas as portas da mesma cor.",
+  },
+  {
+    id: "d-viciosa", titulo: "O fogo que se espalha", dica: "Conclua a Brasa Viciosa.", check: fez("viciosa"),
+    texto: "Tomás descobriu que a brasa só pegava onde já havia calor ao lado. Uma faísca sozinha se apagava; três juntas faziam a costa inteira queimar.",
+  },
+  {
+    id: "d-vapor", titulo: "Entre as colunas quentes", dica: "Conclua a Coluna de Vapor.", check: fez("vapor"),
+    texto: "O vapor subia de uma coluna e depois de outra, sem ordem aparente. Tomás contava os turnos e atravessava sempre que a sua coluna estava fria.",
+  },
+  {
+    id: "d-aquecida", titulo: "Pedra contra o calor", dica: "Conclua a Pedra Aquecida.", check: fez("aquecida"),
+    texto: "Uma pedra bem posta barrava o calor como um muro. Tomás protegia cada alvo com o mínimo de pedras, porque cada pedra custava uma tarde de trabalho.",
+  },
+  {
+    id: "d-anel", titulo: "O anel das lamparinas", dica: "Conclua o Anel de Lamparinas.", check: fez("anel"),
+    texto: "As lamparinas do porto formavam um anel que girava devagar. Quando as chamas caíam nas marcas, a luz se espalhava por toda a praça.",
+  },
+  {
+    id: "d-fosforo", titulo: "O último fósforo", dica: "Conclua o Fósforo Curto.", check: fez("fosforo"),
+    texto: "Os fósforos eram poucos, e cada um acendia uma linha ou uma coluna de lenha. Tomás aprendeu a riscar só o necessário, e a praça inteira acendeu com a última chama.",
+  },
+  {
+    id: "d-tanques", titulo: "Água na medida", dica: "Conclua os Tanques da Chuva.", check: fez("tanques"),
+    texto: "Na chuva, Tomás media a água em jarros sem marcas. Aprendeu que, passando de um para outro, sempre sobrava a medida que faltava.",
+  },
+  {
+    id: "d-simetria", titulo: "O espelho do cofre", dica: "Conclua a Simetria do Cofre.", check: fez("simetria"),
+    texto: "O cofre do porto tinha os dois lados iguais, como um espelho. Quem pintava um lado precisava pintar o outro, senão o cofre não fechava.",
+  },
+  {
+    id: "d-prateleiras", titulo: "Peso igual", dica: "Conclua as Prateleiras Iguais.", check: fez("prateleiras"),
+    texto: "Tomás dividia as cargas entre as estantes até que todas pesassem o mesmo. Ele dizia que o armazém só era justo quando nenhuma prateleira carregava mais que a outra.",
+  },
+  {
+    id: "d-trilhos", titulo: "Chaves da mina", dica: "Conclua os Trilhos da Mina.", check: fez("trilhos"),
+    texto: "Os trilhos da mina se bifurcavam a cada chave. Tomás aprendeu a ver o caminho inteiro antes de mexer em qualquer uma, porque uma troca errada mandava a vagoneta para longe.",
+  },
+  {
+    id: "d-caixas", titulo: "Caixas empilhadas", dica: "Conclua a Torre de Caixas.", check: fez("torrecaixas"),
+    texto: "Com caixas de três tamanhos, Tomás montava a torre do cais na altura exata. Às vezes uma caixa grande valia por duas pequenas, e ele sempre procurava essa economia.",
+  },
+  {
     id: "d-abismo", titulo: "A corrente que sobe", dica: "Conclua as Correntes do Abismo.", check: fez("abismo"),
     texto: "A corrente do poço não é inimiga. É o próprio mar tentando levar a luz de volta à superfície. O problema é que ele leva a cidade junto.",
   },

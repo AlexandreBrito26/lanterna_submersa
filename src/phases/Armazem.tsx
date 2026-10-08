@@ -10,8 +10,8 @@ type Pedra = { id: string; nome: string; peso: number };
 type Prato = "esq" | "dir" | null;
 
 const nomes = ["Aurora", "Gaivota", "Bom Retiro", "Maré Mansa", "Estrela-d'Alva"];
-// Rodada 1: 4 pedras. Rodada 2: 5 pedras. Os pesos mudam a cada partida e nunca aparecem na tela.
-const QUANTAS = [4, 5];
+// Rodada 1: 3 pedras. Rodada 2: 4 pedras. Os pesos mudam a cada partida e nunca aparecem na tela.
+const QUANTAS = [3, 4];
 
 function sortear(n: number): Pedra[] {
   const pesos = Array.from({ length: 16 }, (_, i) => i + 1).sort(() => Math.random() - 0.5).slice(0, n);
@@ -43,6 +43,7 @@ export default function Armazem() {
   const [total, setTotal] = useState(0);
   const [ordem, setOrdem] = useState<string[]>([]);
   const [msg, setMsg] = useState("Ponha pedras nos pratos e pese. A balança só mostra qual lado desce, nunca quanto pesa cada pedra.");
+  const [historico, setHistorico] = useState<{ esq: string[]; dir: string[]; lado: "esq" | "dir" | "nenhum" }[]>([]);
 
   const em = (p: Prato) => pedras.filter((s) => pratos[s.id] === p);
   const soma = (p: Prato) => em(p).reduce((a, s) => a + s.peso, 0);
@@ -67,6 +68,7 @@ export default function Armazem() {
     setTotal(pesagens.current);
     const diff = soma("esq") - soma("dir");
     setUltima({ chave, diff });
+    setHistorico((h) => [...h, { esq: em("esq").map((s) => s.nome), dir: em("dir").map((s) => s.nome), lado: diff === 0 ? "nenhum" : diff > 0 ? "esq" : "dir" }]);
     audio.sfx.balanca();
     setMsg(diff === 0 ? "Os pratos ficam parados, no mesmo nível." : diff > 0 ? "O prato da esquerda desce." : "O prato da direita desce.");
   };
@@ -84,7 +86,7 @@ export default function Armazem() {
         const prox = rodada + 1;
         setRodada(prox);
         setPedras(sortear(QUANTAS[prox]));
-        setPratos({}); setUltima(null); setOrdem([]);
+        setPratos({}); setUltima(null); setOrdem([]); setHistorico([]);
         setMsg("A ordem está certa. O armazém abre uma segunda estante, com mais uma pedra.");
         return;
       }
@@ -95,15 +97,16 @@ export default function Armazem() {
       setMsg("As pedras se alinham sozinhas na estante. Cada uma volta para o lugar de onde o barco saiu.");
       const custo = pesagens.current + errosOrdem.current * 3;
       window.setTimeout(() => complete("armazem", {
-        estrelas: custo <= 15 ? 3 : custo <= 22 ? 2 : 1,
+        estrelas: custo <= 20 ? 3 : custo <= 28 ? 2 : 1,
         tempo: Math.round((performance.now() - inicio.current) / 1000),
         detalhes: [`Pesagens: ${pesagens.current}`, errosOrdem.current ? `Ordens erradas: ${errosOrdem.current}` : "Nenhuma ordem errada"],
       }), 1700);
     } else {
       audio.sfx.erro();
       errosOrdem.current++;
+      const acertos = nova.filter((id, i) => id === certa[i]).length;
       setOrdem([]);
-      setMsg("A ordem está errada. Pese mais antes de arriscar de novo (cada erro conta como três pesagens).");
+      setMsg(`A ordem está errada: ${acertos} de ${certa.length} pedras estão no lugar certo. Pese mais antes de arriscar de novo.`);
     }
   };
 
@@ -123,6 +126,17 @@ export default function Armazem() {
           <Lado nome="Direita" itens={em("dir")} y={-inclinacao * 14} />
         </div>
         <p className="flex items-center gap-2 text-sm text-espuma/70"><Scale size={16} className="text-lanterna" aria-hidden /> Pesagens: {total}</p>
+        {historico.length > 0 && (
+          <ol className="w-full space-y-1 text-xs text-espuma/70" aria-label="Pesagens anteriores">
+            {historico.map((h, i) => (
+              <li key={i} className="rounded-lg border border-mare/50 px-3 py-1">
+                <span className="text-espuma/50">{i + 1}. </span>
+                {h.esq.join(", ") || "vazio"} <span className="text-latao">× </span>{h.dir.join(", ") || "vazio"}
+                <span className="ml-2 text-lanterna">{h.lado === "nenhum" ? "= iguais" : h.lado === "esq" ? "esquerda desce" : "direita desce"}</span>
+              </li>
+            ))}
+          </ol>
+        )}
       </section>
 
       <ul className="grid grid-cols-2 gap-3" aria-label="Pedras de lastro">

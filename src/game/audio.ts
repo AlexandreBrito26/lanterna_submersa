@@ -333,6 +333,67 @@ export const audio = {
       falha: () => tom(150, 0.25, "square", 0.07, 0, 90),
       completo: () => [262, 330, 392, 523].forEach((f, i) => tom(f, 1.5, "triangle", 0.12, i * 0.12)),
     },
+    // Ar contado: braçada com bolha que borbulha, falha de ar sufocada e chegada à superfície
+    ar: {
+      passo: () => { tom(260, 0.1, "sine", 0.05, 0, 320); },
+      bate: () => tom(130, 0.14, "square", 0.06, 0, 90),
+      falha: () => { ruido(0.8, 600, 150, 0.12); tom(120, 0.6, "sine", 0.1, 0, 60); },
+      chegou: () => [392, 523.25, 659.25, 784].forEach((f, i) => tom(f, 1.4, "sine", 0.11, i * 0.12)),
+    },
+    // Luar de linhas: toque que vira uma fileira com clique de vidro e porto aceso com acorde
+    luar: {
+      toque: () => { tom(700, 0.07, "triangle", 0.07, 0, 500); },
+      completo: () => [523.25, 659.25, 783.99, 1046.5, 1318.5].forEach((f, i) => tom(f, 1.3, "sine", 0.11, i * 0.09)),
+    },
+    // Brasa viciosa: brasa que pega com estalo, fogo que se espalha e costa queimando com acorde
+    viciosaFase: {
+      acender: () => { ruido(0.15, 1400, 500, 0.1); tom(360, 0.15, "triangle", 0.07, 0, 520); },
+      completo: () => [262, 330, 392, 523].forEach((f, i) => tom(f, 1.5, "triangle", 0.12, i * 0.12)),
+    },
+    // Coluna de vapor: sopro quente que sobe, passo na coluna fria e travessia concluída com acorde
+    vaporFase: {
+      passo: () => { ruido(0.2, 600, 1400, 0.06); tom(300, 0.1, "sine", 0.05, 0, 380); },
+      bate: () => { tom(180, 0.15, "square", 0.07, 0, 110); ruido(0.1, 2000, 900, 0.07); },
+      completo: () => [329.63, 415.3, 493.88, 659.25].forEach((f, i) => tom(f, 1.4, "sine", 0.11, i * 0.1)),
+    },
+    // Pedra aquecida: pedra que cai com baque surdo, calor que é barrado e campo salvo com acorde
+    aquecidaFase: {
+      pedra: () => { tom(140, 0.2, "sine", 0.3, 0, 80); ruido(0.08, 500, 180, 0.08); },
+      tirar: () => ruido(0.15, 800, 300, 0.06),
+      completo: () => [392, 523.25, 659.25, 783.99].forEach((f, i) => tom(f, 1.5, "sine", 0.12, i * 0.12)),
+    },
+    // Anel de lamparinas: giro com tinido metálico e anel encaixado com acorde
+    anelFase: {
+      girar: () => { tom(880, 0.06, "triangle", 0.07, 0, 1100); tom(1320, 0.05, "sine", 0.03, 0.02); },
+      completo: () => [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => tom(f, 1.4, "sine", 0.12, i * 0.1)),
+    },
+    // Fósforo curto: fósforo que risca e pega, linha inteira que acende e praça iluminada
+    fosforoFase: {
+      riscar: () => { ruido(0.12, 3000, 1200, 0.1); tom(900, 0.1, "triangle", 0.06, 0, 500); },
+      completo: () => [392, 493.88, 587.33, 783.99, 987.77].forEach((f, i) => tom(f, 1.3, "sine", 0.1, i * 0.09)),
+    },
+    // Tanques da chuva: água que escorre entre jarros, com gorgolejo
+    tanques: { agua: () => { ruido(0.5, 900, 300, 0.08); tom(320, 0.3, "sine", 0.05, 0, 240); }, completo: () => [392, 523.25, 659.25, 783.99].forEach((f, i) => tom(f, 1.3, "sine", 0.1, i * 0.1)) },
+    // Simetria do cofre: pintura com clique seco e cofre em equilíbrio com acorde
+    simetria: { pintar: () => tom(600, 0.06, "triangle", 0.07, 0, 500), completo: () => [440, 554.37, 659.25, 880].forEach((f, i) => tom(f, 1.3, "sine", 0.1, i * 0.1)) },
+    // Prateleiras iguais: carga que pousa com baque de madeira e estantes equilibradas com acorde
+    prateleiras: { colocar: () => { tom(140, 0.18, "sine", 0.28, 0, 80); ruido(0.06, 500, 180, 0.07); }, completo: () => [392, 493.88, 587.33, 783.99].forEach((f, i) => tom(f, 1.4, "sine", 0.11, i * 0.11)) },
+    // Trilhos da mina: chave que estala e vagoneta que chega à estação com apito
+    trilhos: { chave: () => { tom(260, 0.08, "square", 0.08, 0, 180); ruido(0.06, 1500, 600, 0.06); }, completo: () => { tom(880, 0.4, "sine", 0.1, 0, 1320); [523.25, 659.25].forEach((f, i) => tom(f, 1.2, "sine", 0.1, 0.4 + i * 0.12)); } },
+    // Torre de caixas: caixa que pousa com baque e torre firme com acorde grave
+    torre: { caixa: () => { tom(150, 0.2, "sine", 0.3, 0, 90); ruido(0.05, 600, 200, 0.06); }, falha: () => tom(170, 0.18, "square", 0.07, 0, 110), completo: () => { tom(160, 0.35, "sine", 0.3, 0, 90); [392, 523.25, 659.25].forEach((f, i) => tom(f, 1.3, "sine", 0.1, 0.1 + i * 0.1)); } },
+    chaves: {
+      pegar: () => { tom(1400, 0.12, "triangle", 0.1, 0, 1100); tom(2100, 0.1, "sine", 0.05, 0.05); },
+      passo: () => tom(260, 0.06, "sine", 0.05, 0, 200),
+      bate: () => tom(130, 0.16, "square", 0.07, 0, 90),
+      abrir: () => [392, 523.25, 659.25, 783.99].forEach((f, i) => tom(f, 1.4, "sine", 0.12, i * 0.12)),
+    },
+    // Sombra espelhada: passo que ecoa do outro lado do espelho e lâmpada que acende com a sombra
+    sombra: {
+      passo: () => tom(300, 0.1, "sine", 0.06, 0, 220),
+      bate: () => tom(130, 0.14, "square", 0.07, 0, 90),
+      acender: () => [392, 523.25, 659.25, 783.99].forEach((f, i) => tom(f, 1.5, "sine", 0.12, i * 0.12)),
+    },
     // Trilha lembrada: passo com estalo de memória, erro seco e caminho refeito com acorde
     trilha: {
       passo: () => tom(440, 0.08, "triangle", 0.06, 0, 520),

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const PhaseId = z.enum(["cais", "biblioteca", "jardins", "armazem", "porao", "recife", "oficina", "espelhos", "catedral", "sinos", "observatorio", "eclusa", "torre", "mangue", "teatro", "bombas", "rede", "mare", "vento", "abismo", "coracao", "eco", "cardume", "coral", "neblina", "alavancas", "memoria", "perolas", "setas", "dominos", "palavras", "final2", "silencio", "contagem", "fio", "pedra", "breu", "chama", "vela", "forja", "molhada", "brasa", "arca", "muralha", "ganchos", "fechadura", "selos", "escalada", "encaixe", "sementes", "alternado", "pontes", "trilha"]);
+export const PhaseId = z.enum(["cais", "biblioteca", "jardins", "armazem", "porao", "recife", "oficina", "espelhos", "catedral", "sinos", "observatorio", "eclusa", "torre", "mangue", "teatro", "bombas", "rede", "mare", "vento", "abismo", "coracao", "eco", "cardume", "coral", "neblina", "alavancas", "memoria", "perolas", "setas", "dominos", "palavras", "final2", "silencio", "contagem", "fio", "pedra", "breu", "chama", "vela", "forja", "molhada", "brasa", "arca", "muralha", "ganchos", "fechadura", "selos", "escalada", "encaixe", "sementes", "alternado", "pontes", "trilha", "sombra", "luar", "ar", "chaves", "viciosa", "vapor", "aquecida", "anel", "fosforo", "tanques", "simetria", "prateleiras", "trilhos", "torrecaixas"]);
 export type PhaseId = z.infer<typeof PhaseId>;
 
 export const SaveSchema = z.object({
