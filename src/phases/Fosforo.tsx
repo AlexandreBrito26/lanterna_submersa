@@ -92,7 +92,7 @@ export default function FosforoFase() {
   const reiniciar = () => { if (fim.current || travado) return; reinicios.current++; setUsadas([]); audio.sfx.interagir(); setMsg("A lenha é recolhida. Os fósforos já riscados continuam contando."); };
 
   return (
-    <main className="mx-auto flex h-full max-w-xl flex-col gap-5 overflow-y-auto px-6 py-10">
+    <main className="mx-auto flex h-full max-w-xl flex-col gap-3 overflow-y-auto px-4 py-3 fase-compacta">
       <AmbienteFase tipo="chama" />
       <div className="flex justify-center"><Cabecalho id="fosforo" /></div>
       <p className="font-narrativa italic text-espuma/80">Praça {rodada + 1} de {TRECHOS.length}: acenda toda a lenha com os fósforos.</p>

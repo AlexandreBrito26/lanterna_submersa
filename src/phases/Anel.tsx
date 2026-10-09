@@ -69,7 +69,7 @@ export default function AnelFase() {
   const reiniciar = () => { if (fim.current || travado) return; reinicios.current++; setK(0); audio.sfx.interagir(); setMsg("O anel volta à posição inicial. Os giros já dados continuam contando."); };
 
   return (
-    <main className="mx-auto flex h-full max-w-xl flex-col gap-5 overflow-y-auto px-6 py-10">
+    <main className="mx-auto flex h-full max-w-xl flex-col gap-3 overflow-y-auto px-4 py-3 fase-compacta">
       <AmbienteFase tipo="chama" />
       <div className="flex justify-center"><Cabecalho id="anel" /></div>
       <p className="font-narrativa italic text-espuma/80">Anel {rodada + 1} de {TRECHOS.length}: gire as lamparinas até as marcas.</p>

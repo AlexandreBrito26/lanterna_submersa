@@ -1,6 +1,6 @@
 import type { PhaseId } from "../store/schema";
 
-export type TipoVitoria = "exploracao" | "deducao" | "furtividade" | "coleta" | "sincronia" | "sobrevivencia" | "duelo" | "criacao" | "escuta" | "equilibrio" | "navegacao" | "medida" | "sinalizacao" | "reflexo" | "estiva" | "deslize" | "sombras" | "valvulas" | "laco" | "labirinto" | "vento" | "eco" | "cardume" | "crescer" | "neblina" | "alavancas" | "memoria" | "logica" | "correnteza" | "cadeia" | "palavras" | "final" | "tateio" | "contagem" | "fio" | "pedra" | "breu" | "chama" | "vela" | "forja" | "molhada" | "brasa" | "arca" | "muralha" | "ordem" | "fechadura" | "selos" | "escalada" | "encaixe" | "sementes" | "alternado" | "pontes" | "lembranca" | "espelhada" | "linhas" | "ar" | "chaves" | "viciosa" | "vapor" | "aquecida" | "anel" | "fosforo" | "tanques" | "simetria" | "prateleiras" | "trilhos" | "torrecaixas";
+export type TipoVitoria = "exploracao" | "deducao" | "furtividade" | "coleta" | "sincronia" | "sobrevivencia" | "duelo" | "criacao" | "escuta" | "equilibrio" | "navegacao" | "medida" | "sinalizacao" | "reflexo" | "estiva" | "deslize" | "sombras" | "valvulas" | "laco" | "labirinto" | "vento" | "eco" | "cardume" | "crescer" | "neblina" | "alavancas" | "memoria" | "logica" | "correnteza" | "cadeia" | "palavras" | "final" | "tateio" | "contagem" | "fio" | "pedra" | "breu" | "chama" | "vela" | "forja" | "molhada" | "brasa" | "arca" | "muralha" | "ordem" | "fechadura" | "selos" | "escalada" | "encaixe" | "sementes" | "alternado" | "pontes" | "lembranca" | "espelhada" | "linhas" | "ar" | "chaves" | "viciosa" | "vapor" | "aquecida" | "anel" | "fosforo" | "tanques" | "simetria" | "prateleiras" | "trilhos" | "torrecaixas" | "alturas" | "queda" | "tinta" | "ninho" | "colheita" | "travessia" | "bussola" | "cores" | "mosaico" | "volta";
 
 export const tiposVitoria: Record<TipoVitoria, { nome: string; objetivo: string }> = {
   exploracao:    { nome: "Exploração",    objetivo: "Encontre a chave e abra a porta" },
@@ -70,6 +70,16 @@ export const tiposVitoria: Record<TipoVitoria, { nome: string; objetivo: string 
   prateleiras:   { nome: "Prateleiras Iguais", objetivo: "Divida as cargas para que cada prateleira pese o mesmo" },
   trilhos:       { nome: "Trilhos da Mina", objetivo: "Ajuste as chaves para levar a vagoneta à estação" },
   torrecaixas:   { nome: "Torre de Caixas", objetivo: "Chegue à altura exata com o menor número de caixas" },
+  alturas:       { nome: "Jardim de Alturas", objetivo: "Preencha o jardim para que as pistas de cada lado batam" },
+  queda:         { nome: "Queda de Sementes", objetivo: "Solte sementes pelas colunas para encher as marcas exatas" },
+  ninho:         { nome: "Ninho de Pássaros", objetivo: "Pouse pássaros para que toda casa tenha um por perto, com o mínimo" },
+  volta:         { nome: "Volta pelo Mar", objetivo: "Trace a ida e a volta até a saída, sem cruzar o caminho" },
+  mosaico:       { nome: "Mosaico de Luz", objetivo: "Equilibre as casas acesas em cada linha e coluna, sem três iguais seguidas" },
+  cores:         { nome: "Cores que Não se Repetem", objetivo: "Chegue à saída sem pisar duas casas seguidas da mesma cor" },
+  bussola:       { nome: "Bússola Girada", objetivo: "Chegue à saída com a bússola girando a cada passo" },
+  travessia:     { nome: "Travessia dos Quatro Pontos", objetivo: "Passe pelos quatro marcos dos ramos e chegue à saída" },
+  colheita:      { nome: "Colheita Completa", objetivo: "Percorra o jardim colhendo cada casa livre uma única vez" },
+  tinta:         { nome: "Tinta de Flor", objetivo: "Espalhe a cor da flor até o jardim inteiro ficar de uma cor só" },
 };
 
 // Os cinco atos da história. Ato I é o jogo original (até o Coração); os demais são construídos em sequência.
@@ -82,7 +92,7 @@ export const atos = [
 ];
 
 // Fases que pertencem a um ato diferente do Ato I
-const ATO_DA_FASE: Partial<Record<PhaseId, number>> = { eco: 2, cardume: 2, coral: 2, neblina: 2, alavancas: 2, memoria: 2, perolas: 2, setas: 2, dominos: 2, palavras: 2, final2: 2, silencio: 3, contagem: 3, fio: 3, pedra: 3, breu: 3, chama: 3, vela: 3, forja: 3, molhada: 3, brasa: 3, arca: 3, muralha: 3, ganchos: 3, fechadura: 3, selos: 3, escalada: 3, encaixe: 3, sementes: 3, alternado: 3, pontes: 3, trilha: 4, sombra: 4, luar: 4, ar: 4, chaves: 4, viciosa: 4, vapor: 4, aquecida: 4, anel: 4, fosforo: 4, tanques: 4, simetria: 4, prateleiras: 4, trilhos: 4, torrecaixas: 4 };
+const ATO_DA_FASE: Partial<Record<PhaseId, number>> = { eco: 2, cardume: 2, coral: 2, neblina: 2, alavancas: 2, memoria: 2, perolas: 2, setas: 2, dominos: 2, palavras: 2, final2: 2, silencio: 3, contagem: 3, fio: 3, pedra: 3, breu: 3, chama: 3, vela: 3, forja: 3, molhada: 3, brasa: 3, arca: 3, muralha: 3, ganchos: 3, fechadura: 3, selos: 3, escalada: 3, encaixe: 3, sementes: 3, alternado: 3, pontes: 3, trilha: 4, sombra: 4, luar: 4, ar: 4, chaves: 4, viciosa: 4, vapor: 4, aquecida: 4, anel: 4, fosforo: 4, tanques: 4, simetria: 4, prateleiras: 4, trilhos: 4, torrecaixas: 4, alturas: 4, queda: 4, tinta: 4, ninho: 4, colheita: 4, travessia: 5, bussola: 5, cores: 5, mosaico: 5, volta: 5 };
 export function atoDe(id: PhaseId): number { return ATO_DA_FASE[id] ?? 1; }
 
 // ramo: fase que só aparece para quem escolheu esse final no Coração (Ato III em diante)
@@ -157,4 +167,14 @@ export const phases: PhaseInfo[] = [
   { id: "prateleiras", titulo: "Prateleiras Iguais", resumo: "Divida as cargas para que cada prateleira pese o mesmo.", tipo: "prateleiras", pronta: true, ramo: "guardar" },
   { id: "trilhos", titulo: "Trilhos da Mina", resumo: "Ajuste as chaves para a vagoneta chegar à estação certa.", tipo: "trilhos", pronta: true, ramo: "guardar" },
   { id: "torrecaixas", titulo: "Torre de Caixas", resumo: "Empilhe caixas até a altura exata, com o menor número delas.", tipo: "torrecaixas", pronta: true, ramo: "guardar" },
+  { id: "alturas", titulo: "Jardim de Alturas", resumo: "Cada linha e coluna com plantas de altura diferente. Use as pistas das bordas.", tipo: "alturas", pronta: true, ramo: "renascer" },
+  { id: "queda", titulo: "Queda de Sementes", resumo: "Solte sementes pelas colunas e encha exatamente as marcas.", tipo: "queda", pronta: true, ramo: "renascer" },
+  { id: "tinta", titulo: "Tinta de Flor", resumo: "Espalhe a cor da flor até o jardim inteiro ficar de uma cor só.", tipo: "tinta", pronta: true, ramo: "renascer" },
+  { id: "ninho", titulo: "Ninho de Pássaros", resumo: "Pouse pássaros para que toda casa tenha um por perto, com o mínimo.", tipo: "ninho", pronta: true, ramo: "renascer" },
+  { id: "colheita", titulo: "Colheita Completa", resumo: "Percorra o jardim colhendo cada casa livre, sem repetir nenhuma.", tipo: "colheita", pronta: true, ramo: "renascer" },
+  { id: "travessia", titulo: "Travessia dos Quatro Pontos", resumo: "Passe pelos quatro marcos de cada ramo e chegue à saída, em qualquer ordem.", tipo: "travessia", pronta: true },
+  { id: "bussola", titulo: "Bússola Girada", resumo: "A bússola gira a cada passo. Descubra o padrão e chegue à saída.", tipo: "bussola", pronta: true },
+  { id: "cores", titulo: "Cores que Não se Repetem", resumo: "Não pise em duas casas seguidas da mesma cor até a saída.", tipo: "cores", pronta: true },
+  { id: "mosaico", titulo: "Mosaico de Luz", resumo: "Metade das casas acesas em cada linha e coluna, sem três seguidas iguais.", tipo: "mosaico", pronta: true },
+  { id: "volta", titulo: "Volta pelo Mar", resumo: "Trace a ida e a volta até a saída, sem cruzar o caminho.", tipo: "volta", pronta: true },
 ];

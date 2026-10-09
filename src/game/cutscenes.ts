@@ -662,6 +662,106 @@ export const cutscenes = {
       { texto: "Empilhe com calma. Quando a torre chegar à altura certa, ela fica firme contra a maré.", agua: 0.62, brilho: 0.9 },
     ],
   },
+  alturas: {
+    tipo: "renascer",
+    entrada: "Toque para plantar o jardim",
+    cenas: [
+      { texto: "No renascer, a cidade planta de novo. Cada canteiro precisa de plantas de alturas diferentes.", agua: 0.5, brilho: 0.4 },
+      { texto: "Uma planta baixa atrás de uma alta fica escondida. Tomás lia as pistas de cada lado antes de plantar.", agua: 0.5, brilho: 0.5 },
+      { texto: "Cada linha e cada coluna tinha de ter plantas de todas as alturas, sem repetir.", agua: 0.55, brilho: 0.7 },
+      { texto: "Plante com calma. Quando o jardim bater com as pistas, a cidade volta a brotar.", agua: 0.55, brilho: 0.9 },
+    ],
+  },
+  queda: {
+    tipo: "renascer",
+    entrada: "Toque para soltar as sementes",
+    cenas: [
+      { texto: "As sementes caem do alto e param no primeiro chão que encontram. Nada as segura no ar.", agua: 0.5, brilho: 0.4 },
+      { texto: "Uma pedra no caminho segura a queda a meio caminho. Tomás escolhia a coluna com cuidado.", agua: 0.5, brilho: 0.5 },
+      { texto: "Cada semente no lugar certo é uma flor que nasce. Cada uma fora da marca, uma perda.", agua: 0.55, brilho: 0.7 },
+      { texto: "Solte as sementes pelas colunas certas. Quando a última marca estiver cheia, o jardim floresce.", agua: 0.55, brilho: 0.9 },
+    ],
+  },
+  tinta: {
+    tipo: "renascer",
+    entrada: "Toque para pintar o jardim",
+    cenas: [
+      { texto: "As flores do renascer têm cores diferentes. Onde uma cor toca a outra, ela se espalha.", agua: 0.5, brilho: 0.4 },
+      { texto: "Tomás pintava uma flor e via a cor correr pelas vizinhas da mesma cor, sem pressa.", agua: 0.5, brilho: 0.5 },
+      { texto: "Às vezes a melhor pintura é a que atinge a região inteira de uma vez.", agua: 0.55, brilho: 0.7 },
+      { texto: "Escolha a tinta com cuidado. Quando o jardim inteiro tiver uma cor só, ele estará pronto para brotar.", agua: 0.55, brilho: 0.9 },
+    ],
+  },
+  ninho: {
+    tipo: "renascer",
+    entrada: "Toque para chamar os pássaros",
+    cenas: [
+      { texto: "Os pássaros voltaram ao porto e procuram onde fazer ninho, perto das casas do jardim.", agua: 0.5, brilho: 0.4 },
+      { texto: "Cada casa livre precisa de um pássaro por perto, ou ao lado, para ser vigiada.", agua: 0.5, brilho: 0.5 },
+      { texto: "Tomás pousava os pássaros com o mínimo possível, para que nenhum ficasse sem trabalho.", agua: 0.55, brilho: 0.7 },
+      { texto: "Pouse com cuidado. Quando toda a horta tiver um vigia, o jardim pode dormir em paz.", agua: 0.55, brilho: 0.9 },
+    ],
+  },
+  colheita: {
+    tipo: "renascer",
+    entrada: "Toque para começar a colheita",
+    cenas: [
+      { texto: "A horta do renascer está pronta para ser colhida, casa por casa, sem pressa.", agua: 0.5, brilho: 0.4 },
+      { texto: "Colher uma casa duas vezes desperdiça o que já foi colhido. Por isso Tomás planejava a volta.", agua: 0.5, brilho: 0.5 },
+      { texto: "A cerca no meio do canteiro obriga a fazer curvas. Uma escolha errada deixa uma casa para trás.", agua: 0.55, brilho: 0.7 },
+      { texto: "Passe por cada casa uma única vez. Quando o canteiro estiver colhido, a cidade pode comer de novo.", agua: 0.55, brilho: 0.9 },
+    ],
+  },
+  travessia: {
+    tipo: "apagar",
+    entrada: "Toque para seguir o caminho",
+    cenas: [
+      { texto: "Tomás carrega um pedaço de cada caminho que percorreu: o breu, a brasa, o cofre e o jardim.", agua: 0.6, brilho: 0.4 },
+      { texto: "Nenhum deles basta sozinho. A saída só se abre quando os quatro estão juntos.", agua: 0.6, brilho: 0.5 },
+      { texto: "Ele passa pelos marcos em qualquer ordem, porque cada um guardava uma parte da luz.", agua: 0.62, brilho: 0.7 },
+      { texto: "Chegue à saída. Os caminhos do passado se encontram, e o porto acende inteiro.", agua: 0.62, brilho: 0.9 },
+    ],
+  },
+  bussola: {
+    tipo: "apagar",
+    entrada: "Toque para olhar a bússola",
+    cenas: [
+      { texto: "No mar final, a bússola de Tomás não aponta sempre para o mesmo lugar. Ela gira a cada passo.", agua: 0.6, brilho: 0.4 },
+      { texto: "Apertar para a direita podia levar para cima. Era preciso pensar antes de cada movimento.", agua: 0.6, brilho: 0.5 },
+      { texto: "Tomás aprendeu que o mar não tinha mudado: era a bússola que pedia outra leitura.", agua: 0.62, brilho: 0.7 },
+      { texto: "Siga o padrão com calma. Quando a bússola parar, a saída estará diante de você.", agua: 0.62, brilho: 0.9 },
+    ],
+  },
+  cores: {
+    tipo: "apagar",
+    entrada: "Toque para seguir as cores",
+    cenas: [
+      { texto: "O último mar tem casas de cores diferentes, e cada uma guarda uma parte da luz.", agua: 0.6, brilho: 0.4 },
+      { texto: "Tomás notou que duas casas seguidas da mesma cor apagavam o rastro. Era preciso variar.", agua: 0.6, brilho: 0.5 },
+      { texto: "Cada passo era uma escolha: avançar pela cor nova, ou voltar e buscar outra rota.", agua: 0.62, brilho: 0.7 },
+      { texto: "Varie as cores com calma. Quando a saída se abrir, a luz final vai brilhar.", agua: 0.62, brilho: 0.9 },
+    ],
+  },
+  mosaico: {
+    tipo: "apagar",
+    entrada: "Toque para acender o mosaico",
+    cenas: [
+      { texto: "No farol do fim do mar, um mosaico de luz guarda o equilíbrio entre o claro e o escuro.", agua: 0.6, brilho: 0.4 },
+      { texto: "Cada linha e cada coluna pedia metade de luz. Três casas iguais seguidas quebravam o desenho.", agua: 0.6, brilho: 0.5 },
+      { texto: "Tomás preenchia o mosaico devagar, conferindo a cada casa se o equilíbrio se mantinha.", agua: 0.62, brilho: 0.7 },
+      { texto: "Acenda com cuidado. Quando o mosaico fechar, a luz do farol volta a brilhar inteira.", agua: 0.62, brilho: 0.9 },
+    ],
+  },
+  volta: {
+    tipo: "apagar",
+    entrada: "Toque para traçar a volta",
+    cenas: [
+      { texto: "A última saída fica do outro lado do mar. Para voltar, Tomás precisava de dois caminhos.", agua: 0.6, brilho: 0.4 },
+      { texto: "A ida e a volta não podiam se cruzar: quem se encontra no mesmo ponto, se perde junto.", agua: 0.6, brilho: 0.5 },
+      { texto: "Tomás traçou a ida até a luz e depois procurou, sem pressa, uma volta que não encostasse nela.", agua: 0.62, brilho: 0.7 },
+      { texto: "Trace a volta com cuidado. Quando os dois caminhos se abrirem na saída, o porto está salvo.", agua: 0.62, brilho: 0.9 },
+    ],
+  },
   abismo: {
     tipo: "abismo",
     entrada: "Toque para enfrentar a corrente",

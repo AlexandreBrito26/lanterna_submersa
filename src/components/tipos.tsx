@@ -69,6 +69,16 @@ export const iconeTipo: Record<TipoVitoria, typeof Compass> = {
   prateleiras: Package,
   trilhos: Lock,
   torrecaixas: Anchor,
+  alturas: Sunrise,
+  queda: Sprout,
+  tinta: Waves,
+  ninho: Sprout,
+  colheita: Sunrise,
+  travessia: Anchor,
+  bussola: Compass,
+  cores: Sunrise,
+  mosaico: Lightbulb,
+  volta: Anchor,
 };
 
 import { Anchor, Award, BookMarked, BookOpenCheck, Ear, Clock, Crown, Flame, Infinity as InfinityIcon, Shell, ShieldCheck, Star, Sunrise, Timer, Waves as Ondas, Wind as Vento, type LucideIcon } from "lucide-react";
@@ -149,4 +159,14 @@ export const iconeConquista: Record<string, LucideIcon> = {
   "prateleiras-iguais": Package,
   "trilhos-da-mina": Lock,
   "torre-de-caixas": Anchor,
+  "jardim-de-alturas": Sunrise,
+  "queda-de-sementes": Sprout,
+  "tinta-de-flor": Waves,
+  "ninho-de-passaros": Sprout,
+  "colheita-completa": Sunrise,
+  "travessia-dos-quatro-pontos": Anchor,
+  "bussola-girada": Compass,
+  "cores-que-nao-se-repetem": Sunrise,
+  "mosaico-de-luz": Lightbulb,
+  "volta-pelo-mar": Anchor,
 };

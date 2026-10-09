@@ -69,7 +69,7 @@ export default function TorreCaixasFase() {
   const reiniciar = () => { if (fim.current || travado) return; reinicios.current++; setPilha([]); audio.sfx.interagir(); setMsg("A torre desmorona e as caixas voltam ao chão. As caixas já colocadas continuam contando."); };
 
   return (
-    <main className="mx-auto flex h-full max-w-xl flex-col gap-5 overflow-y-auto px-6 py-10">
+    <main className="mx-auto flex h-full max-w-xl flex-col gap-3 overflow-y-auto px-4 py-3 fase-compacta">
       <AmbienteFase tipo="coral" />
       <div className="flex justify-center"><Cabecalho id="torrecaixas" /></div>
       <p className="font-narrativa italic text-espuma/80">Torre {rodada + 1} de {TRECHOS.length}: chegue à altura {alvo} exatamente.</p>

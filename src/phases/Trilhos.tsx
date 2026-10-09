@@ -88,7 +88,7 @@ export default function TrilhosFase() {
   const reiniciar = () => { if (fim.current || travado) return; reinicios.current++; setCfg(t.chaves); audio.sfx.interagir(); setMsg("As chaves voltam à posição inicial. As trocas já feitas continuam contando."); };
 
   return (
-    <main className="mx-auto flex h-full max-w-xl flex-col gap-5 overflow-y-auto px-6 py-10">
+    <main className="mx-auto flex h-full max-w-xl flex-col gap-3 overflow-y-auto px-4 py-3 fase-compacta">
       <AmbienteFase tipo="coral" />
       <div className="flex justify-center"><Cabecalho id="trilhos" /></div>
       <p className="font-narrativa italic text-espuma/80">Mina {rodada + 1} de {TRECHOS.length}: leve a vagoneta até a estação {t.estacao}.</p>

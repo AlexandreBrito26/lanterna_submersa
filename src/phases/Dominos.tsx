@@ -104,7 +104,7 @@ export default function DominosFase() {
   };
 
   return (
-    <main className="mx-auto flex h-full max-w-xl flex-col gap-5 overflow-y-auto px-6 py-10">
+    <main className="mx-auto flex h-full max-w-xl flex-col gap-3 overflow-y-auto px-4 py-3 fase-compacta">
       <AmbienteFase tipo="dominos" />
       <div className="flex justify-center"><Cabecalho id="dominos" /></div>
 

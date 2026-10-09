@@ -168,5 +168,13 @@ main:has(.font-narrativa blockquote) blockquote { border-radius: 4px 14px 6px 12
 .menu-raiz { background: none !important; }
 
 /* Título e frase do menu: sombra escura por trás das letras para ficarem legíveis sobre o fundo animado */
-.menu-titulo { text-shadow: 0 0 14px rgba(2,8,16,0.95), 0 2px 6px rgba(2,8,16,0.9); }
+.menu-titulo {
+  background: linear-gradient(180deg, #FFF3C4 0%, #FFBF00 48%, #7FE0D0 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 0 16px rgba(255,191,0,0.35)) drop-shadow(0 2px 4px rgba(2,8,16,0.55));
+}
 .menu-frase { text-shadow: 0 0 10px rgba(2,8,16,0.95), 0 1px 4px rgba(2,8,16,0.9); }
+
+/* Fases em celular: a largura do tabuleiro é limitada pela metade da altura da tela. Limitar a largura mantém as casas quadradas */
+.fase-compacta [role="grid"], .fase-compacta [role="img"][aria-label] { max-width: min(100%, 50dvh) !important; margin-inline: auto; }
+.fase-compacta > p { line-height: 1.35; }

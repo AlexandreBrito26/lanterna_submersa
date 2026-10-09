@@ -372,6 +372,26 @@ export const audio = {
       riscar: () => { ruido(0.12, 3000, 1200, 0.1); tom(900, 0.1, "triangle", 0.06, 0, 500); },
       completo: () => [392, 493.88, 587.33, 783.99, 987.77].forEach((f, i) => tom(f, 1.3, "sine", 0.1, i * 0.09)),
     },
+    // Volta pelo mar: passo de remo, bater na cerca e chegada à luz com acorde final
+    volta: { passo: () => { tom(280, 0.12, "sine", 0.05, 0, 340); ruido(0.04, 1200, 600, 0.03); }, bate: () => tom(140, 0.14, "square", 0.06, 0, 100), completo: () => [392, 523.25, 659.25, 783.99, 1046.5].forEach((f, i) => tom(f, 1.6, "sine", 0.1, i * 0.1)) },
+    // Mosaico de luz: casa que acende com brilho curto e mosaico equilibrado com acorde
+    mosaico: { acender: () => { tom(880, 0.1, "sine", 0.06, 0, 1100); tom(1320, 0.08, "triangle", 0.03, 0.03); }, completo: () => [523.25, 659.25, 783.99, 1046.5, 1318.5].forEach((f, i) => tom(f, 1.4, "sine", 0.1, i * 0.08)) },
+    // Cores que não se repetem: passo com tom que muda de acordo com a cor, parede seca e saída com acorde
+    cores: { passo: () => tom(480, 0.08, "triangle", 0.06, 0, 560), bate: () => tom(140, 0.12, "square", 0.06, 0, 100), completo: () => [392, 466.16, 587.33, 698.46, 880].forEach((f, i) => tom(f, 1.4, "sine", 0.1, i * 0.08)) },
+    // Bússola girada: passo com clique de agulha e parede com som seco
+    bussola: { passo: () => { tom(700, 0.05, "square", 0.04, 0, 900); tom(500, 0.06, "triangle", 0.04, 0.05); }, bate: () => tom(140, 0.14, "square", 0.06, 0, 100), completo: () => [329.63, 415.3, 493.88, 659.25, 830.61].forEach((f, i) => tom(f, 1.4, "sine", 0.1, i * 0.08)) },
+    // Travessia dos quatro pontos: passo, marco coletado com tinido e saída com acorde completo
+    travessia: { passo: () => tom(300, 0.09, "sine", 0.05, 0, 340), marco: () => { tom(660, 0.1, "triangle", 0.08, 0, 880); tom(990, 0.12, "sine", 0.05, 0.05); }, bate: () => tom(130, 0.14, "square", 0.06, 0, 100), completo: () => [392, 493.88, 587.33, 783.99, 987.77].forEach((f, i) => tom(f, 1.5, "sine", 0.1, i * 0.1)) },
+    // Ninho de pássaros: pouso com bater de asas e revoada ao sair
+    ninho: { pousar: () => { ruido(0.12, 3000, 1500, 0.05); tom(880, 0.08, "triangle", 0.05, 0, 1100); }, sair: () => ruido(0.15, 2500, 900, 0.05), completo: () => [659.25, 783.99, 987.77, 1318.5].forEach((f, i) => tom(f, 1.2, "sine", 0.09, i * 0.09)) },
+    // Colheita completa: colher com estalo de caule e casa repetida com som seco
+    colheita: { colher: () => { tom(520, 0.07, "triangle", 0.06, 0, 640); ruido(0.04, 1500, 800, 0.04); }, bate: () => tom(150, 0.14, "square", 0.06, 0, 100), completo: () => [392, 523.25, 659.25, 783.99].forEach((f, i) => tom(f, 1.4, "sine", 0.11, i * 0.11)) },
+    // Jardim de alturas: planta que cresce com rangido de caule
+    alturas: { toque: () => tom(420, 0.08, "triangle", 0.07, 0, 520), completo: () => [392, 523.25, 659.25, 783.99].forEach((f, i) => tom(f, 1.4, "sine", 0.11, i * 0.11)) },
+    // Queda de sementes: semente que cai com assobio e pousa com tique de terra
+    queda: { cair: () => { tom(900, 0.18, "sine", 0.05, 0, 300); tom(180, 0.08, "triangle", 0.06, 0.18); }, falha: () => tom(160, 0.15, "square", 0.07, 0, 110), completo: () => [329.63, 415.3, 493.88, 659.25].forEach((f, i) => tom(f, 1.4, "sine", 0.1, i * 0.1)) },
+    // Tinta de flor: pincelada que se espalha e jardim inteiro numa cor com acorde
+    tinta: { pintar: () => { ruido(0.25, 1200, 500, 0.06); tom(520, 0.12, "triangle", 0.05, 0, 700); }, completo: () => [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => tom(f, 1.3, "sine", 0.1, i * 0.1)) },
     // Tanques da chuva: água que escorre entre jarros, com gorgolejo
     tanques: { agua: () => { ruido(0.5, 900, 300, 0.08); tom(320, 0.3, "sine", 0.05, 0, 240); }, completo: () => [392, 523.25, 659.25, 783.99].forEach((f, i) => tom(f, 1.3, "sine", 0.1, i * 0.1)) },
     // Simetria do cofre: pintura com clique seco e cofre em equilíbrio com acorde

@@ -67,7 +67,7 @@ export default function PrateleirasFase() {
   const reiniciar = () => { if (fim.current || travado) return; reinicios.current++; setOnde(t.pesos.map(() => null)); setSel(null); audio.sfx.interagir(); setMsg("As cargas voltam ao chão. As ações já feitas continuam contando."); };
 
   return (
-    <main className="mx-auto flex h-full max-w-xl flex-col gap-5 overflow-y-auto px-6 py-10">
+    <main className="mx-auto flex h-full max-w-xl flex-col gap-3 overflow-y-auto px-4 py-3 fase-compacta">
       <AmbienteFase tipo="catedral" />
       <div className="flex justify-center"><Cabecalho id="prateleiras" /></div>
       <p className="font-narrativa italic text-espuma/80">Estante {rodada + 1} de {TRECHOS.length}: peso igual em cada prateleira ({alvoPeso}).</p>

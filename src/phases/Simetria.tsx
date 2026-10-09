@@ -77,7 +77,7 @@ export default function SimetriaFase() {
   const reiniciar = () => { if (fim.current || travado) return; reinicios.current++; setGrade(t.fixas.map((v) => (v === null ? 0 : v))); audio.sfx.interagir(); setMsg("A grade volta ao começo. As pinturas já feitas continuam contando."); };
 
   return (
-    <main className="mx-auto flex h-full max-w-xl flex-col gap-5 overflow-y-auto px-6 py-10">
+    <main className="mx-auto flex h-full max-w-xl flex-col gap-3 overflow-y-auto px-4 py-3 fase-compacta">
       <AmbienteFase tipo="coral" />
       <div className="flex justify-center"><Cabecalho id="simetria" /></div>
       <p className="font-narrativa italic text-espuma/80">Cofre {rodada + 1} de {TRECHOS.length}: deixe a grade simétrica pelo eixo vertical.</p>

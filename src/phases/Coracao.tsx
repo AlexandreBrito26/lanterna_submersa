@@ -127,7 +127,7 @@ export default function Coracao() {
   };
 
   return (
-    <main className="mx-auto flex h-full max-w-xl flex-col gap-5 overflow-y-auto px-6 py-10">
+    <main className="mx-auto flex h-full max-w-xl flex-col gap-3 overflow-y-auto px-4 py-3 fase-compacta">
       <AmbienteFase tipo="coracao" />
       {etapa !== "final" ? <div className="flex justify-center"><Cabecalho id="coracao" /></div> : <h2 className="font-narrativa text-3xl text-lanterna">Coração da Lanterna</h2>}
 

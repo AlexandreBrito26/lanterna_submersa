@@ -272,6 +272,46 @@ export const paginas: Pagina[] = [
     texto: "Com caixas de três tamanhos, Tomás montava a torre do cais na altura exata. Às vezes uma caixa grande valia por duas pequenas, e ele sempre procurava essa economia.",
   },
   {
+    id: "d-alturas", titulo: "Plantas em fila", dica: "Conclua o Jardim de Alturas.", check: fez("alturas"),
+    texto: "No jardim do renascer, cada planta tinha uma altura diferente das outras da mesma fila. Tomás lia as pistas das bordas como quem lê as sombras, e sabia quantas se viam de cada lado.",
+  },
+  {
+    id: "d-queda", titulo: "Sementes que caem", dica: "Conclua a Queda de Sementes.", check: fez("queda"),
+    texto: "A semente cai até encontrar o chão. Tomás aprendeu a soltar cada uma pela coluna certa, porque uma semente fora da marca era uma flor perdida.",
+  },
+  {
+    id: "d-tinta", titulo: "A cor que se espalha", dica: "Conclua a Tinta de Flor.", check: fez("tinta"),
+    texto: "Uma flor de cor espalha a cor para tudo o que é vizinho da mesma cor. Tomás pintava o jardim inteiro com uma só tinta, e cada toque valia pelo que atingia.",
+  },
+  {
+    id: "d-ninho", titulo: "Pássaros no jardim", dica: "Conclua o Ninho de Pássaros.", check: fez("ninho"),
+    texto: "Os pássaros do renascer pousavam onde podiam vigiar a horta toda. Tomás aprendeu que um bom vigia não precisa estar em cada casa, só perto delas.",
+  },
+  {
+    id: "d-colheita", titulo: "Sem repetir a casa", dica: "Conclua a Colheita Completa.", check: fez("colheita"),
+    texto: "Colher o jardim inteiro sem voltar a nenhuma casa exigia planejamento. Tomás olhava a cerca antes de dar o primeiro passo, e assim nunca ficava preso num canto.",
+  },
+  {
+    id: "d-travessia", titulo: "Os quatro caminhos", dica: "Conclua a Travessia dos Quatro Pontos.", check: fez("travessia"),
+    texto: "Tomás carregava um pedaço de cada ramo: a trilha, a brasa, a chave e a semente. Só quando passou por todos eles é que a saída se abriu, porque o porto precisava das quatro coisas juntas.",
+  },
+  {
+    id: "d-bussola", titulo: "A bússola que gira", dica: "Conclua a Bússola Girada.", check: fez("bussola"),
+    texto: "No mar final, a bússola de Tomás girava a cada passo. Ele demorou a aceitar que o caminho não mudava: era só a sua mão que precisava aprender outra direção.",
+  },
+  {
+    id: "d-cores", titulo: "Cores em sequência", dica: "Conclua Cores que Não se Repetem.", check: fez("cores"),
+    texto: "No último mar, cada casa tinha uma cor, e Tomás aprendeu que andar em linha reta sobre a mesma cor era se perder. Variar era a única maneira de avançar.",
+  },
+  {
+    id: "d-mosaico", titulo: "Luz equilibrada", dica: "Conclua o Mosaico de Luz.", check: fez("mosaico"),
+    texto: "O mosaico do farol precisava de metade de luz em cada linha e cada coluna. Tomás aprendeu que três casas seguidas iguais deixavam o conjunto torto, e que o equilíbrio era a forma de a luz durar.",
+  },
+  {
+    id: "d-volta", titulo: "Ida e volta", dica: "Conclua a Volta pelo Mar.", check: fez("volta"),
+    texto: "Para voltar do mar final, Tomás precisava de um caminho diferente do da ida. Dois caminhos iguais se cruzariam e se perderiam; só a rota que não se encontra leva de volta para casa.",
+  },
+  {
     id: "d-abismo", titulo: "A corrente que sobe", dica: "Conclua as Correntes do Abismo.", check: fez("abismo"),
     texto: "A corrente do poço não é inimiga. É o próprio mar tentando levar a luz de volta à superfície. O problema é que ele leva a cidade junto.",
   },

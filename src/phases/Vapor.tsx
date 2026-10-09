@@ -95,7 +95,7 @@ export default function VaporFase() {
   );
 
   return (
-    <main className="mx-auto flex h-full max-w-xl flex-col gap-5 overflow-y-auto px-6 py-10">
+    <main className="mx-auto flex h-full max-w-xl flex-col gap-3 overflow-y-auto px-4 py-3 fase-compacta">
       <AmbienteFase tipo="chama" />
       <div className="flex justify-center"><Cabecalho id="vapor" /></div>
       <p className="font-narrativa italic text-espuma/80">Travessia {rodada + 1} de {TRECHOS.length}: atravesse o vapor sem pisar numa coluna quente.</p>
@@ -109,7 +109,7 @@ export default function VaporFase() {
             <div key={p} className={`relative aspect-square rounded-sm transition-colors duration-500 ${q ? "bg-coral/35" : "bg-mare/25"}`}>
               {c === "E" && <span className="absolute inset-[24%] rounded-full bg-lanterna shadow-[0_0_14px_4px_rgba(255,191,0,0.5)]" />}
               {pos === p && <span className="absolute inset-[20%] rounded-full bg-espuma shadow-[0_0_10px_2px_rgba(242,230,214,0.5)]" />}
-              {x >= 0 && q && <span className="absolute bottom-0.5 left-0.5 text-[9px] text-coral" aria-hidden>~</span>}
+              {x >= 0 && q && <span className="absolute bottom-0 left-0.5 text-sm font-bold text-coral" aria-hidden>≈</span>}
             </div>
           );
         })}

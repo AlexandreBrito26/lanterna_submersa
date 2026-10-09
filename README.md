@@ -398,3 +398,56 @@ Suba para o GitHub e importe em vercel.com. O Vite é detectado automaticamente.
 - **Torre de Caixas** (`phases/TorreCaixas.tsx`): empilhe caixas de altura 1, 2 e 3 até a altura exata. Mínimo de caixas por programação dinâmica (alturas 7 e 10).
 - **Correção:** a fase Torre do Ato I (`phases/Torre.tsx`) foi restaurada. Na primeira versão desta rodada, a nova torre de caixas tinha sobrescrito esse arquivo; ela agora tem o id `torrecaixas`.
 - **Ato IV:** 15 de 20 fases (Apagar, Acender e Guardar completos). Próximo: ramo Renascer do Ato IV.
+
+## Título do menu (v63)
+- O título "Lanterna Submersa" usa um degradê de cor de lanterna (creme e âmbar) que passa para o azul-claro do oceano, com um brilho âmbar em volta.
+- Removida a sombra escura que deixava as letras com aparência de lama.
+
+## Ato IV completo (v64)
+- **Ramo Renascer, fases 4 e 5:**
+  - **Ninho de Pássaros:** pouse pássaros para que toda casa livre tenha um pássaro em cima ou ao lado. Duas rodadas (mínimos de 4 e 3, calculados pelo código por enumeração).
+  - **Colheita Completa:** percorra o canteiro colhendo cada casa livre uma única vez, sem passar pela cerca nem repetir casas. Estrelas pelo número de voltas.
+- Os cinco arquivos de fase de origem desconhecida (Adubo, Arvore, Colheita, Polinizacao, Regador) foram removidos, a pedido do Zé. O build de tipos volta a passar.
+- **Ato IV:** 20 de 20 fases. Próximo: Ato V.
+
+## Ato V, fase 1 (v65)
+- **Travessia dos Quatro Pontos** (`phases/Travessia.tsx`): cada marco (A, B, C, D) é um pedaço de um dos ramos. Passe pelos quatro, em qualquer ordem, e chegue à saída. Duas travessias, com mínimos de 16 e 12 passos, calculados por busca em largura sobre (posição, marcos visitados). Estrelas pelos passos.
+- Sem ramo: é uma fase comum, visível para todos os jogadores.
+- Cutscene de entrada, página *Os quatro caminhos* no diário, medalha *Ponto de encontro*.
+- **Estrutura assumida do Ato V:** 5 fases comuns, pela decisão de convergência dos ramos. Ato V: 1 de 5. Próximo: fase 2.
+
+## Ato V, fase 2 (v66)
+- **Bússola Girada** (`phases/Bussola.tsx`): a bússola gira 90° a cada passo dado, então a direção que você aperta vira outra direção no mapa. Bater numa parede não gira a bússola. Duas rodadas (mínimos de 7 e 5 passos, por busca em largura sobre posição e rotação). Estrelas pelos passos. Desfazer disponível.
+- Cutscene de entrada, página *A bússola que gira* no diário, medalha *Norte de cabeça*.
+- **Ato V:** 2 de 5 fases (estrutura assumida, a confirmar). Próximo: fase 3.
+
+## Ato V, fase 3 (v67)
+- **Cores que Não se Repetem** (`phases/Cores.tsx`): cada casa tem uma cor (a, b ou c). Você não pode pisar numa casa da mesma cor que a casa anterior. A interface avisa quando o passo é bloqueado. Duas rodadas, com mínimos calculados por busca em largura sobre (posição, cor anterior). Estrelas pelos passos.
+- Cutscene de entrada, página *Cores em sequência* no diário, medalha *Sem repetir a cor*.
+- **Ato V:** 3 de 5 fases (estrutura assumida, a confirmar). Próximo: fase 4.
+
+## Ato V, fase 4 (v68)
+- **Mosaico de Luz** (`phases/Mosaico.tsx`): grade 4x4 com algumas casas travadas. Cada linha e coluna precisa ter metade das casas acesas, e não pode haver três casas seguidas do mesmo estado. Duas rodadas, com mínimos de 6 e 4 casas por enumeração exaustiva. Validado: cada mosaico tem pelo menos uma solução.
+- Cutscene de entrada, página *Luz equilibrada* no diário, medalha *Equilíbrio de luz*.
+- **Ato V:** 4 de 5 fases (estrutura assumida, a confirmar). Próximo: fase 5.
+
+## Ato V, fase 5 (v69)
+- **Volta pelo Mar** (`phases/Volta.tsx`): trace a ida de S até E e depois uma volta de S até E que não passe por nenhuma casa da ida (exceto S e E). Duas rodadas, com mínimos de 10 e 8 passos, por enumeração exaustiva de caminhos simples. Validado: os dois mapas têm par de caminhos disjuntos.
+- Cutscene de entrada, página *Ida e volta* no diário, medalha *Caminho de volta*.
+- **Ato V:** 5 de 5 fases (estrutura assumida, a confirmar).
+
+## Layout das fases no celular (v70)
+- Problema: no Galaxy S20 FE, as fases (como o Porão da Estrela-d'Alva) exigiam rolar a tela para ver o tabuleiro e os controles.
+- Correção: as 69 fases usam a classe `fase-compacta`, com espaçamento e margens menores. Os tabuleiros (`role="grid"` e `role="img"` com rótulo) têm largura máxima de 50% da altura visível da tela (`50dvh`). Limitar a largura, e não a altura, mantém as casas quadradas.
+- Não testado no aparelho. Se o tabuleiro ficar pequeno demais ou as casas deixarem de ser quadradas, o próximo passo é ajustar a largura pela altura disponível.
+
+## Auditoria de legibilidade (v72)
+- **Coluna de Vapor:** o sinal que marca as colunas quentes passou de 9px para um símbolo de tamanho normal, mais visível no celular.
+- Fases anteriores ao Ato IV (Arca, Espelhos, Final, Sinos, Armazém, Biblioteca, Coração, Eclusa e Pérolas) usam textos pequenos ou de baixo contraste. Não foram alteradas nesta rodada.
+
+## Capturas e GIF para divulgação (v73)
+- `tools/capturar_gif.py` abre a versão compilada no navegador, em tamanho de celular, e tira um print de cada tela do roteiro: menu e uma fase de cada ato (Cais, Sombra, Viciosa, Alturas e as cinco do Ato V).
+- O script grava o progresso em `lanterna-submersa:save`, então as fases abrem sem precisar jogar tudo.
+- Saída: `tools/capturas/*.png` e `tools/lanterna.gif`.
+- Como usar: `npm run build`, depois `npm run preview` e, em outro terminal, `python tools/capturar_gif.py --url http://localhost:4173`.
+- Não testado num navegador real no ambiente de desenvolvimento. Se algum print sair com erro, me manda a mensagem de erro.
