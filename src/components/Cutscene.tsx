@@ -660,6 +660,54 @@ function Digitando({ texto, onFim }: { texto: string; onFim: () => void }) {
   return <>{texto.slice(0, n)}<span className="inline-block w-[0.5ch] animate-pulse text-espuma/50">{n < texto.length ? "▍" : ""}</span></>;
 }
 
+// Cinematográfico (usado no Cais): faixas de tela panorâmica, vinheta, grão de filme, raios de luz e título de capítulo
+function TituloCapitulo({ capitulo, nome }: { capitulo: string; nome: string }) {
+  return (
+    <motion.div
+      aria-hidden
+      className="pointer-events-none fixed inset-x-0 top-[24vh] z-[7] text-center"
+      initial={{ opacity: 0, letterSpacing: "0.6em" }}
+      animate={{ opacity: [0, 1, 1, 0], letterSpacing: "0.3em" }}
+      transition={{ duration: 5.5, times: [0, 0.22, 0.78, 1], delay: 0.8, ease: "easeInOut" }}
+    >
+      <p className="text-xs uppercase text-latao">{capitulo}</p>
+      <p className="mt-2 font-narrativa text-3xl text-lanterna drop-shadow-[0_0_14px_rgba(255,191,0,0.35)]">{nome}</p>
+    </motion.div>
+  );
+}
+
+const TITULOS_CINEMA: Record<string, { capitulo: string; nome: string }> = {
+  cais: { capitulo: "Capítulo I", nome: "O Cais Afundado" },
+  biblioteca: { capitulo: "Capítulo I · Fase II", nome: "A Biblioteca Alagada" },
+};
+
+function Cinema({ cor, i, tipo }: { cor: string; i: number; tipo: string }) {
+  return (
+    <>
+      <motion.div aria-hidden className="pointer-events-none fixed inset-x-0 top-0 z-[6] h-[9vh] bg-black"
+        initial={{ y: "-100%" }} animate={{ y: 0 }} transition={{ duration: 1.4, ease: "easeOut" }} />
+      <motion.div aria-hidden className="pointer-events-none fixed inset-x-0 bottom-0 z-[6] h-[9vh] bg-black"
+        initial={{ y: "100%" }} animate={{ y: 0 }} transition={{ duration: 1.4, ease: "easeOut" }} />
+      <div aria-hidden className="pointer-events-none fixed inset-0 z-[4]"
+        style={{ background: "radial-gradient(ellipse at center, transparent 42%, rgba(2,8,16,0.88) 100%)" }} />
+      {[0, 1, 2].map((k) => (
+        <motion.div key={k} aria-hidden className="pointer-events-none fixed top-0 z-[3] h-full w-[18%]"
+          style={{ left: `${20 + k * 27}%`, background: `linear-gradient(180deg, ${cor}33, transparent 75%)`, transformOrigin: "top center", clipPath: "polygon(40% 0, 60% 0, 100% 100%, 0 100%)" }}
+          animate={{ rotate: [-4, 4, -4], opacity: [0.2, 0.45, 0.2] }}
+          transition={{ duration: 9 + k * 2, repeat: Infinity, ease: "easeInOut" }} />
+      ))}
+      <motion.svg aria-hidden className="pointer-events-none fixed inset-0 z-[4] h-full w-full mix-blend-overlay"
+        style={{ opacity: 0.14 }}
+        animate={{ x: [0, -5, 4, -3, 0], y: [0, 3, -4, 2, 0] }}
+        transition={{ duration: 0.45, repeat: Infinity, ease: "linear" }}>
+        <filter id="grao-cinema"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" /></filter>
+        <rect width="100%" height="100%" filter="url(#grao-cinema)" />
+      </motion.svg>
+      {i === 0 && TITULOS_CINEMA[tipo] && <TituloCapitulo capitulo={TITULOS_CINEMA[tipo].capitulo} nome={TITULOS_CINEMA[tipo].nome} />}
+    </>
+  );
+}
+
 // Bolhas que sobem ao fundo: posições fixas para não mudar a cada render
 function Bolhas({ cor }: { cor: string }) {
   return (
@@ -708,10 +756,11 @@ export default function Cutscene({ info, aoFinal, ato = 1 }: { info: CutsceneInf
   return (
     <div className="fixed inset-0 z-[5] flex flex-col overflow-hidden bg-abismo" onClick={avancar}>
       <Bolhas cor={cor} />
+      {(info.tipo === "cais" || info.tipo === "biblioteca") && <Cinema cor={cor} i={i} tipo={info.tipo} />}
       <motion.div
-        className="relative mx-auto mt-16 w-full max-w-sm"
-        animate={{ scale: [1, 1.035, 1], y: [0, -4, 0] }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        className={`relative mx-auto mt-16 w-full ${info.tipo === "cais" || info.tipo === "biblioteca" ? "max-w-md" : "max-w-sm"}`}
+        animate={info.tipo === "cais" || info.tipo === "biblioteca" ? { scale: [1.12, 1.04, 1.12], x: [-12, 12, -12] } : { scale: [1, 1.035, 1], y: [0, -4, 0] }}
+        transition={{ duration: info.tipo === "cais" || info.tipo === "biblioteca" ? 22 : 14, repeat: Infinity, ease: "easeInOut" }}
       >
       <motion.div
         key={`clarao-${i}`}
@@ -753,7 +802,7 @@ export default function Cutscene({ info, aoFinal, ato = 1 }: { info: CutsceneInf
       </svg>
       </motion.div>
 
-      <div className="relative mx-auto flex w-full max-w-md flex-1 flex-col justify-between px-6 pb-10 pt-6">
+      <div className="relative z-[8] mx-auto flex w-full max-w-md flex-1 flex-col justify-between px-6 pb-10 pt-6">
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-abismo via-abismo/80 to-transparent" aria-hidden />
         <AnimatePresence mode="wait">
           <motion.p

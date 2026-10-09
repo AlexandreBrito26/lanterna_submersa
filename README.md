@@ -451,3 +451,16 @@ Suba para o GitHub e importe em vercel.com. O Vite é detectado automaticamente.
 - Saída: `tools/capturas/*.png` e `tools/lanterna.gif`.
 - Como usar: `npm run build`, depois `npm run preview` e, em outro terminal, `python tools/capturar_gif.py --url http://localhost:4173`.
 - Não testado num navegador real no ambiente de desenvolvimento. Se algum print sair com erro, me manda a mensagem de erro.
+
+## Cutscene cinematográfica do Cais (v74)
+- **Tela panorâmica:** faixas pretas sobem e descem nas bordas no início, como em um filme.
+- **Câmera:** o desenho do cais faz um movimento lento de aproximação e deslocamento lateral, em 22 segundos por ciclo.
+- **Vinheta e grão de filme:** bordas escurecidas e um grão sutil que se move, para dar textura.
+- **Raios de luz:** três feixes que balançam suavemente vindos do alto.
+- **Título de capítulo:** "Capítulo I · O Cais Afundado" aparece na primeira cena e some sozinho.
+- O texto e a dica de continuar ficam acima das faixas, para nunca serem cobertos.
+- Só o Cais recebe essa versão. As outras cutscenes continuam com a arte anterior.
+
+## Cutscene cinematográfica da Biblioteca (v75)
+- A Biblioteca Alagada (fase 2 do Ato I) recebe o mesmo tratamento do Cais: faixas de tela panorâmica, vinheta, grão de filme, raios de luz, câmera lenta e título de capítulo na primeira cena.
+- O título de capítulo agora depende da fase: "Capítulo I · O Cais Afundado" no Cais e "Capítulo I · A Biblioteca Alagada" na Biblioteca.
