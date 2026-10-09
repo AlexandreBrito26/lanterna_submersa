@@ -734,6 +734,7 @@ export default function Cutscene({ info, aoFinal, ato = 1 }: { info: CutsceneInf
   const cena = info.cenas[i];
   const ultima = i === info.cenas.length - 1;
   const cor = destaque[ato] ?? destaque[1];
+  const cinema = info.tipo === "cais" || info.tipo === "biblioteca";
 
   // Primeiro toque termina de escrever o texto; o segundo avança para a próxima cena
   const avancar = () => {
@@ -754,13 +755,13 @@ export default function Cutscene({ info, aoFinal, ato = 1 }: { info: CutsceneInf
   });
 
   return (
-    <div className="fixed inset-0 z-[5] flex flex-col overflow-hidden bg-abismo" onClick={avancar}>
+    <div className="fixed inset-0 z-[5] flex select-none flex-col overflow-hidden bg-abismo touch-manipulation" onClick={avancar}>
       <Bolhas cor={cor} />
       {(info.tipo === "cais" || info.tipo === "biblioteca") && <Cinema cor={cor} i={i} tipo={info.tipo} />}
       <motion.div
-        className={`relative mx-auto mt-16 w-full ${info.tipo === "cais" || info.tipo === "biblioteca" ? "max-w-md" : "max-w-sm"}`}
-        animate={info.tipo === "cais" || info.tipo === "biblioteca" ? { scale: [1.12, 1.04, 1.12], x: [-12, 12, -12] } : { scale: [1, 1.035, 1], y: [0, -4, 0] }}
-        transition={{ duration: info.tipo === "cais" || info.tipo === "biblioteca" ? 22 : 14, repeat: Infinity, ease: "easeInOut" }}
+        className={cinema ? "relative mx-auto mt-[6dvh] h-[44dvh] aspect-[9/10] max-w-full" : "relative mx-auto mt-16 w-full max-w-sm"}
+        animate={cinema ? { scale: [1.04, 1, 1.04], x: [-6, 6, -6] } : { scale: [1, 1.035, 1], y: [0, -4, 0] }}
+        transition={{ duration: cinema ? 22 : 14, repeat: Infinity, ease: "easeInOut" }}
       >
       <motion.div
         key={`clarao-${i}`}
@@ -771,7 +772,7 @@ export default function Cutscene({ info, aoFinal, ato = 1 }: { info: CutsceneInf
         animate={{ opacity: 0, scale: 1.4 }}
         transition={{ duration: 1.8, ease: "easeOut" }}
       />
-      <svg viewBox="0 0 360 400" className="relative mx-auto w-full" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+      <svg viewBox="0 0 360 400" className={cinema ? "relative mx-auto h-full w-full" : "relative mx-auto w-full"} aria-hidden="true" preserveAspectRatio="xMidYMid meet">
         {info.tipo === "cais" && <Cais agua={cena.agua} brilho={cena.brilho} i={i} />}
         {info.tipo === "biblioteca" && <BibliotecaAv agua={cena.agua} brilho={cena.brilho} i={i} />}
         {info.tipo === "catedral" && <CatedralAv agua={cena.agua} brilho={cena.brilho} i={i} />}

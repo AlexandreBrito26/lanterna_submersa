@@ -464,3 +464,10 @@ Suba para o GitHub e importe em vercel.com. O Vite é detectado automaticamente.
 ## Cutscene cinematográfica da Biblioteca (v75)
 - A Biblioteca Alagada (fase 2 do Ato I) recebe o mesmo tratamento do Cais: faixas de tela panorâmica, vinheta, grão de filme, raios de luz, câmera lenta e título de capítulo na primeira cena.
 - O título de capítulo agora depende da fase: "Capítulo I · O Cais Afundado" no Cais e "Capítulo I · A Biblioteca Alagada" na Biblioteca.
+
+## Seleção de texto nas cutscenes (v76)
+- O texto das cutscenes não pode mais ser selecionado com o toque duplo, o que pintava as frases de azul no celular.
+
+## Enquadramento da cutscene cinematográfica (v77)
+- O desenho do Cais e da Biblioteca tem altura limitada a 44% da tela (`dvh`), então a ilustração inteira aparece e o texto fica abaixo dela, mesmo em tela curta.
+- A câmera ficou mais suave (de 1,12 para 1,04 de zoom e deslocamento de 6 px), para não cortar a cena.
